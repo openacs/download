@@ -1,0 +1,80 @@
+-Set the object names to be something that will make sense when setting permissions, etc.
+-Check for unique object names before doing insert.
+
+-Show some or all versions (check this because live_revision may not be the same as the most recent approved version)
+      -see file storage (use content-repository)
+
+DONE-Record and show number of downloads
+
+-Optional Approval (how is this handled by the content-repository?)
+          -need to add parameter
+
+DONE-Edit permissions (set default to world readable??)
+
+-Need to define permissions for a couple of non-obvious things
+      (like who can download, upload or approve)
+
+DONE-Need to make descriptions that support both plain text and html
+-Need to add code to convert descriptions based on type
+
+DONE-For revisions, need to determine what is used for the revision_name
+     and what is used for the filename
+
+DONE-Add general comments links
+
+DONE-Add version_name to revision
+
+DONE-Add context bars
+--------------------------------------------------------------------------------
+
+Each Repository Has The Following Configuration Features:
+
+1.) Name, Message
+
+2.) What types of archives are collected.
+
+3.) What MetaData is collected per archive
+
+4.) What reasons can downloaders give
+
+5.) Other parameters: 
+    -do we need admin approval?
+    -default permissions, this can be setup by inheriting properly
+
+--------------------------------------------------------------------------------
+
+Pages That I Envision:
+
+      Repository Level Admin Pages:
+            MOSTLYDONE-Configuration Page, shows current config
+                           MOSTLYDONE-Add/Edit Name, Message of Repository
+                           MOSTLYDONE-Add/Edit Archive Types
+                           MOSTLYDONE-Add/Edit MetaData collected
+                                     -Add choices as appropriate
+                           MOSTLYDONE-Add/Edit reasons
+            DONE-Download Reports:
+                DONE-Downloads by IP/User
+                DONE-Downloads by Version
+                DONE-Report by one IP/User
+            DONE-Show list of archives, with approval status
+            DONE-Spam downloaders
+            DONE-Export csv of downloaders
+            -Delete an archive
+
+      User Pages:
+            DONE-Index page lists archives, with sensible filtering, sorting
+            DONE-Help Page
+            DONE-Show all archives with a specific piece of metadata
+            DONE-Detail page about one archive
+            DONE-Detail page about one version
+            DONE-Show all values of one type of metadata, with counts
+            DONE-Download page, with list of reasons 
+
+      Archive Level Admin Pages:
+           DONE-add an archive 
+           DONE-add a version to an archive (upload the file, plus metadata)
+           -edit archive info
+           -delete a version
+           DONE-approve, reject versions
+           -special page to upload an apm that adds the correct metadata
+            automatically

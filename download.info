@@ -21,6 +21,7 @@
         <requires url="acs-kernel" version="4.0"/>
         <requires url="acs-tcl" version="4.0.2"/>
         <requires url="acs-templating" version="4.1.2"/>
+		<requires url="acs-mail" version="4.1"/>
 
         <files>
             <file type="package_spec" path="download.info"/>

@@ -26,6 +26,7 @@ ad_page_contract {
 ##Then do a download_archive_revision.new
 ##Then insert into the download_revision_data
 set user_id [ad_conn user_id]
+set package_id [ad_conn package_id]
 set admin_p [ad_permission_p $repository_id admin]
 
 # check for write permission on this repository

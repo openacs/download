@@ -31,7 +31,8 @@
 			:description_format,
 			null,
 			null,
-			'file'
+			'file',
+			:package_id
           );
 
 		  -- get the latest revision

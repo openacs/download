@@ -22,6 +22,7 @@
            mime_type => :description_format,
            parent_id => :repository_id,
            context_id => :repository_id,
+           package_id => :package_id,
            creation_user => :user_id,
            creation_ip => :creation_ip,
            is_live => 't'

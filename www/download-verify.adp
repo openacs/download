@@ -9,7 +9,7 @@
         <td><strong>@file_size@k</strong></td>
       </tr>
       <tr>
-        <form method="get" action="@action@">
+        <form method="post" action="@action@">
           <%= [export_form_vars download_id revision_id] %>
           <td align="right">Reason for Download:</td> 
           <td> @reason_widget@ </td>

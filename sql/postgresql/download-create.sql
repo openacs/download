@@ -311,7 +311,9 @@ select content_type__register_child_type(
 
 create view download_repository_obj as
        select repository_id, 
-	          o.*, 
+                 o.object_id, o.object_type, o.title as obj_title, o.package_id as obj_package_id, o.context_id,
+                 o.security_inherit_p, o.creation_user, o.creation_date, o.creation_ip, o.last_modified, o.modifying_user,
+                 o.modifying_ip, o.tree_sortkey, o.max_child_sortkey,
 	          i.parent_id, 
 			  r.title, 
 			  r.description, 
@@ -341,7 +343,9 @@ create view download_archives_obj as
 
 create view download_arch_revisions_obj as
        select dar.*, 
-			  o.*, 
+                          o.object_id, o.object_type, o.title as obj_title, o.package_id as obj_package_id, o.context_id,
+                          o.security_inherit_p, o.creation_user, o.creation_date, o.creation_ip, o.last_modified, o.modifying_user,
+                          o.modifying_ip, o.tree_sortkey, o.max_child_sortkey,
 			  r.item_id as archive_id, 
 			  r.title as file_name, 
 			  r.description as version_name, 

@@ -49,6 +49,7 @@ drop table download_reasons;
 drop table download_archive_types;
 drop table download_repository;
 drop table download_archive_descs;
+
 /* acs_object_type */
 begin
   content_type.unregister_child_type(
@@ -64,6 +65,8 @@ begin
   );
 end;
 /
+
+--fixme VK drop the content_types, not the acs type directly
 
 begin
     acs_object_type.drop_type(

@@ -6,14 +6,14 @@
 <fullquery name="download_table">
 <querytext>
       
-select u.last_name || ', ' || u.first_names as user_name,
+select u.user_id,
+       u.email,
+       u.last_name || ', ' || u.first_names as user_name,
        d.download_date,
        d.download_ip,
        coalesce(d.download_hostname,'unavailable') as download_hostname,
        coalesce(dar.version_name, 'unnamed') as version_name,
        dar.revision_id,
-       u.user_id,
-       u.email,
        case when d.reason_id is null then d.reason else dr.reason end as reason
 from download_downloads d left join download_reasons dr
   on (d.reason_id=dr.download_reason_id),

@@ -41,14 +41,14 @@ set table_def {
 }
 
 set sql_query "
-    select da.archive_name, 
+    select u.user_id,
+           u.last_name || ', ' || u.first_names as user_name,
+           u.email,
+           da.archive_name, 
            da.archive_id, 
            dar.revision_id,
            dar.version_name,
            d.download_date,
-           u.last_name || ', ' || u.first_names as user_name,
-           u.user_id,
-           u.email,
            nvl(d.download_hostname,'unavailable') as download_hostname,
            nvl2(d.reason_id, d.reason, dr.reason) as reason
       from download_archives_obj da, download_arch_revisions_obj dar, download_downloads d, download_reasons dr, cc_users u
@@ -62,13 +62,14 @@ set sql_query "
        [ad_order_by_from_sort_spec $orderby $table_def]
 "
 
-set export_sql_query [export_vars -url -sign {downloaded repository_id dimensional}]
-
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
-        -Ttable_extra_html { width= 90% align=center} \
+        -Ttable_extra_html { width="90%" align="center"} \
         -bind [ad_tcl_vars_to_ns_set repository_id download_ip] \
         download_table $sql_query $table_def ]
+
+set user_id_list [db_list download_table { *SQL* }]
+set user_id_list_export [export_vars -url -sign user_id_list]
 
 set context [list [list "report-by-ip" "Downloads by IP"] "$download_ip"]
 

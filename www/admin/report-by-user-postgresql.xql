@@ -6,9 +6,9 @@
 <fullquery name="download_table">
       <querytext>
       
-    select min(u.last_name || ', ' || u.first_names) as user_name,
+    select d.user_id,
+           min(u.last_name || ', ' || u.first_names) as user_name,
            min(u.email) as email,
-           d.user_id,
            count(*) as num_downloads,
            min('$downloaded'::varchar) as downloaded
      from download_downloads_repository d, cc_users u

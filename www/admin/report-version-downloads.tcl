@@ -30,16 +30,16 @@ set dimensional {
 set table_def {
     {user_name "User Name"
     {user_name $order}
-    {<td><a href=report-one-user?user_id=$user_id>$user_name</a></td>}}
+    {<td><a href="report-one-user?user_id=$user_id">$user_name</a></td>}}
     {version_name "Version"
     {version_name $order}
-    {<td><a href=[ad_conn package_url]one-revision?[export_url_vars revision_id downloaded]>$version_name</a></td>}}
+    {<td><a href="[ad_conn package_url]one-revision?[export_url_vars revision_id downloaded]">$version_name</a></td>}}
     {download_date "Download Date"
     {download_date $order}
     {}}
     {download_ip "From IP (hostname)"
     {download_ip $order}
-    {<td><a href=report-one-ip?[export_url_vars download_ip downloaded]>$download_ip</a> ($download_hostname)</td>}}
+    {<td><a href="report-one-ip?[export_url_vars download_ip downloaded]">$download_ip</a> ($download_hostname)</td>}}
     {reason "Download Reason"
     {reason $order}
     {<td>$reason</td>}}
@@ -84,14 +84,14 @@ where  dar.archive_id = :archive_id and
 set downloaded $temp_downloaded 
 
 set sql_query "
-    select u.last_name || ', ' || u.first_names as user_name,
+    select u.user_id,
+           u.email,
+           u.last_name || ', ' || u.first_names as user_name,
            d.download_date,
            d.download_ip,
            nvl(d.download_hostname,'unavailable') as download_hostname,
            nvl(dar.version_name, 'unnamed') as version_name,
            dar.revision_id,
-           u.user_id,
-           u.email,
            nvl2(d.reason_id, d.reason, dr.reason) as reason
       from download_arch_revisions_obj dar, download_downloads d, download_reasons dr, cc_users u
      where d.user_id = u.user_id
@@ -102,13 +102,14 @@ set sql_query "
        [ad_order_by_from_sort_spec $orderby $table_def]
 "
 
-set export_sql_query [export_vars -url -sign {sql_query}]
-
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
         -Ttable_extra_html { width= 90% align=center} \
         -bind [ad_tcl_vars_to_ns_set archive_id] \
         download_table $sql_query $table_def ]
+
+set user_id_list [db_list download_table { *SQL* }]
+set user_id_list_export [export_vars -url -sign user_id_list]
 
 set context [list "$archive_name Download History"]
 

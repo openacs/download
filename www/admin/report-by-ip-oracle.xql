@@ -4,9 +4,9 @@
 <fullquery name="download_table">
       <querytext>
       
-    select min(u.last_name || ', ' || u.first_names) as user_name,
+    select min(d.user_id) as user_id,
+           min(u.last_name || ', ' || u.first_names) as user_name,
            min(u.email) as email,
-           min(d.user_id) as user_id,
            d.download_ip,
            nvl(min(d.download_hostname),'unavailable') as download_hostname,
            count(*) as num_downloads,

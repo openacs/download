@@ -4,8 +4,7 @@
 
 
 <ul>
-<li><a href=spam-users?@export_sql_query@>Spam Downloaders</a>
-<li><a href=export-csv?@export_sql_query@>Export CSV File</a>
+<li><a href="spam-users?@user_id_list_export@">Spam Downloaders</a>
 </ul>
 
 @dimensional_html@

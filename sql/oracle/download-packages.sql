@@ -38,6 +38,7 @@ create or replace package download_rep as
     creation_user	in acs_objects.creation_user%TYPE default null,
     parent_id           in cr_items.parent_id%TYPE default null,
     context_id          in acs_objects.context_id%TYPE default null,
+    package_id          in acs_objects.package_id%TYPE default null,
     creation_ip	        in acs_objects.creation_ip%TYPE default null
   ) return download_repository.repository_id%TYPE;
 
@@ -71,6 +72,7 @@ create or replace package body download_rep as
     creation_user	in acs_objects.creation_user%TYPE default null,
     parent_id           in cr_items.parent_id%TYPE default null,
     context_id          in acs_objects.context_id%TYPE default null,
+    package_id          in acs_objects.package_id%TYPE default null,
     creation_ip	        in acs_objects.creation_ip%TYPE default null
   ) return download_repository.repository_id%TYPE
   is
@@ -84,6 +86,7 @@ create or replace package body download_rep as
       name => v_name,
       parent_id => new.parent_id,
       context_id => new.context_id,
+      package_id => new.package_id,
       title => new.title,
       description => new.description,
       text => new.help_text,

@@ -36,7 +36,7 @@
 --   -set_metadata_value
 --   -downloaded_by
 
-create function download_rep__new (integer,varchar,varchar,varchar,timestamptz,integer,integer,integer,varchar)
+create function download_rep__new (integer,varchar,varchar,varchar,timestamptz,integer,integer,integer,integer,varchar)
 returns integer as '
 declare
 	new__repository_id			alias for $1;
@@ -47,7 +47,8 @@ declare
 	new__creation_user			alias for $6;  -- default null
 	new__parent_id				alias for $7;  -- default null
 	new__context_id				alias for $8;  -- default null
-	new__creation_ip			alias for $9;  -- default null
+        new__package_id                         alias for $9;  -- default null
+	new__creation_ip			alias for $10;  -- default null
     v_name						cr_items.name%TYPE;
     v_repository_id				integer;
 	v_revision_id				integer;
@@ -69,7 +70,8 @@ begin
 		''text/plain'',			-- mime_type
 		null,					-- nls_language
 		new__help_text,
-		''text''				-- storage_type (vk - not sure about this)
+		''text'',				-- storage_type (vk - not sure about this)
+                new__package_id
 	);
 
     insert into download_repository

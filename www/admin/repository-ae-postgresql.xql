@@ -14,6 +14,7 @@
 			:user_id,
 			:package_id,
 			:package_id,
+			:package_id,
 			null
 		  );
       </querytext>

@@ -15,6 +15,7 @@
                              help_text => :help_text,
                              creation_user => :user_id,
                              parent_id => :package_id,
+                             package_id => :package_id,
                              context_id => :package_id);
                     end;
         

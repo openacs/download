@@ -1,5 +1,6 @@
-# /packages/download/www/admin/report-one-ip-.tcl
+# /packages/download/www/admin/report-one-ip.tcl
 ad_page_contract {
+    Show all downloaders from a single IP address
      
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Thu Dec 14 16:11:49 2000
@@ -8,6 +9,12 @@ ad_page_contract {
     download_ip:notnull
     {orderby "archive_name"}
     {downloaded "1m"}
+} -properties {
+    download_ip:onevalue
+    context:onevalue
+    user_id_list_export:onevalue
+    dimensional_html:onevalue
+    table:onevalue
 }
 
 
@@ -40,35 +47,15 @@ set table_def {
     {}}
 }
 
-set sql_query "
-    select da.archive_name, 
-           da.archive_id, 
-           dar.revision_id,
-           dar.version_name,
-           d.download_date,
-           u.last_name || ', ' || u.first_names as user_name,
-           u.user_id,
-           u.email,
-           nvl(d.download_hostname,'unavailable') as download_hostname,
-           nvl2(d.reason_id, d.reason, dr.reason) as reason
-      from download_archives_obj da, download_arch_revisions_obj dar, download_downloads d, download_reasons dr, cc_users u
-     where da.repository_id = $repository_id
-       and da.archive_id = dar.archive_id
-       and d.revision_id = dar.revision_id
-       and d.download_ip = '$download_ip'
-       and dr.download_reason_id(+) = d.reason_id
-       and u.user_id = d.user_id
-       [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
-"
-
-set export_sql_query [export_vars -url -sign {downloaded repository_id dimensional}]
-
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
-        -Ttable_extra_html { width= 90% align=center} \
+        -Ttable_extra_html { width="90%" align="center" } \
         -bind [ad_tcl_vars_to_ns_set repository_id download_ip] \
-        download_table $sql_query $table_def ]
+               download_table { *SQL* } $table_def ]
+
+# query users to spam
+set user_id_list [db_list users_to_spam { *SQL* }]
+set user_id_list_export [export_vars -form -sign user_id_list]
 
 set context [list [list "report-by-ip" "Downloads by IP"] "$download_ip"]
 

@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Mon Jan  8 18:05:51 2001
      @cvs-id $Id$
 } {
-    userid_list:verify
+    user_id_list:verify
     subject:notnull
     msgbody:notnull
 }
@@ -18,7 +18,7 @@ set page_content "[ad_header "Spam Downloaders"]
 
 <h2>Spam Downloaders</h2> 
 <p>
-[list "Spam Downloader"]
+[ad_context_bar "Spam Downloader"]
 
 <h3>Spam Downloader </h3>
 
@@ -34,7 +34,7 @@ ad_return_top_of_page $page_content
 
 # send out email
 set count 0
-foreach to_user_id $userid_list {
+foreach to_user_id $user_id_list {
     db_exec_plsql sendmail {
         select acs_mail_nt__post_request (
 		    :user_id,    -- p_party_from

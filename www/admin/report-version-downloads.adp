@@ -2,13 +2,14 @@
 <property name="title">@archive_name@ Download History</property>
 <property name="context">@context@</property>
 
-
-<ul>
-<li><a href=spam-users?@export_sql_query@>Spam Downloaders</a>
-<li><a href=export-csv?@export_sql_query@>Export CSV File</a>
-</ul>
+<p>
+<form method="post" action="spam-users">
+  @user_id_list_export@
+  <input type="submit" value="Spam Downloaders" />
+</form>
+</p>
 
 @dimensional_html@
-<center><b>Total downloads listed: @count@; Overall Total for @archive_name@: @total_count@</b>
+<center><strong>Total downloads listed: @current_count@; Overall Total for @archive_name@: @total_count@</strong>
 </center>
 @table@

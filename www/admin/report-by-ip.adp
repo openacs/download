@@ -3,7 +3,11 @@
 <property name="context">@context@</property>
 
 <p>
-<a href=spam-users?@export_sql_query@>Spam Downloaders</a>
+<form method="post" action="spam-users">
+  @user_id_list_export@
+  <input type="submit" value="Spam Downloaders" />
+</form>
 </p>
+
 @dimensional_html@
 @table@

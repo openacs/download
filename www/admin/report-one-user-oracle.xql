@@ -14,10 +14,10 @@
            nvl(d.download_hostname,'unavailable') as download_hostname,
            nvl2(d.reason_id, dr.reason, d.reason) as reason
       from download_archives_obj da, download_arch_revisions_obj dar, download_downloads d, download_reasons dr
-     where da.repository_id = $repository_id
+     where da.repository_id = :repository_id
        and da.archive_id = dar.archive_id
        and d.revision_id = dar.revision_id
-       and d.user_id = $user_id
+       and d.user_id = :user_id
        and dr.download_reason_id(+) = d.reason_id
        [ad_dimensional_sql $dimensional where]
        [ad_order_by_from_sort_spec $orderby $table_def]

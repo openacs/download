@@ -43,7 +43,6 @@ set sql_query "
      order by 2 desc
 "
 
-#set export_sql_query [export_vars -url -sign {sql_query}]
 set export_sql_query [export_vars -url -sign {downloaded repository_id dimensional}]
 
 set dimensional_html [ad_dimensional $dimensional]

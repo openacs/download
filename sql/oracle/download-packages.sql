@@ -51,7 +51,7 @@ create or replace package download_rep as
     modifying_ip     in acs_objects.modifying_ip%TYPE default null
   );
 
-  procedure delete (
+  procedure del (
     repository_id      in acs_objects.object_id%TYPE
   ); 
 
@@ -134,17 +134,17 @@ create or replace package body download_rep as
   end edit;
 
 
-  procedure delete (
+  procedure del (
     repository_id      in acs_objects.object_id%TYPE
   ) 
   is
   begin
-    update acs_objects set context_id = null where context_id = download_rep.delete.repository_id;
+    update acs_objects set context_id = null where context_id = download_rep.del.repository_id;
 
     delete from download_repository
-    where repository_id = download_rep.delete.repository_id;
+    where repository_id = download_rep.del.repository_id;
 
-    acs_object.delete(repository_id);
+    acs_object.del(repository_id);
   end;
 
 end download_rep;

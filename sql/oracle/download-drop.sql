@@ -10,7 +10,7 @@ delete from download_archive_types;
 begin
     for archive_rec in (select item_id from cr_items where content_type = 'cr_download_archive_desc')
     loop
-        content_item.delete(archive_rec.item_id);
+        content_item.del(archive_rec.item_id);
     end loop;
 end;
 /
@@ -19,7 +19,7 @@ show errors
 begin
     for archive_rec in (select item_id from cr_items where content_type = 'cr_download_archive')
     loop
-        content_item.delete(archive_rec.item_id);
+        content_item.del(archive_rec.item_id);
     end loop;
 end;
 /
@@ -28,7 +28,7 @@ show errors
 begin
     for archive_rec in (select item_id from cr_items where content_type = 'cr_download_rep')
     loop
-        content_item.delete(archive_rec.item_id);
+        content_item.del(archive_rec.item_id);
     end loop;
 end;
 /

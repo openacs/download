@@ -30,8 +30,8 @@ drop sequence download_downloads_seq;
 drop view download_downloads_sequence;
 
 -- Functions --
-drop function download_rep__new (integer,varchar,varchar,varchar,timestamp,integer,integer,integer,varchar);
-drop function download_rep__edit (integer,varchar,varchar,varchar,timestamp,integer,varchar);
+drop function download_rep__new (integer,varchar,varchar,varchar,timestamptz,integer,integer,integer,varchar);
+drop function download_rep__edit (integer,varchar,varchar,varchar,timestamptz,integer,varchar);
 drop function download_rep__delete (integer);
 
 -- Tables --

@@ -209,7 +209,7 @@ create table download_archive_revisions (
                         constraint download_ar_id_pk 
 						primary key,
     approved_p          boolean,
-    approved_date       timestamp,
+    approved_date       timestamptz,
     approved_user       integer 
                         constraint download_ar_usr_fk 
 						references users,
@@ -236,7 +236,7 @@ create table download_revision_data (
     clob_answer		  text,
     number_answer	  numeric,
     varchar_answer	  text,
-    date_answer		  timestamp
+    date_answer		  timestamptz
 );
 
 
@@ -262,7 +262,7 @@ create table download_downloads (
 				  constraint download_downloads_rev_fk 
 				  references download_archive_revisions
                   on delete cascade,
-    download_date timestamp not null,
+    download_date timestamptz not null,
     download_hostname varchar(400),
     download_ip   varchar(20),
     user_agent    varchar(200),

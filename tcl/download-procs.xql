@@ -45,30 +45,6 @@ where download_id = :download_id
 </querytext>
 </fullquery>
 
-<fullquery name="download_maybe_create_new_mime_type.mime_type_exists">
-<querytext>
-      
-select count(*) from cr_mime_types
-where  mime_type = :mime_type
-
-</querytext>
-</fullquery>
-
-
- 
-<fullquery name="download_maybe_create_new_mime_type.new_mime_type">      
-<querytext>
-      
-insert into cr_mime_types
-(mime_type, file_extension)
-values
-(:mime_type, :extension)
-
-</querytext>
-</fullquery>
-
-
- 
 <fullquery name="download_validate_metadata.metadata">      
 <querytext>
       

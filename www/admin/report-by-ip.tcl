@@ -13,9 +13,9 @@ set repository_id [download_repository_id]
 ##TODO: Add support for other
 set dimensional {
     {downloaded "Download Period" 1m {
-        {1d "last 24hrs" {where "d.download_date + 1 > SYSDATE"}}
-        {1w "last week"  {where "d.download_date + 7 > SYSDATE"}}
-        {1m "last month" {where "d.download_date + 30 > SYSDATE"}}
+        {1d "last 24hrs" {where "[db_map date_clause_1]"}}
+        {1w "last week"  {where "[db_map date_clause 7]"}}
+        {1m "last month" {where "[db_map date_clause_30]"}}
         {all "all" {}}}}
 }
 

@@ -1,4 +1,4 @@
-# /packages/download/www/admin/export-cvs.tcl
+# /packages/download/www/admin/export-csv.tcl
 ad_page_contract {
     returns a comma-separated values file where each row is one
     user in a class (designated by the args); this CSV file is 
@@ -24,7 +24,7 @@ db_foreach download_info_select $sql_query {
 }
 
 if { $count == 0 } {
-	doc_return 200 text/plain "There is no user meet your criteria"
+	doc_return 200 text/plain "No users meet your criteria"
 } else {
 	doc_return  200 text/plain $csv_rows
 }

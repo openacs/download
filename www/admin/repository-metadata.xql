@@ -51,7 +51,6 @@
  
 <fullquery name="metadata_select">      
       <querytext>
-      FIX ME OUTER JOIN
 
     select 
       dam.metadata_id,
@@ -65,9 +64,9 @@
       dam.linked_p,        
       dam.mainpage_p,
       dam.computed_p      
-    from download_archive_metadata dam, download_archive_types dat
-         where dam.repository_id = :repository_id and
-               dam.archive_type_id = dat.archive_type_id(+)
+    from download_archive_metadata dam left join download_archive_types dat
+			using archive_type_id
+         where dam.repository_id = :repository_id 
     order by archive_type_id, sort_key
 
       </querytext>

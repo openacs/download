@@ -15,14 +15,14 @@ ad_require_permission $archive_id "admin"
 
 set dimensional {
    {versions "Versions" current {
-       {current "current" {where "dar.revision_id = content_item.get_live_revision(dar.archive_id)" }}
+       {current "current" {where "[db_map version_clause]" }}
        {all "all" ""}
    }}
 
     {downloaded "Download Period" 1m {
-	{1d "last 24hrs" {where "d.download_date + 1 > SYSDATE"}}
-        {1w "last week"  {where "d.download_date + 7 > SYSDATE"}}
-        {1m "last month" {where "d.download_date + 30 > SYSDATE"}}
+		{1d "last 24hrs" {where "[db_map date_clause_1]"}}
+        {1w "last week"  {where "[db_map date_clause_7]"}}
+        {1m "last month" {where "[db_map date_clause_30]"}}
         {all "all" {}}
     }}
 }
@@ -67,6 +67,11 @@ where  dar.archive_id = :archive_id and
        d.revision_id = dar.revision_id 
        [ad_dimensional_sql $dimensional where]
 "]
+
+#FIXME 
+# what is temp_downloaded for?
+# why are count and total_count the same query?
+# do we need version_str above?
 
 set temp_downloaded $downloaded
 

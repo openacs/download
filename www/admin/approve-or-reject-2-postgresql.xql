@@ -19,17 +19,18 @@
  
 <fullquery name="sendmail">      
       <querytext>
-      FIX ME PLSQL - need acs-notification
 
 		declare
 			v_id   integer;
         begin
-          v_id := nt__post_request(
-                party_from => :user_id,
-                party_to => :creation_user,
-                expand_group => 'f',
-                subject => :subject,
-                message => :body);
+          v_id := acs_mail_nt__post_request(
+                :user_id,           -- p_party_from
+                :creation_user,     -- p_party_to
+                'f',                -- p_expand_group
+                :subject,           -- p_subject
+                :message,           -- p_message
+                0                   -- p_max_retries
+          );
 
 		  return v_id;
         end;

@@ -85,7 +85,7 @@ if {[ad_parameter -package_id [ad_conn package_id] "approval_notification" "down
 
     db_exec_plsql sendmail {
         begin
-           :1 := nt.post_request(
+           :1 := acs_mail_nt.post_request(
                 party_from => :user_id,
                 party_to => :creation_user,
                 expand_group => 'f',

@@ -5,10 +5,10 @@
   <form action=approve-or-reject-2.tcl>
   <%=  [export_form_vars return_url action revision_id] %>
   <tr><td colspan=2 align=right>
-      [<a href=revision-audit?revision_id=@revision_id@>Version History</a>]</td>
+      [<a href=../one-archive?archive_id=@archive_id@>Version History</a>]</td>
   </tr>
   <tr><th colspan=2>
-      <font size=+1><a href=../download-verify?revision_id=@revision_id@>@archive_name@</a></font> 
+      <font size=+1><a href=../one-revision?revision_id=@revision_id@>@archive_name@</a></font> 
       <if @current_version_p@ eq "t"> (current version)
       </if>
   <tr><td colspane=2></td>

@@ -63,7 +63,7 @@ db_1row name_select "select u.last_name, u.first_names
                      from cc_users u
                      where u.user_id = :user_id "
 
-set dimensional [ad_dimensional $dimensional]
+set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
         -Ttable_extra_html { width= 90% align=center} \
         -bind [ad_tcl_vars_to_ns_set repository_id user_id] \

@@ -6,5 +6,5 @@
 <a href=spam-users.tcl?@export_sql_query@>Spam Downloaders</a>
 </p>
 
-@dimensional@
+@dimensional_html@
 @table@

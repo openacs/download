@@ -14,7 +14,7 @@ set repository_id [download_repository_id]
 set dimensional {
     {downloaded "Download Period" 1m {
         {1d "last 24hrs" {where "[db_map date_clause_1]"}}
-        {1w "last week"  {where "[db_map date_clause 7]"}}
+        {1w "last week"  {where "[db_map date_clause_7]"}}
         {1m "last month" {where "[db_map date_clause_30]"}}
         {all "all" {}}}}
 }
@@ -45,7 +45,7 @@ set sql_query "
 
 set export_sql_query [export_vars -url -sign {sql_query}]
 
-set dimensional [ad_dimensional $dimensional]
+set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
         -Ttable_extra_html { width= 90% align=center} \
         -bind [ad_tcl_vars_to_ns_set repository_id downloaded] \

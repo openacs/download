@@ -14,7 +14,7 @@
            dar.revision_id,
            u.user_id,
            u.email,
-           nvl2(d.reason_id, d.reason, dr.reason) as reason
+           nvl2(d.reason_id, dr.reason, d.reason) as reason
       from download_arch_revisions_obj dar, download_downloads d, download_reasons dr, cc_users u
      where d.user_id = u.user_id
        and dar.archive_id = $archive_id

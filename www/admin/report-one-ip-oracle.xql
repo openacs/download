@@ -13,7 +13,7 @@
            u.user_id,
            u.email,
            nvl(d.download_hostname,'unavailable') as download_hostname,
-           nvl2(d.reason_id, d.reason, dr.reason) as reason
+           nvl2(d.reason_id, dr.reason, d.reason) as reason
       from download_archives_obj da, download_arch_revisions_obj dar, download_downloads d, download_reasons dr, cc_users u
      where da.repository_id = $repository_id
        and da.archive_id = dar.archive_id

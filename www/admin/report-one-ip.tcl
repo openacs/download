@@ -64,7 +64,7 @@ set sql_query "
 
 set export_sql_query [export_vars -url -sign {sql_query}]
 
-set dimensional [ad_dimensional $dimensional]
+set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
         -Ttable_extra_html { width= 90% align=center} \
         -bind [ad_tcl_vars_to_ns_set repository_id download_ip] \

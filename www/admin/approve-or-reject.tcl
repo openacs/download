@@ -20,6 +20,7 @@ set package_id [ad_conn package_id]
 
 if ![db_0or1row revision_info_select {
 select da.repository_id as repository_id,
+       da.archive_id,
        da.archive_name,
        da.summary,
        dar.revision_id,

@@ -36,8 +36,6 @@ order by sort_order
 </querytext>
 </fullquery>
 
- 
-
 <fullquery name="download_file_downloader.download_count">
 <querytext>
 
@@ -47,20 +45,6 @@ where download_id = :download_id
 </querytext>
 </fullquery>
 
-
- 
-<fullquery name="download_file_downloader.file_type">
-<querytext>
-      
-select mime_type 
-from   cr_revisions 
-where  revision_id = :revision_id
-
-</querytext>
-</fullquery>
-
-
- 
 <fullquery name="download_maybe_create_new_mime_type.mime_type_exists">
 <querytext>
       

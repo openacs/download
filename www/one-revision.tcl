@@ -73,8 +73,8 @@ set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] 
 set gc_link ""
 set gc_comments ""
 if { [catch {
-    set gc_link [general_comments::create_link $revision_id "$archive_name $version_name" [ad_conn url]?[ad_conn query] "Add a comment"]
-    set gc_comments [general_comments::get_comments $revision_id [ad_conn url]?[ad_conn query]]
+    set gc_link [general_comments_create_link -object_name "$archive_name $version_name" $revision_id [ad_conn url]?[ad_conn query]]
+    set gc_comments [general_comments_get_comments $revision_id [ad_conn url]?[ad_conn query]]
 } error] } {
     global errorInfo errorCode
     ns_log Notice "gc_link: $errorInfo, $errorCode"

@@ -11,6 +11,7 @@
 		  v_live_archive_desc_id  integer;
 		  v_id			  		  integer;
           v_name       			  cr_items.name%TYPE;
+          v_archive_name                  cr_items.name%TYPE;
         begin
           v_name := 'Download Archive Desc for ' || :archive_id;
 
@@ -47,7 +48,7 @@
 			(v_live_archive_desc_id);
 
           v_archive_id := content_item__new(
-			:archive_name,
+			varchar :archive_name,
 			:repository_id,
 			:archive_id,
 			null,

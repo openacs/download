@@ -170,18 +170,7 @@ ad_proc download_file_downloader {
         }
     }
 
-    db_1row file_type "
-    select mime_type 
-    from   cr_revisions 
-    where  revision_id = :revision_id"
-
-    ReturnHeaders $mime_type
-
-    db_write_blob version_write "select content
-                                 from   cr_revisions
-                                 where  revision_id = $revision_id"
-
-
+    cr_write_content -revision_id $revision_id
 
     return filter_return
 }

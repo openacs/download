@@ -30,21 +30,6 @@ values (
 </querytext>
 </fullquery>
 
-
- 
-<fullquery name="download_file_downloader.version_write">      
-<querytext>
-
-select '[cr_fs_path]' || content as content, storage_type
-from   cr_revisions r, cr_items i
-where  r.revision_id = :revision_id and
-       r.item_id = i.item_id
-
-</querytext>
-</fullquery>
-
-
- 
 <fullquery name="download_insert_revision.revision_new">      
 <querytext>
 

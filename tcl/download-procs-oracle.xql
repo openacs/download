@@ -29,16 +29,6 @@
             
       </querytext>
 </fullquery>
-
- 
-<fullquery name="download_file_downloader.version_write">      
-      <querytext>
-      select content
-                                 from   cr_revisions
-                                 where  revision_id = $revision_id
-      </querytext>
-</fullquery>
-
  
 <fullquery name="download_insert_revision.revision_new">      
       <querytext>

@@ -177,36 +177,6 @@ ad_proc download_file_downloader {
     return filter_return
 }
 
-##Borrowed from file-storage
-ad_proc download_maybe_create_new_mime_type {
-    file_name
-} {
-    The content repository expects the MIME type to already be defined
-    when you upload content.  We use this procedure to add a new type
-    when we encounter something we haven't seen before.
-} {
-
-    set mime_type [ns_guesstype $file_name]
-    set extension [string trimleft [file extension $file_name] "."]
-
-    # don't know how to generate nice names like "JPEG Image"
-    # have to leave it blank for now
-
-    #set pretty_mime_type ???
-
-    if { [db_string mime_type_exists "
-    select count(*) from cr_mime_types
-    where  mime_type = :mime_type"] == 0 } {
-	db_dml new_mime_type "
-	insert into cr_mime_types
-	(mime_type, file_extension)
-	values
-	(:mime_type, :extension)"
-    }
-
-    return $mime_type
-}
-
 # @author jbank@arsdigita.com [jbank@arsdigita.com]
 # @creation-date Fri Dec 15 14:07:02 2000
 ad_proc download_metadata_column { data_type } { Dummy comment.} {
@@ -335,7 +305,8 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
 	# get the file_size for the postgres version
 	set file_size [file size $tmpfile]
 
-    set mime_type [download_maybe_create_new_mime_type $upload_file]
+    set mime_type [cr_filename_to_mime_type -create $upload_file]
+
     db_exec_plsql revision_new {
         declare
           v_revision_id integer;

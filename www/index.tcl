@@ -28,7 +28,7 @@ set description $repository(description)
 set help_text $repository(help_text)
 
 #select the current list of archives
-set type_dimlist {{all "All" {}}}
+set type_dimlist {{"" "All" {}}}
 db_foreach archive_type {
     select archive_type_id as at_id, pretty_name from download_archive_types where repository_id = :repository_id
 } {
@@ -37,14 +37,14 @@ db_foreach archive_type {
 
 set dimensional [list \
    {versions "Versions" current {
-       {current "current" {where "dar.revision_id = content_item.get_live_revision(da.archive_id)" }}
+       {current "current" {where "[db_map archive_where_clause]" }}
        {all "all" {where "da.archive_id = dar.archive_id"}}
    }} \
-   [list archive_type_id "Type" all $type_dimlist] \
+   [list archive_type_id "Type" "" $type_dimlist] \
    {updated "Updated" all {
-       {1d "last 24hrs" {where "dar.publish_date + 1 > SYSDATE"}}
-       {1w "last week"  {where "dar.publish_date + 7 > SYSDATE"}}
-       {1m "last month" {where "dar.publish_date + 30 > SYSDATE"}}
+       {1d "last 24hrs" {where "dar.publish_date + 1 > [db_map date_clause]"}}
+       {1w "last week"  {where "dar.publish_date + 7 > [db_map date_clause]"}}
+       {1m "last month" {where "dar.publish_date + 30 > [db_map date_clause]"}}
        {all "all" {}}
    }} \
 ]
@@ -141,13 +141,14 @@ where  da.repository_id = :repository_id and
        [ad_dimensional_sql $dimensional where]
        [ad_order_by_from_sort_spec $orderby $table_def]"
 
-set dimensional [ad_dimensional $dimensional]
+set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
         -Torderby $orderby \
         -Tband_colors {{} {\"\#cccccc\"}} \
         -bind [ad_tcl_vars_to_ns_set user_id repository_id] \
         -Ttable_extra_html { cellpadding=3 } \
         download_index_query $sql_query $table_def ]
+
 
 db_multirow types types_select {
     select archive_type_id, pretty_name, description from download_archive_types where repository_id = :repository_id

@@ -7,14 +7,14 @@
   <body bgcolor="#ffffff">
     <h1>Download Package Requirements</h1>
     by <a href="mailto:jbank@arsdigita.com">Joseph Bank</a> 
-    based largely on the ACS Repository requirements written by by <a href="mailto:tnight@arsdigita.com">Todd Nightingale</a>
+    based largely on the ACS Repository requirements written by <a href="mailto:tnight@arsdigita.com">Todd Nightingale</a>
     <hr>
 
     <i>This is a DRAFT</i>
 
     <h3>I. Introduction</h3>
 
-    <p> ACS 4.x has a file storage module, so an obvious question is:
+    <p> OpenACS 4.x has a file storage module, so an obvious question is:
     "Why do we need a seperate download module?"  The download module
     is targeted at a different usage pattern and interface.  The
     intent of the download module is to provide an online repository
@@ -33,7 +33,7 @@
 
     <p>
     There are thousands of independent developers all over the world
-    writing their own ACS packages.  Without a canonical distribution
+    writing their own OpenACS packages.  Without a canonical distribution
     point finding the packages you need becomes a formidable task,
     forcing developers to duplicating each others efforts.  The
     download module allows us to setup a package repository service
@@ -45,7 +45,7 @@
     <h3>III. System/Application Overview</h3>
     
     <p>
-    The ACS download package provides an application for managing file
+    The OpenACS download package provides an application for managing file
     distribution.
     </p>
 
@@ -74,9 +74,9 @@
     Joe Contributer (currently working for <i>Joe.com</i>) writes a piece
     of software used to do knowledge management (KM) for the ACS.  He
     packages his code using the <a
-    href=http://www.arsdigita.com/doc/core-arch-guide/apm>APM</a>.  Joe
-    feels that others could gain from using his knew package so he uploads
-    it the the ArsDigita Package Repository.  Since it is in APM format in
+    href=/doc/packages>APM</a>.  Joe
+    feels that others could gain from using his new package so he uploads
+    it to the OpenACS Package Repository.  Since it is in APM format, in
     one step a package, version, vendor, owner and description data are
     all uploaded (extracted from the .info file).
 
@@ -86,7 +86,7 @@
     to not allow users to download versions pending approval.  That forces
     her to download Joe's package from the admin pages and install it.
     She notices that it isn't malicious in any way and doesn't harm her
-    ACS installation so she approves it to go live on her package
+    OpenACS installation so she approves it to go live on her package
     repository.  Joe is informed via email that his package was approved
     (because Jane set this configuration parameter).
 
@@ -96,7 +96,7 @@
     a package repository and finds Joe's KM package.  He notices that
     many other users have downloaded the package and have made comments
     praising the package as well as <i>Joe.com</i>.  Since Ben is a
-    follower by heart he decides to download the package as well and
+    follower by heart, he decides to download the package as well and
     install it on his system.  (Ben's crafty friend Alyssa later informs
     Ben that he could have just had the APM install directly from the
     repository url).
@@ -104,7 +104,7 @@
     <p>
 
     Benny Beancounter loves to learn about who's downloading files from
-    his site and what reasons they give for downloads.  On a frequent basis
+    his site and what reasons they give for downloads.  On a frequent basis,
     Benny visits the download packages admin pages and views a report of
     how many downloads occured for each file.  He then drills down on a
     particular file and views a list of the users who downloaded the file
@@ -114,7 +114,8 @@
     <h3>V. Related Links</h3>
 
     <ul>
-      <li><a href="design">Design Document</a>
+      <li><a href="design">Design Document</a> - not present.
+		<li><a href="features">Some Features</a>
     </ul>
 
 
@@ -123,19 +124,19 @@
     <p><strong>10.0 Versioned File Storage</strong>
     </p>
     <p>
-    ACS Download must provide versioned file storage.
+    OpenACS Download must provide versioned file storage.
     </p>
 
     <p><strong>20.0 User Tracking</strong>
     </p>
     <p>
-    ACS Download must store information about which users have downloaded which files (including versions).
+    OpenACS Download must store information about which users have downloaded which files (including versions).
     </p>
 
     <p><strong>20.0 Package Based Meta Information</strong>
     </p>
     <p>
-    ACS Download must be able to store arbitrary meta information on a per package basis.
+    OpenACS Download must be able to store arbitrary meta information on a per package basis.
     i.e. All files provided by this instance of the package require the fields x, y and z.
     </p>
 
@@ -313,6 +314,13 @@
     <th width=50%>Action Taken, Notes</th>
     <th>When?</th>
     <th>By Whom?</th>
+</tr>
+
+<tr>
+   <td>0.3</td>
+   <td>Minor edits. Few typos & links fixed. ACS changed to OpenACS.</td>
+   <td>2/16/2002</td>
+   <td>Vinod Kurup</td>
 </tr>
 
 <tr>

@@ -69,7 +69,7 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
 	}
 
 	"text" {
-	    append html "<textarea name=$element_name>$user_value</textarea>" 
+	    append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>" 
 	}
 	"date" {
 	    append html "[ad_dateentrywidget $element_name $user_value]" 
@@ -245,18 +245,23 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
          dam.archive_type_id is null)
         order by sort_key
     } {
-        if { $data_type == "date" } {
-            if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
-                ad_complain "$errmsg: Please make sure your dates are valid."
-            }
-        }
+		# date's are complex. convert them first
+		if { $data_type == "date" } {
+			if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
+				if {$required_p == "t"} {
+					ad_complain "$errmsg: Please make sure your dates are valid."
+				} else {
+					set metadata($metadata_id) ""
+				}
+			}
+		}
         if { [exists_and_not_null metadata($metadata_id)] } {
             set response_value [string trim $metadata($metadata_id)]
         } elseif {$required_p == "t"} {
             lappend metadata_with_missing_responses $pretty_name
             continue
         } else {
-            set response_to_question($question_id) ""
+            set response_to_question($metadata_id) ""
             set response_value ""
         }
         if {![empty_string_p $response_value]} {
@@ -271,11 +276,11 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
                     ad_complain "The value for \"$metadata\" must be an integer. Your value was \"$response_value\"."
                     continue
                 }
-            }
+            } 
         }
         
 
-        ns_log Notice "LOGGING: Metadata $pretty_name: $metadata($metadata_id)"
+#        ns_log Notice "LOGGING: Metadata $pretty_name: $metadata($metadata_id)"
     }
     if { [llength $metadata_with_missing_responses] > 0 } {
         ad_complain "You didn't respond to all required sections. You skipped:"

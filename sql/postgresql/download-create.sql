@@ -1,3 +1,12 @@
+--
+-- packages/sdm/sql/download/download-create.sql
+--
+-- 
+-- @author Vinod Kurup (vinod@kurup.com)
+-- 
+-- @cvs-id $Id$
+--
+
 -- Note cr_items has available:
 --    parent_id
 --    name
@@ -23,39 +32,15 @@ create table download_repository (
                      constraint download_repository_id_pk primary key
 );
 
-create function inline_0 ()
-returns integer as '
-begin
-    PERFORM content_type__create_type (
-	''cr_download_rep'',
-	''content_revision'',
-	''Download Repository'',
-	''Download Repositories'',
-	''download_repository'',
-	''repository_id'',
+select content_type__create_type (
+	'cr_download_rep',
+	'content_revision',
+	'Download Repository',
+	'Download Repositories',
+	'download_repository',
+	'repository_id',
 	null
-	);
-
-    return 0;
-end;' language 'plpgsql';
-
-select inline_0 ();
-
-drop function inline_0 ();
-
---begin
---  content_type.create_type (
---     content_type  => 'cr_download_rep',
---     pretty_name   => 'Download Repository',
---     pretty_plural => 'Download Repositories',
---     table_name    => 'download_repository',
---     id_column     => 'repository_id'
---   );
---end;
---/
---show errors
-
-
+);
 
 comment on table download_repository is '
 This table stores the actual download repositories.  Each repository has a title
@@ -79,7 +64,6 @@ create table download_archive_types (
 					references download_repository (repository_id),
     pretty_name     varchar(100) not null,
     description     varchar(500) not null
---    unique (repository_id, short_name) constraint download_archive_types_shrt_name_un unique
 );
 
 comment on table download_archive_types is '
@@ -97,7 +81,6 @@ create table download_reasons (
 					   constraint download_reason_id_fk 
 					   references download_repository (repository_id) ,
     reason			   varchar(500) not null
---    unique (repository_id, reason) constraint download_reason_un unique
 );
 
 comment on table download_archive_types is '
@@ -215,8 +198,7 @@ create table download_archives (
 --  vendor (via metadata)
 --  owner (via metadata)
 
--- not sure where most of the above stuff is,
---  but I added file_size, cuz the oracle version
+--  I added file_size, cuz the oracle version
 --  keeps content in blobs and thus can easily
 --  get file_size from the database
 --     vinodk 2001-05-16
@@ -236,23 +218,6 @@ create table download_archive_revisions (
 						constraint download_ar_file_size_nn
 						not null
 );
-
--- added table download_archive_descs - vinodk
--- Normally this table is created during content_type__create_type
--- but it only contains the primary key
--- I want it to also contain file_size, since the oracle version
--- calculates file_size in the database.
-
---create table download_archive_descs (
---	archive_desc_id		integer 
---						constraint download_ar_desc_id_fk 
---                        references cr_items (item_id) on delete cascade 
---                        constraint download_ar_desc_id_pk 
---						primary key,
---	file_size			integer
---						constraint download_ar_desc_fs_nn
---						not null
---);
 
 -- Storage of the metadata per archive
 -- Long skinny table.
@@ -308,93 +273,41 @@ create table download_downloads (
     reason        text
 );
 
-create function inline_1 ()
-returns integer as '
-begin
-    PERFORM content_type__create_type (
-	  ''cr_download_archive'',
-	  ''content_revision'',
-	  ''Download Archive'',
-	  ''Download Archives'',
-	  ''download_archives'',
-	  ''archive_id'',
+select content_type__create_type (
+	  'cr_download_archive',
+	  'content_revision',
+	  'Download Archive',
+	  'Download Archives',
+	  'download_archives',
+	  'archive_id',
 	  null
-	);
+);
 
-	PERFORM content_type__register_child_type(
-      ''cr_download_rep'',
-      ''cr_download_archive'',
-	  ''generic'',
+select content_type__register_child_type(
+      'cr_download_rep',
+      'cr_download_archive',
+	  'generic',
 	  0,
 	  null
-    );
+);
 
-	return 0;
-end;' language 'plpgsql';
-
-select inline_1 ();
-
-drop function inline_1 ();
-
-create function inline_2 ()
-returns integer as '
-begin
-    PERFORM content_type__create_type (
-	  ''cr_download_archive_desc'',
-	  ''content_revision'',
-	  ''Download Archive Description'',
-	  ''Download Archive Descriptions'',
-	  ''download_archive_descs'',
-	  ''archive_desc_id'',
+select content_type__create_type (
+	  'cr_download_archive_desc',
+	  'content_revision',
+	  'Download Archive Description',
+	  'Download Archive Descriptions',
+	  'download_archive_descs',
+	  'archive_desc_id',
 	  null
-	);
+);
 
-	PERFORM content_type__register_child_type(
-      ''cr_download_rep'',
-      ''cr_download_archive_desc'',
-	  ''generic'',
+select content_type__register_child_type(
+      'cr_download_rep',
+      'cr_download_archive_desc',
+	  'generic',
 	  0,
 	  null
-  );
-
-    return 0;
-end;' language 'plpgsql';
-
-select inline_2 ();
-
-drop function inline_2 ();
-
---begin
---  content_type.create_type (
---     content_type  => 'cr_download_archive',
---     pretty_name   => 'Download Archive',
---     pretty_plural => 'Download Archive',
---     table_name    => 'download_archives',
---     id_column     => 'archive_id'
---   );
---
---  content_type.register_child_type(
---      parent_type => 'cr_download_rep',
---      child_type => 'cr_download_archive'
---  );
---
---
---  content_type.create_type (
---     content_type  => 'cr_download_archive_desc',
---     pretty_name   => 'Download Archive Description',
---     pretty_plural => 'Download Archive Description',
---     table_name    => 'download_archive_descs',
---     id_column     => 'archive_desc_id'
---   );
---
---  content_type.register_child_type(
---      parent_type => 'cr_download_rep',
---      child_type => 'cr_download_archive_desc'
---  );
---
---end;
---/
---show errors
+);
 
 create view download_repository_obj as
        select repository_id, 

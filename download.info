@@ -20,7 +20,7 @@
         <description format="text/plain">Create an instance of the download module. Each instance has a repository_id which allows the download module to differentiate between different instances of the package.</description>
 
         <provides url="download" version="4.1"/>
-        <requires url="acs-kernel" version="4.0"/>
+        <requires url="acs-kernel" version="4.6.2"/>
         <requires url="acs-mail" version="4.6"/>
 
         <files>

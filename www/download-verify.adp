@@ -6,7 +6,7 @@
 <table>
 <tr>
 <td align=right>File Size:</td> 
-<td><b><%= [expr $file_size / 1024]%>k</b></td>
+<td><b>@file_size@k</b></td>
 </tr><tr>
 <form method=get action="@action@">
 <%= [export_form_vars download_id revision_id] %>

@@ -2,6 +2,27 @@
 -- Drop the data model and the PL/SQL packages.
 --
 
+-- Views --
+drop view download_repository_obj;
+drop view download_archives_obj;
+drop view download_arch_revisions_obj;
+drop view download_downloads_repository;
+
+-- Sequences --
+drop sequence download_archive_type_seq;
+drop view download_archive_type_sequence;
+drop sequence download_reasons_seq;
+drop view download_reasons_sequence;
+drop sequence download_md_choice_id_seq;
+drop view download_md_choice_id_sequence;
+drop sequence download_downloads_seq;
+drop view download_downloads_sequence;
+
+-- Functions --
+drop function download_rep__new (integer,varchar,varchar,varchar,timestamp,integer,integer,integer,varchar);
+drop function download_rep__edit (integer,varchar,varchar,varchar,timestamp,integer,varchar);
+drop function download_rep__delete (integer);
+
 /* Drop all content items */
 
 create function inline_0 ()
@@ -14,9 +35,9 @@ begin
                          where content_type in ( ''cr_download_archive_desc'', 
 											     ''cr_download_archive'', 
 												 ''cr_download_rep'' ) loop
-		for archive_child_rec in select * from acs_object_context_index where ancestor_id = archive_rec.item_id loop
-			PERFORM content_item__delete( archive_child_rec.object_id );
-		end loop;
+--		for archive_child_rec in select * from acs_object_context_index where ancestor_id = archive_rec.item_id loop
+--			PERFORM content_item__delete( archive_child_rec.object_id );
+--		end loop;
 		PERFORM content_item__delete( archive_rec.item_id );
 	end loop;
 
@@ -50,22 +71,6 @@ drop function inline_0 ();
 --    end loop;
 --end;
 --/
-
-/* Sequences */
-drop sequence download_archive_type_seq;
-drop view download_archive_type_sequence;
-drop sequence download_reasons_seq;
-drop view download_reasons_sequence;
-drop sequence download_md_choice_id_seq;
-drop view download_md_choice_id_sequence;
-drop sequence download_downloads_seq;
-drop view download_downloads_sequence;
-
-/* Views */
-drop view download_repository_obj;
-drop view download_archives_obj;
-drop view download_arch_revisions_obj;
-drop view download_downloads_repository;
 
 /* Tables */
 drop table download_downloads;
@@ -164,9 +169,5 @@ drop function inline_1 ();
 --/
 --show errors
 --
-
-drop function download_rep__new (integer,varchar,varchar,varchar,timestamp,integer,integer,integer,varchar);
-drop function download_rep__edit (integer,varchar,varchar,varchar,timestamp,integer,varchar);
-drop function download_rep__delete (integer);
 
 --drop package download_rep;

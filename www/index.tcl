@@ -8,6 +8,7 @@ ad_page_contract {
     {archive_type_id ""}
     {orderby "archive_name"}
     {query_string ""}
+	{updated ""}
 } -properties {
     title:onevalue
     description:onevalue
@@ -28,12 +29,13 @@ set description $repository(description)
 set help_text $repository(help_text)
 
 #select the current list of archives
-set type_dimlist {{"" "All" {}}}
+set type_dimlist {}
 db_foreach archive_type {
     select archive_type_id as at_id, pretty_name from download_archive_types where repository_id = :repository_id
 } {
     lappend type_dimlist [list $at_id $pretty_name [list where "da.archive_type_id = $at_id"]]
 }
+lappend type_dimlist {"" "all" {}}
 
 set dimensional [list \
    {versions "Versions" current {
@@ -42,9 +44,9 @@ set dimensional [list \
    }} \
    [list archive_type_id "Type" "" $type_dimlist] \
    {updated "Updated" all {
-       {1d "last 24hrs" {where "dar.publish_date + 1 > [db_map date_clause]"}}
-       {1w "last week"  {where "dar.publish_date + 7 > [db_map date_clause]"}}
-       {1m "last month" {where "dar.publish_date + 30 > [db_map date_clause]"}}
+       {1d "last 24hrs" {where "[db_map date_clause_1]"}}
+       {1w "last week"  {where "[db_map date_clause_7]"}}
+       {1m "last month" {where "[db_map date_clause_30]"}}
        {all "all" {}}
    }} \
 ]
@@ -61,12 +63,10 @@ if { $admin_p } {
     set approval "       and dar.approved_p = 't'  "
 }
 
-#FIXME fix the file size thing
-
 set table_def {
     {archive_name "Software Name" 
         {lower(archive_name) $order}
-        {<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;([expr [cr_file_size $file_size] / 1024]k)<br>$summary</td>}}
+        {<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;(${file_size}k)<br>$summary</td>}}
     {archive_type "Software Type" {} {}}
     {downloads "# Downloads" {} {}}
 }

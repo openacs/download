@@ -61,8 +61,8 @@ select '[cr_fs_path]' || content as content, storage_type
 			:creation_ip
 		  );
 
-          insert into download_archive_revisions (revision_id,    approved_p) values
-                                                 (v_revision_id, :approved_p);
+          insert into download_archive_revisions (revision_id,    approved_p, file_size) values
+                                                 (v_revision_id, :approved_p, :file_size);
 		  return v_revision_id;
         end;
     

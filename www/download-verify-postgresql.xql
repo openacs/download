@@ -13,7 +13,7 @@ select da.archive_id,
        dar.revision_id,
        dar.file_name,
        dar.version_name,
-       dar.content as content_path
+       dar.file_size / 1024 as file_size
 from   download_archives_obj da,
        download_arch_revisions_obj dar
 where  da.archive_id = dar.archive_id and

@@ -32,7 +32,7 @@ select da.archive_id,
        dar.revision_id,
        dar.file_name,
        dar.version_name,
-       dar.content as file_size,       
+       dar.file_size / 1024 as file_size,       
        (select count(*) from download_downloads where revision_id = dar.revision_id) as downloads,
        dar.approved_p 
        $metadata_selects
@@ -57,12 +57,28 @@ where  da.repository_id = :repository_id and
       </querytext>
 </partialquery>
 
-<partialquery name="date_clause">      
+<partialquery name="date_clause_1">
       <querytext>
 
-   current_timestamp
+	dar.publish_date + '1 days'::interval > current_timestamp
 
       </querytext>
 </partialquery>
  
+<partialquery name="date_clause_7">
+      <querytext>
+
+	dar.publish_date + '7 days'::interval > current_timestamp
+
+      </querytext>
+</partialquery>
+
+<partialquery name="date_clause_30">
+      <querytext>
+
+	dar.publish_date + '30 days'::interval > current_timestamp
+
+      </querytext>
+</partialquery>
+
 </queryset>

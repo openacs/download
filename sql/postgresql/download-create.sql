@@ -215,6 +215,11 @@ create table download_archives (
 --  vendor (via metadata)
 --  owner (via metadata)
 
+-- not sure where most of the above stuff is,
+--  but I added file_size, cuz the oracle version
+--  keeps content in blobs and thus can easily
+--  get file_size from the database
+--     vinodk 2001-05-16
 create table download_archive_revisions (
     revision_id         integer
 						constraint download_ar_id_fk
@@ -226,9 +231,28 @@ create table download_archive_revisions (
     approved_user       integer 
                         constraint download_ar_usr_fk 
 						references users,
-    approved_comment    varchar(1000)
+    approved_comment    varchar(1000),
+	file_size			integer
+						constraint download_ar_file_size_nn
+						not null
 );
 
+-- added table download_archive_descs - vinodk
+-- Normally this table is created during content_type__create_type
+-- but it only contains the primary key
+-- I want it to also contain file_size, since the oracle version
+-- calculates file_size in the database.
+
+--create table download_archive_descs (
+--	archive_desc_id		integer 
+--						constraint download_ar_desc_id_fk 
+--                        references cr_items (item_id) on delete cascade 
+--                        constraint download_ar_desc_id_pk 
+--						primary key,
+--	file_size			integer
+--						constraint download_ar_desc_fs_nn
+--						not null
+--);
 
 -- Storage of the metadata per archive
 -- Long skinny table.

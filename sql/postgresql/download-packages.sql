@@ -41,6 +41,7 @@ declare
 	new__creation_ip			alias for $9;  -- default null
     v_name						cr_items.name%TYPE;
     v_repository_id				integer;
+	v_revision_id				integer;
 begin
     v_name := ''download_repository'' || new__repository_id;
     select into v_repository_id content_item__new (
@@ -66,6 +67,13 @@ begin
      (repository_id)
     values
      (new__repository_id);
+
+	 -- get the latest revision
+	 select content_item__get_latest_revision ( v_repository_id ) 
+			into v_revision_id;
+
+	 -- make it live
+	 select content_item__set_live_revision ( v_revision_id );
 
     return v_repository_id;
 

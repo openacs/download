@@ -65,12 +65,12 @@ drop view download_downloads_repository;
 drop table download_downloads;
 drop table download_revision_data;
 drop table download_archive_revisions;
-drop table download_archives;
+--drop table download_archives;
 drop table download_metadata_choices;
 drop table download_archive_metadata;
 drop table download_reasons;
 drop table download_archive_types;
-drop table download_repository;
+--drop table download_repository;
 --drop table download_archive_descs;
 
 /* acs_object_type */

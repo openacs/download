@@ -20,7 +20,8 @@ create table download_repository (
        repository_id integer
                      constraint download_repository_id_fk
                      references cr_items (item_id) on delete cascade
-                     constraint download_repository_id_pk primary key
+                     constraint download_repository_id_pk 
+					 primary key
 );
 
 begin
@@ -50,8 +51,10 @@ the repository is keyed to this table';
 create sequence download_archive_type_sequence;
 create table download_archive_types (
     archive_type_id integer
-                    constraint download_archive_types_pk primary key,
-    repository_id   constraint download_archive_rep_id_fk references download_repository (repository_id),
+                    constraint download_archive_types_pk 
+					primary key,
+    repository_id   constraint download_archive_rep_id_fk 
+					references download_repository (repository_id),
     pretty_name     varchar(100) not null,
     description     varchar(500) not null
 --    unique (repository_id, short_name) constraint download_archive_types_shrt_name_un unique
@@ -64,9 +67,11 @@ comment on table download_archive_types is '
 create sequence download_reasons_sequence;
 create table download_reasons (
     download_reason_id integer
-                       constraint download_archive_reasons_pk primary key,
-    repository_id   constraint download_reason_id_fk references download_repository (repository_id) ,
-    reason          varchar(500) not null
+                       constraint download_archive_reasons_pk 
+					   primary key,
+    repository_id	   constraint download_reason_id_fk 
+					   references download_repository (repository_id) ,
+    reason			   varchar(500) not null
 --    unique (repository_id, reason) constraint download_reason_un unique
 );
 
@@ -85,12 +90,14 @@ comment on table download_archive_types is '
 --
 create table download_archive_metadata (
     metadata_id      integer
-                     constraint download_ma_pk primary key,
+                     constraint download_ma_pk 
+					 primary key,
     repository_id    constraint download_ma_rep_id_fk
                      references download_repository (repository_id),
     --if archive_type_id is null, applies to all archive types
     archive_type_id  integer 
-                     constraint download_ma_type_fk references download_archive_types,
+                     constraint download_ma_type_fk 
+					 references download_archive_types,
     sort_key         integer
                      constraint download_ma_sort_key_nn
                      not null,
@@ -99,17 +106,21 @@ create table download_archive_metadata (
                      constraint download_data_type_ck
                      check (data_type in ('text', 'shorttext', 'boolean', 'number', 'integer', 'date', 'choice')),
     required_p       varchar(1) 
-                     constraint download_ma_required_p_ck check(required_p in ('t','f')),
+                     constraint download_ma_required_p_ck 
+					 check(required_p in ('t','f')),
     --linked_p indicates whether we should have links to show all
     --archives with a particular link
     linked_p         varchar(1) 
-                     constraint download_ma_linked_p_ck check(linked_p in ('t','f')),
+                     constraint download_ma_linked_p_ck 
+					 check(linked_p in ('t','f')),
     --is this field shown on the main page?                 
     mainpage_p       varchar(1) 
-                     constraint download_ma_mainpage_p_ck check(mainpage_p in ('t','f')),
+                     constraint download_ma_mainpage_p_ck 
+					 check(mainpage_p in ('t','f')),
     --is this field computed, or should we ask the user to enter it?
     computed_p       varchar(1) 
-                     constraint download_ma_computed_p_ck check(computed_p in ('t','f'))
+                     constraint download_ma_computed_p_ck 
+					 check(computed_p in ('t','f'))
 );
 
 --When a piece of metadata has a fixed set of responses

@@ -4,19 +4,20 @@
 
 <formtemplate id="add_metadata"></formtemplate>
 
-<h3>Current Metadata</h3>
+<h3>#download.Current_Metadata#</h3>
 <ul>
 <multiple name=metadata>
-  <li>Name: @metadata.pretty_name@ <br>
-      Archive Type: @metadata.archive_name@ <br>
-      Sort key: @metadata.sort_key@ <br>
-      Data Type: @metadata.data_type@ <br>
-      Required: @metadata.required_p@ <br>
-      Linked: @metadata.linked_p@ <br>
-      Mainpage: @metadata.mainpage_p@ <br>
-      Computed: @metadata.computed_p@ <br>
+  <li>#download.lt_Name_metadatapretty_n# <br>
+      #download.lt_Archive_Type_metadata# <br>
+      #download.lt_Sort_key_metadatasort# <br>
+      #download.lt_Data_Type_metadatadat# <br>
+      #download.lt_Required_metadatarequ# <br>
+      #download.lt_Linked_metadatalinked# <br>
+      #download.lt_Mainpage_metadatamain# <br>
+      #download.lt_Computed_metadatacomp# <br>
 
-      <a href="repository-metadata-delete?metadata_id=@metadata.metadata_id@">Delete</a> |
-      <a href="repository-metadata-edit?metadata_id=@metadata.metadata_id@">Edit</a>
+      <a href="repository-metadata-delete?metadata_id=@metadata.metadata_id@">#download.Delete#</a> |
+      <a href="repository-metadata-edit?metadata_id=@metadata.metadata_id@">#download.Edit#</a>
 </multiple>
 </ul>
+

@@ -19,7 +19,7 @@
      <td>@summary@</td>
  </tr>
  <tr><td align=right valign=top>Description:</td>
-     <td>@description@</td>
+     <td>@description;noquote@</td>
  </tr>
 <if @admin_p@ eq 1>
  <tr><td align=right valign=top><p><a href=/permissions/one?object_id=@revision_id@><b>Edit Permissions on This Revision</b></a> 
@@ -54,7 +54,7 @@
 
 <p>
 <center>
-@gc_link@
+@gc_link;noquote@
 <p>
 @gc_comments@
 </center>

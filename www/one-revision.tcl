@@ -74,7 +74,7 @@ where  da.repository_id = :repository_id and
 }
 
 if {[string eq $description_type {text/plain}]} { 
-    set description [ad_text_to_html $description]
+    set description [ad_text_to_html -- $description]
 }
 
 set context [list [list "one-archive?archive_id=$archive_id" $archive_name] "version $version_name"]

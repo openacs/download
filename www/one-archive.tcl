@@ -34,7 +34,7 @@ if ![db_0or1row archive_info_select {
 
 
 if {[string eq $description_type {text/plain}]} { 
-    set description [ad_text_to_html $description]
+    set description [ad_text_to_html -- $description]
 }
 
 set pending_count [db_string pending_count_select {

@@ -19,7 +19,7 @@
 
 @dimensional_html;noquote@
 <br /><br />
-@table@
+@table;noquote@
 
 <if @write_p@ eq 1>
 <h3>Upload a New Version of Software:</h3>

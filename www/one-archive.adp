@@ -19,7 +19,7 @@
  </tr>
  <tr>
      <td align="right" valign="top">Description:</td>
-     <td>@description@</td>
+     <td>@description;noquote@</td>
  </tr>
 
  <if @admin_p@ eq 1>
@@ -52,7 +52,7 @@
 
 <p>
 <center>
-@gc_link@
+@gc_link;noquote@
 <p>
-@gc_comments@
+@gc_comments;noquote@
 </center>

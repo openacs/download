@@ -2,6 +2,8 @@
 -- Drop the data model and the PL/SQL packages.
 --
 
+delete from download_archives;
+
 -- Views --
 drop view download_repository_obj;
 drop view download_archives_obj;
@@ -40,17 +42,12 @@ drop table download_archive_types;
 create function inline_0 ()
 returns integer as '
 declare
-	archive_rec			cr_items%ROWTYPE;
-	archive_child_rec	acs_object_context_index%ROWTYPE;
+	archive_rec			record;
 begin
-	for archive_rec in select * from cr_items 
+	for archive_rec in select item_id from cr_items 
                          where content_type in ( ''cr_download_archive'', 
 											     ''cr_download_archive_desc'', 
-												 ''cr_download_rep'' ) loop
---		for archive_child_rec in select * from acs_object_context_index where ancestor_id = archive_rec.item_id loop
---			PERFORM content_item__delete( archive_child_rec.object_id );
---		end loop;
-		update cr_items set live_revision=null, latest_revision=null where item_id=archive_rec.item_id;
+												 ''cr_download_rep'' )  order by item_id desc  loop
 		PERFORM content_item__delete( archive_rec.item_id );
 	end loop;
 

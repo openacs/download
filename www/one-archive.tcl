@@ -31,7 +31,7 @@ if ![db_0or1row archive_info_select {
     return
 }
 
-set description [acs_messaging_format_as_html $description_type $description]
+#set description [acs_messaging_format_as_html $description_type $description]
 
 set pending_count [db_string pending_count_select {
         select count(*)

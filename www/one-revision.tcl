@@ -68,7 +68,7 @@ where  da.repository_id = :repository_id and
     return
 }
 
-set description [acs_messaging_format_as_html $description_type $description]
+#set description [acs_messaging_format_as_html $description_type $description]
 
 set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] "$archive_name $version_name"]
 set gc_link ""

@@ -25,6 +25,7 @@
  <tr><td align=right valign=top><p><a href=/permissions/one?object_id=@revision_id@><b>Edit Permissions on This Revision</b></a> 
      <td> <font size=-1>(<a href=help#permissions>permission descriptions</a>)</font>
  </tr>
+<tr><td align="center" valign="top" colspan="2"><p><b><a href="archive-version-add?archive_id=@archive_id@">Add a new version</a></b></td></tr>
 </if>
 
 <tr>

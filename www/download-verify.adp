@@ -12,11 +12,11 @@
         <form method="post" action="@action@">
           <%= [export_form_vars download_id revision_id] %>
           <td align="right">Reason for Download:</td> 
-          <td> @reason_widget@ </td>
+          <td> @reason_widget;noquote@ </td>
       </tr>
       <tr>
         <td align="right">If you have selected "Other"<br /> please tell us why:</td>
-        <td><input type="text" name="reason_other" size="31" /></td>
+        <td><input type="text" name="reason_other" size="60" /></td>
       </tr>
       <tr>
         <td>&nbsp;</td>

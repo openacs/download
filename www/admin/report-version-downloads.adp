@@ -4,7 +4,7 @@
 
 <p>
 <form method="post" action="spam-users">
-  @user_id_list_export@
+  @user_id_list_export;noquote@
   <input type="submit" value="Spam Downloaders" />
 </form>
 </p>
@@ -12,4 +12,4 @@
 @dimensional_html;noquote@
 <center><strong>Total downloads listed: @current_count@; Overall Total for @archive_name@: @total_count@</strong>
 </center>
-@table@
+@table;noquote@

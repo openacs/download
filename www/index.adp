@@ -15,14 +15,12 @@
       </p>
     </if>
 
-<h3>Available Software:</h3> 
-
 @dimensional_html;noquote@
 <br /><br />
 @table;noquote@
 
 <if @write_p@ eq 1>
-<h3>Upload a New Version of Software:</h3>
+<h3 style="margin-top: 1em">Upload a New Version of Software:</h3>
 <ul>
 <multiple name=types>
   <li><a href="archive-add?repository_id=@repository_id@&archive_type_id=@types.archive_type_id@">@types.pretty_name@</a></li>

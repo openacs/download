@@ -3,4 +3,4 @@
 <property name="context">@context;noquote@</property>
 
 @dimensional_html;noquote@
-@table@
+@table;noquote@

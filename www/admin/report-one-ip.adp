@@ -4,10 +4,10 @@
 
 <p>
 <form method="post" action="spam-users">
-  @user_id_list_export@
+  @user_id_list_export;noquote@
   <input type="submit" value="Spam Downloaders" />
 </form>
 </p>
 
 @dimensional_html;noquote@
-@table@
+@table;noquote@

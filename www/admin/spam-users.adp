@@ -17,7 +17,7 @@
     </p>
 
     <form action="spam-users-2" method="post">
-      @user_id_list_export@
+      @user_id_list_export;noquote@
       <table>
         <tr>
           <td>Email Subject:</td>

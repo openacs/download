@@ -4,90 +4,100 @@
    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
 <fullquery name="download_file_downloader.download_insert">      
-      <querytext>
-      
-                insert into download_downloads (
-                download_id, 
-                user_id, 
-                revision_id, 
-                download_date, 
-                download_ip,
-                download_hostname,
-                user_agent,
-                reason_id,
-                reason)
-                values
-                (:download_id, 
-                :user_id, 
-                :revision_id, 
-                current_timestamp, 
-                :download_ip,
-                :download_hostname,
-                :user_agent,
-                :reason_id,
-                :reason_other)
+<querytext>
+
+insert into download_downloads (
+  download_id, 
+  user_id, 
+  revision_id, 
+  download_date, 
+  download_ip,
+  download_hostname,
+  user_agent,
+  reason_id,
+  reason)
+values (
+  :download_id, 
+  :user_id, 
+  :revision_id, 
+  current_timestamp, 
+  :download_ip,
+  :download_hostname,
+  :user_agent,
+  :reason_id,
+  :reason_other)
             
-      </querytext>
+</querytext>
 </fullquery>
+
 
  
 <fullquery name="download_file_downloader.version_write">      
-      <querytext>
+<querytext>
+
 select '[cr_fs_path]' || content as content, storage_type
-                                 from   cr_revisions r, cr_items i
-                                 where  r.revision_id = :revision_id and
-                                        r.item_id = i.item_id
-      </querytext>
+from   cr_revisions r, cr_items i
+where  r.revision_id = :revision_id and
+       r.item_id = i.item_id
+
+</querytext>
 </fullquery>
+
 
  
 <fullquery name="download_insert_revision.revision_new">      
-      <querytext>
+<querytext>
 
-        declare
-          v_revision_id integer;
-        begin
-          v_revision_id := content_revision__new(
-			:filename,
-			:version_name,
-			now(),
-			:mime_type,
-			null,
-			' ',
-			:archive_id,
-			:revision_id,
-			now(),
-			:user_id,
-			:creation_ip
-		  );
+declare
+  v_revision_id integer;
+begin
+  v_revision_id := content_revision__new(
+    :filename,
+    :version_name,
+    now(),
+    :mime_type,
+    null,
+    ' ',
+    :archive_id,
+    :revision_id,
+    now(),
+    :user_id,
+    :creation_ip
+   );
 
-          insert into download_archive_revisions (revision_id,    approved_p, file_size) values
-                                                 (v_revision_id, :approved_p, :file_size);
-		  return v_revision_id;
-        end;
+  insert into download_archive_revisions 
+  (revision_id, approved_p, file_size) 
+  values
+  (v_revision_id, :approved_p, :file_size);
+
+  return v_revision_id;
+end;
     
-      </querytext>
+</querytext>
 </fullquery>
+
 
  
 <fullquery name="download_insert_revision.content_add">      
-      <querytext>
+<querytext>
 
-        update cr_revisions
-        set    content = '[cr_create_content_file $archive_id $revision_id $tmpfile]'
-        where  revision_id = :revision_id
+update cr_revisions
+set    content = '[cr_create_content_file $archive_id $revision_id $tmpfile]'
+where  revision_id = :revision_id
     
-      </querytext>
+</querytext>
 </fullquery>
+
 
  
 <fullquery name="download_insert_revision.make_live">      
-      <querytext>
+<querytext>
 
-	    select content_item__set_live_revision(:revision_id);
+select content_item__set_live_revision( :revision_id );
     
-      </querytext>
+</querytext>
 </fullquery>
+
 
  
 </queryset>

@@ -337,7 +337,7 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
     }
 
 	# get the file_size for the postgres version
-	set file_size [file size $upload_file]
+	set file_size [file size $tmpfile]
 
     set mime_type [download_maybe_create_new_mime_type $upload_file]
     db_exec_plsql revision_new {

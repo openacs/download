@@ -23,6 +23,18 @@ drop function download_rep__new (integer,varchar,varchar,varchar,timestamp,integ
 drop function download_rep__edit (integer,varchar,varchar,varchar,timestamp,integer,varchar);
 drop function download_rep__delete (integer);
 
+-- Tables --
+drop table download_downloads;
+drop table download_revision_data;
+drop table download_archive_revisions;
+--drop table download_archives;
+drop table download_metadata_choices;
+drop table download_archive_metadata;
+drop table download_reasons;
+drop table download_archive_types;
+--drop table download_repository;
+--drop table download_archive_descs;
+
 /* Drop all content items */
 
 create function inline_0 ()
@@ -32,12 +44,13 @@ declare
 	archive_child_rec	acs_object_context_index%ROWTYPE;
 begin
 	for archive_rec in select * from cr_items 
-                         where content_type in ( ''cr_download_archive_desc'', 
-											     ''cr_download_archive'', 
+                         where content_type in ( ''cr_download_archive'', 
+											     ''cr_download_archive_desc'', 
 												 ''cr_download_rep'' ) loop
 --		for archive_child_rec in select * from acs_object_context_index where ancestor_id = archive_rec.item_id loop
 --			PERFORM content_item__delete( archive_child_rec.object_id );
 --		end loop;
+		update cr_items set live_revision=null, latest_revision=null where item_id=archive_rec.item_id;
 		PERFORM content_item__delete( archive_rec.item_id );
 	end loop;
 
@@ -71,18 +84,6 @@ drop function inline_0 ();
 --    end loop;
 --end;
 --/
-
-/* Tables */
-drop table download_downloads;
-drop table download_revision_data;
-drop table download_archive_revisions;
---drop table download_archives;
-drop table download_metadata_choices;
-drop table download_archive_metadata;
-drop table download_reasons;
-drop table download_archive_types;
---drop table download_repository;
---drop table download_archive_descs;
 
 /* acs_object_type */
 

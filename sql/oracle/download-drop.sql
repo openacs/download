@@ -28,10 +28,10 @@ end;
 /
 
 /* Sequences */
-drop sequence download_archive_type_seq;
-drop sequence download_reasons_seq;
+drop sequence download_archive_type_sequence;
+drop sequence download_reasons_sequence;
 drop sequence download_md_choice_id_sequence;
-drop sequence download_downloads_seq;
+drop sequence download_downloads_sequence;
 
 /* Views */
 drop view download_archives_obj;

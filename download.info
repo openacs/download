@@ -12,10 +12,11 @@
         <database>oracle</database>
         <database>postgresql</database>
     </database-support>
-        <owner url="mailto:jbank@arsdigita.com">Joseph Bank</owner>
+        <owner url="mailto:vkurup@massmed.org">Vinod Kurup</owner>
+        <owner>Joseph Bank</owner>
         <summary>ACS 4.x version of download module.  Supports the functionality required by the current acs-repository.</summary>
         <release-date>2001-01-19</release-date>
-        <vendor url="http://www.arsdigita.com/">ArsDigita Corporation</vendor>
+        <vendor url="http://www.openacs.org/">OpenACS</vendor>
 
         <requires url="acs-content-repository" version="4.0.1"/>
         <requires url="acs-kernel" version="4.0"/>

@@ -15,7 +15,7 @@
 
 <h3>Available Software:</h3> 
 
-@dimensional@
+@dimensional_html@
 @table@
 
 <if @write_p@ eq 1>

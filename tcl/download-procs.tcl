@@ -122,7 +122,7 @@ ad_proc download_file_downloader {
 	{ reason_other ""}
     }
     
-    ns_log Notice "download_file_downloader: $revision_id"
+    ns_log Debug "download_file_downloader: downloading $revision_id"
 
     set user_id [ad_verify_and_get_user_id]
     set download_ip [ad_conn peeraddr]
@@ -200,7 +200,6 @@ ad_proc download_metadata_column { data_type } { Dummy comment.} {
 ad_proc download_validate_metadata { repository_id metadata_info archive_type_id } {
     Validate metadata arguments for a given archive_type
 } {
-    ns_log Notice "FOOOO: $metadata_info"
     array set metadata $metadata_info
     set metadata_with_missing_responses [list]
     ##Iterate over the metadata information
@@ -252,7 +251,7 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
         }
         
 
-#        ns_log Notice "LOGGING: Metadata $pretty_name: $metadata($metadata_id)"
+        ns_log Debug "LOGGING: Metadata $pretty_name: $metadata($metadata_id)"
     }
     if { [llength $metadata_with_missing_responses] > 0 } {
         ad_complain "You didn't respond to all required sections. You skipped:"

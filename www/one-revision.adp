@@ -56,5 +56,5 @@
 <center>
 @gc_link;noquote@
 <p>
-@gc_comments@
+@gc_comments;noquote@
 </center>

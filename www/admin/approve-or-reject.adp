@@ -1,5 +1,6 @@
 <master src="master">
 <property name="title">@pretty_noun@ @archive_name@ @version_name@</property>
+<property name="context">@pretty_noun@</property>
 
   <table>
   <form action=approve-or-reject-2.tcl>

@@ -1,8 +1,6 @@
 <master src="master">
 <property name="title">Help on @title@</property>
-<property name="context_bar">@context_bar@</property>
-
-
+<property name="context">@context@</property>
 
 @help_text@
 

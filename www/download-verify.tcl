@@ -39,7 +39,7 @@ where  da.archive_id = dar.archive_id and
     return
 }
 
-set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] "Download $archive_name $version_name"]
+set context [list [list "one-archive?archive_id=$archive_id" $archive_name] "Download $archive_name $version_name"]
 
 ##TODO Get version name
 set action "[ad_conn package_url]download/$file_name"

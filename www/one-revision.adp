@@ -1,13 +1,15 @@
 <master src="master">
-<property name="title">One Revision: @archive_name@ @version_name@</property>
-<property name="context_bar">@context_bar@</property>
+<property name="title">One Revision: @archive_name@ ver. @version_name@</property>
+<property name="context">@context@</property>
 
-
-<p>
+<if @master_admin_p@ eq 1>
+<table align="right"><tr><td><a href="admin/">Administration</a></td></tr></table>
+</if>
+<table align="right"><tr><td><a href="help">Help</a></td></tr></table>
 <table align=center>
- <tr><th colspan=2><font size=+1>@archive_name@</font></th></tr>
+ <tr><th colspan="2"><big>@archive_name@</big></th></tr>
 <if @version_name@ ne "">
- <tr><td colspan=2 align=center><b>version @version_name@</b></td></tr>
+ <tr><td colspan=2 align=center><strong>version @version_name@</strong></td></tr>
 </if>
  <tr><td colspan=2 align=center>
                    [<a href=download-verify?revision_id=@revision_id@>Download Now</a>]

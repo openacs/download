@@ -18,7 +18,7 @@ set page_content "[ad_header "Spam Downloaders"]
 
 <h2>Spam Downloaders</h2> 
 <p>
-[ad_context_bar "Spam Downloader"]
+[list "Spam Downloader"]
 
 <h3>Spam Downloader </h3>
 

@@ -35,6 +35,6 @@ if {[form is_valid edit_type]} {
 }
 
 set title "Edit $pretty_name"
-set context_bar [list [list "repository-types" "Repository Types"] $title]
+set context [list [list "repository-types" "Repository Types"] $title]
 
 ad_return_template

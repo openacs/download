@@ -31,5 +31,5 @@ db_multirow archives archives "
         group by da.archive_name, da.archive_id
 "
 
-set context_bar [list [list "all-metadata?metadata_id=$metadata_id" "All $pretty_name"] "One $pretty_name"]
+set context [list [list "all-metadata?metadata_id=$metadata_id" "All $pretty_name"] "One $pretty_name"]
 ad_return_template

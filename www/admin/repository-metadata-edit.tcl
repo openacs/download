@@ -8,6 +8,8 @@ ad_page_contract {
     metadata_id:integer,notnull
 }
 
+set context [list "Metadata edit"]
+
 set repository_id [download_repository_id]
 ad_require_permission $repository_id "admin"
 

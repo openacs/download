@@ -34,6 +34,6 @@ if {[form is_valid edit_reason]} {
 }
 
 set title "Edit Reason"
-set context_bar [list [list "repository-types" "Repository Types"] $title]
+set context [list [list "repository-types" "Repository Types"] $title]
 
 ad_return_template

@@ -10,7 +10,7 @@ ad_page_contract {
 }
 
 ad_maybe_redirect_for_registration
-set context_bar {"Add an Archive"}
+set context {"Add an Archive"}
 set user_id [ad_verify_and_get_user_id]
 
 array set repository [download_repository_info]

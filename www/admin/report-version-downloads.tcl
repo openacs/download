@@ -110,6 +110,6 @@ set table [ad_table \
         -bind [ad_tcl_vars_to_ns_set archive_id] \
         download_table $sql_query $table_def ]
 
-set context_bar [list "$archive_name Download History"]
+set context [list "$archive_name Download History"]
 
 ad_return_template

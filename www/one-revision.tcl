@@ -6,10 +6,15 @@ ad_page_contract {
      @cvs-id
 } {
     revision_id:naturalnum,notnull
+} -properties {
+    title:onevalue
+    admin_p:onevalue
+    master_admin_p:onevalue    
 }
 
 set repository_id [download_repository_id]
 set admin_p [ad_permission_p $revision_id "admin"]
+set master_admin_p [ad_permission_p [ad_conn package_id] admin]
 
 ##FIXME: Need to do the metadata thing here!
 ad_require_permission $revision_id "read"
@@ -67,9 +72,12 @@ where  da.repository_id = :repository_id and
     ad_return_complaint 1 "The revision you are looking for (revision ID $revision_id) could not be found"
     return
 }
-set description [acs_messaging_format_as_html $description_type $description]
 
-set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] "$archive_name $version_name"]
+if {[string eq $description_type {text/plain}]} { 
+    set description [ad_text_to_html $description]
+}
+
+set context [list [list "one-archive?archive_id=$archive_id" $archive_name] "version $version_name"]
 set gc_link ""
 set gc_comments ""
 if { [catch {

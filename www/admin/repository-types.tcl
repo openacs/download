@@ -11,7 +11,7 @@ set repository_id [download_repository_id [ad_conn package_id] 0]
 ad_require_permission $repository_id "admin"
 
 set title "Download Repository Archive Types"
-set context_bar [list "Archive Types"]
+set context [list "Archive Types"]
 
 form create add_type
 element create add_type archive_type_id -label "ArchiveType ID" -datatype integer -widget hidden

@@ -54,6 +54,6 @@ set table [ad_table \
         -bind [ad_tcl_vars_to_ns_set repository_id downloaded] \
         download_table $sql_query $table_def ]
 
-set context_bar [list "Downloads by IP"]
+set context [list "Downloads by IP"]
 
 ad_return_template

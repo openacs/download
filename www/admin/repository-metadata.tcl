@@ -9,7 +9,7 @@ ad_page_contract {
 
 set repository_id [download_repository_id]
 set title "Download Repository Metadata"
-set context_bar [list "Metadata"]
+set context [list "Metadata"]
 
 form create add_metadata
 element create add_metadata metadata_id -label "MetadataID" -datatype integer -widget hidden

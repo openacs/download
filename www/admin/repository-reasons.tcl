@@ -11,7 +11,7 @@ set repository_id [download_repository_id]
 ad_require_permission $repository_id "admin"
 
 set title "Download Repository Download Reasons"
-set context_bar [list "Download Reasons"]
+set context [list "Download Reasons"]
 
 form create add_reason
 element create add_reason download_reason_id -label "Reason ID" -datatype integer -widget hidden

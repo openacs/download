@@ -53,6 +53,6 @@ db_foreach metadata {
     append extra_form_elts [download_metadata_widget $data_type $pretty_name $metadata_id]
 }
 
-set context_bar [list "Add an Revision to $archive_name"]
+set context [list "Add an Revision to $archive_name"]
 
 ad_return_template

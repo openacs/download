@@ -9,9 +9,9 @@ ad_page_contract {
     archive_id:integer,notnull
 }
 
-
 ad_require_permission $archive_id read
 
+set master_admin_p [ad_permission_p [ad_conn package_id] admin]
 set admin_p [ad_permission_p $archive_id admin]
 set write_p [ad_permission_p $archive_id write]
 
@@ -31,7 +31,11 @@ if ![db_0or1row archive_info_select {
     return
 }
 
-set description [acs_messaging_format_as_html $description_type $description]
+
+
+if {[string eq $description_type {text/plain}]} { 
+    set description [ad_text_to_html $description]
+}
 
 set pending_count [db_string pending_count_select {
         select count(*)
@@ -55,7 +59,7 @@ db_multirow revisions rep_get_revisions {
     order by version_name
 }
 
-set context_bar [list $archive_name]
+set context [list $archive_name]
 
 set gc_link ""
 set gc_comments ""

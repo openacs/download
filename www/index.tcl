@@ -13,6 +13,9 @@ ad_page_contract {
     title:onevalue
     description:onevalue
     help_text:onevalue
+    write_p:onevalue
+    admin_p:onevalue
+    master_admin_p:onevalue    
 }
 
 set return_url "[ad_conn url]?[ad_conn query]"
@@ -21,6 +24,7 @@ set user_id [ad_verify_and_get_user_id]
 array set repository [download_repository_info]
 set repository_id $repository(repository_id)
 
+set master_admin_p [ad_permission_p [ad_conn package_id] admin]
 set admin_p [ad_permission_p $repository_id admin]
 set write_p [ad_permission_p $repository_id write]
 

@@ -24,10 +24,10 @@ set dimensional {
 set table_def {
     {archive_name "Archive"
     {archive_name $order}
-    {<td><a href=one-archive?archive_id=$archive_id>$archive_name</a></td>}}
+    {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
     {version_name "Version"
     {version_name $order}
-    {<td><a href=one-revision?revision_id=$revision_id>$version_name</a></td>}}
+    {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
     {download_date "Download Date"
     {download_date}
     {}}
@@ -69,5 +69,5 @@ set table [ad_table \
         -bind [ad_tcl_vars_to_ns_set repository_id user_id] \
         download_table $sql_query $table_def ]
 
-set context_bar [list [list "report-by-user" "Downloads by User"] "$first_names $last_name"]
+set context [list [list "report-by-user" "Downloads by User"] "$first_names $last_name"]
 ad_return_template

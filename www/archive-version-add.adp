@@ -1,6 +1,6 @@
 <master src="master">
 <property name="title">Add a New Software Archive</property>
-<property name="context_bar">@context_bar@</property>
+<property name="context">@context@</property>
 
 <form enctype=multipart/form-data method=POST action="archive-version-add-2">
 <%= [export_form_vars archive_id return_url]%>

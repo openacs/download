@@ -25,13 +25,13 @@ set dimensional {
 set table_def {
     {archive_name "Archive"
     {archive_name $order}
-    {<td><a href=one-archive?archive_id=$archive_id>$archive_name</a></td>}}
+    {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
     {version_name "Version"
     {version_name $order}
-    {<td><a href=one-revision?revision_id=$revision_id>$version_name</a></td>}}
+    {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
     {user_name "User Name"
     {user_name}
-    {<td><a href=report-one-user?[export_url_vars user_id downloaded]>$user_name</a></td>}}
+    {<td><a href="report-one-user?[export_url_vars user_id downloaded]">$user_name</a></td>}}
     {download_date "Download Date"
     {download_date}
     {}}
@@ -62,7 +62,7 @@ set sql_query "
        [ad_order_by_from_sort_spec $orderby $table_def]
 "
 
-set export_sql_query [export_vars -url -sign {sql_query}]
+set export_sql_query [export_vars -url -sign {downloaded repository_id dimensional}]
 
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
@@ -70,6 +70,6 @@ set table [ad_table \
         -bind [ad_tcl_vars_to_ns_set repository_id download_ip] \
         download_table $sql_query $table_def ]
 
-set context_bar [list [list "report-by-ip" "Downloads by IP"] "$download_ip"]
+set context [list [list "report-by-ip" "Downloads by IP"] "$download_ip"]
 
 ad_return_template

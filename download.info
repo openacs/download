@@ -14,10 +14,10 @@
     </database-support>
         <owner>Joseph Bank</owner>
         <owner url="mailto:vinod@kurup.com">Vinod Kurup</owner>
-        <summary>OpenACS 4.x version of download module.  Supports the functionality required by the current acs-repository.</summary>
+        <summary>Manage downloadable resources, versioned and with download tracking.</summary>
         <release-date>2003-01-03</release-date>
         <vendor url="http://www.openacs.org/">OpenACS</vendor>
-        <description format="text/plain">Create an instance of the download module. Each instance has a repository_id which allows the download module to differentiate between different instances of the package.</description>
+        <description format="text/plain">Intended to support downloads of versioned software and packages.  UI needs work.</description>
 
         <provides url="download" version="5.0d1"/>
         <requires url="acs-kernel" version="5.0d13"/>

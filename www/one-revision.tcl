@@ -69,7 +69,7 @@ where  da.repository_id = :repository_id and
        dar.revision_id = :revision_id and
        dar.creation_user = u.user_id
 "] {
-    ad_return_complaint 1 "The revision you are looking for (revision ID $revision_id) could not be found"
+    ad_return_complaint 1 "[_ download.lt_The_revision_you_are_]"
     return
 }
 

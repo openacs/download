@@ -35,7 +35,7 @@ where  da.archive_id = dar.archive_id and
        dar.revision_id = :revision_id 
        $approval
 "] {
-    ad_return_complaint 1 "The version you are looking for (revision ID $revision_id) could not be found"
+    ad_return_complaint 1 "[_ download.lt_The_version_you_are_l]"
     return
 }
 

@@ -61,11 +61,12 @@ if { $admin_p } {
     set approval "       and dar.approved_p = 't'  "
 }
 
+#FIXME fix the file size thing
 
 set table_def {
     {archive_name "Software Name" 
         {lower(archive_name) $order}
-        {<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;([expr $file_size / 1024]k)<br>$summary</td>}}
+        {<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;([expr [cr_file_size $file_size] / 1024]k)<br>$summary</td>}}
     {archive_type "Software Type" {} {}}
     {downloads "# Downloads" {} {}}
 }

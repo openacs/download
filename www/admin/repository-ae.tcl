@@ -41,7 +41,7 @@ if { [form is_valid ae_repository] } {
     form get_values ae_repository
     set edit_p [db_string rep_count_get "select count(*) from download_repository_obj where repository_id = :repository_id"]
     if { $edit_p == "0" } {
-        db_dml todo_insert {
+        db_exec_plsql todo_insert {
          declare
           the_id integer;
          begin
@@ -55,7 +55,7 @@ if { [form is_valid ae_repository] } {
                     end;
         }
     } else {
-        db_dml repository_edit {
+        db_exec_plsql repository_edit {
              begin
                 download_rep.edit(repository_id  => :repository_id,
                                          title => :title,

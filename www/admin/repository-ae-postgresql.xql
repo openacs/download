@@ -5,7 +5,6 @@
 
 <fullquery name="todo_insert">      
       <querytext>
-         begin;
           select download_rep__new(
 			:repository_id,
 			:title,
@@ -17,16 +16,12 @@
 			:package_id,
 			null
 		  );
-
-         end;
-        
       </querytext>
 </fullquery>
 
  
 <fullquery name="repository_edit">      
       <querytext>
-             begin;
                 select download_rep__edit(
 				  :repository_id,
                   :title,
@@ -36,9 +31,6 @@
 				  :user_id,
 				  null
                 );
-			
-             end;
-        
       </querytext>
 </fullquery>
 

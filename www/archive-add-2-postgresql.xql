@@ -5,12 +5,11 @@
 
 <fullquery name="archive_new">      
       <querytext>
-      FIX ME PLSQL
-
         declare
           v_archive_id 			  integer;
           v_archive_desc_id 	  integer;
 		  v_live_archive_desc_id  integer;
+		  v_id			  		  integer;
           v_name       			  cr_items.name%TYPE;
         begin
           v_name := 'Download Archive Desc for ' || :archive_id;
@@ -34,9 +33,14 @@
 			'file'
           );
 
-		  select content_item__get_live_revision(v_archive_desc_id)
-			into v_live_archive_desc_id;
+		  -- get the latest revision
+	 	  select into v_live_archive_desc_id 
+			content_item__get_latest_revision (v_archive_desc_id);
 
+	 	  -- make it live
+	 	  select into v_id 
+			content_item__set_live_revision ( v_live_archive_desc_id );
+			
           insert into download_archive_descs 
 			(archive_desc_id) 
 			values 
@@ -61,6 +65,14 @@
 			'file'
 		  );
 
+		  -- get the latest revision
+	 	  select into v_id 
+			content_item__get_latest_revision (v_archive_id);
+
+	 	  -- make it live
+	 	  select into v_id 
+			content_item__set_live_revision ( v_id );
+			
           insert into download_archives 
 			(archive_id, archive_type_id, archive_desc_id) 
 			values 

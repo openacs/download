@@ -34,8 +34,9 @@
 <fullquery name="download_file_downloader.version_write">      
       <querytext>
 select '[cr_fs_path]' || content as content, storage_type
-                                 from   cr_revisions
-                                 where  revision_id = :revision_id
+                                 from   cr_revisions r, cr_items i
+                                 where  r.revision_id = :revision_id and
+                                        r.item_id = i.item_id
       </querytext>
 </fullquery>
 
@@ -73,7 +74,7 @@ select '[cr_fs_path]' || content as content, storage_type
       <querytext>
 
         update cr_revisions
-        set    content = '[cr_create_content_file $item_id $revision_id $tmp_filename]'
+        set    content = '[cr_create_content_file $archive_id $revision_id $tmpfile]'
         where  revision_id = :revision_id
     
       </querytext>
@@ -83,11 +84,7 @@ select '[cr_fs_path]' || content as content, storage_type
 <fullquery name="download_insert_revision.make_live">      
       <querytext>
 
-        begin
-	        content_item__set_live_revision(:revision_id);
-	
-			return 0;
-        end;
+	    select content_item__set_live_revision(:revision_id);
     
       </querytext>
 </fullquery>

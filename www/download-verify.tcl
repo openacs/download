@@ -56,5 +56,5 @@ set action "[ad_conn package_url]download/$file_name"
 set reason_widget [ad_db_select_widget -option_list {{"" "Other"}} reasons "
     select reason, download_reason_id from download_reasons where repository_id = $repository_id" reason_id]
 
-set download_id [db_nextval download_reasons_seq]
+set download_id [db_nextval download_reasons_sequence]
 ad_return_template

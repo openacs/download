@@ -39,41 +39,43 @@ db_foreach archive_type {
 } {
     lappend type_dimlist [list $at_id $pretty_name [list where "da.archive_type_id = $at_id"]]
 }
-lappend type_dimlist {"" "all" {}}
+lappend type_dimlist {"" "#download.all#" {}}
 
-set dimensional [list \
-   {versions "Versions" current {
-       {current "current" {where "[db_map archive_where_clause]" }}
-       {all "all" {where "da.archive_id = dar.archive_id"}}
-   }} \
-   [list archive_type_id "Type" "" $type_dimlist] \
-   {updated "Updated" all {
-       {1d "last 24hrs" {where "[db_map date_clause_1]"}}
-       {1w "last week"  {where "[db_map date_clause_7]"}}
-       {1m "last month" {where "[db_map date_clause_30]"}}
-       {all "all" {}}
-   }} \
-]
+set dimensional [list [list versions "#download.Versions#" current [list \
+									 [list current "[_ download.current]" {where "[db_map archive_where_clause]"} ] \
+									 [list all "[_ download.all]" {where "da.archive_id = dar.archive_id"} ]
+								     ]]\
+		     [list archive_type_id "[_ download.Type]" "" $type_dimlist] \
+		     [list updated "[_ download.Updated]" all [list \
+								   [list 1d "[_ download.last_24hrs]" {where "[db_map date_clause_1]"}] \
+								   [list 1w "[_ download.last_week]"  {where "[db_map date_clause_7]"}] \
+								   [list 1m "[_ download.last_month]" {where "[db_map date_clause_30]"}] \
+								   [list all "[_ download.all]" {}]]
+		     ]]
 
 if { $admin_p } {
     set approval ""
-    lappend dimensional {approved "Approval" approved {
-        {pending "pending"   {where "dar.approved_p is null"}}
-        {approved "approved" {where "dar.approved_p = 't'"}}
-        {rejected "rejected" {where "dar.approved_p = 'f'"}}
-        {all "all" {}}
-    }}
+    lappend dimensional [list approved "[_ download.Approval]" approved \
+			     [list \
+				  [list pending "[_ download.pending]"   {where "dar.approved_p is null"}] \
+				  [list approved "[_ download.approved]" {where "dar.approved_p = 't'"}] \
+				  [list rejected "[_ download.rejected]" {where "dar.approved_p = 'f'"}] \
+				  [list all "[_ download.all]" {}] \
+				  ]
+			 ]
 } else {
     set approval "       and dar.approved_p = 't'  "
 }
 
-set table_def {
-    {archive_name "Software Name" 
-        {lower(archive_name) $order}
-        {<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;(${file_size}k)<br>$summary</td>}}
-    {archive_type "Software Type" {} {}}
-    {downloads "# Downloads" {} {}}
-}
+
+set table_def [list \
+		   [list archive_name "[_ download.Software_Name_1]"\
+			{lower(archive_name) $order} \
+			{<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;(${file_size}k)<br>$summary</td>}
+		    ] \
+	       [list archive_type "[_ download.Software_Type]" "" ""] \
+	       [list downloads "[_ download._Downloads]" "" ""] \
+	      ]
 
 #Setup the metadata
 set metadata_selects ""
@@ -103,9 +105,9 @@ db_foreach metadata {
 ##Add on the metadata columns
 
 if { $admin_p } {
-    lappend table_def     {dar.approved_p "Approval" 
-        {}
-        {<td>
+    lappend table_def [list dar.approved_p "[_ download.Approval]" \
+        {} \
+        {<td> \
 	[ad_decode $approved_p \
             "t" "<font color=green>approved</font> 
                 \[<font size=-1>
@@ -118,7 +120,7 @@ if { $admin_p } {
                  <a href=admin/approve-or-reject?action=approve&[export_url_vars revision_id return_url]>approve</a> |
                  <a href=admin/approve-or-reject?action=reject&[export_url_vars revision_id return_url]>reject</a></font>\]
 	"]
-	</td>}}
+	    </td>}]
     }
 
 set sql_query "

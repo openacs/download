@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<message_catalog package_key="download" package_version="5.0d1" locale="en_US" charset="ISO-8859-1">
+<message_catalog package_key="download" package_version="5.1d1" locale="en_US" charset="ISO-8859-1">
 
+  <msg key="_Downloads"># Downloads</msg>
+  <msg key="_Files"># Files</msg>
+  <msg key="_Versions"># Versions</msg>
   <msg key="add_a_version">add a version</msg>
   <msg key="AddEdit_Repository">Add/Edit Repository</msg>
   <msg key="AddEdit_Repository_1">{Add/Edit Repository}</msg>
   <msg key="Administer">Administer</msg>
   <msg key="Administration">Administration</msg>
+  <msg key="all">all</msg>
   <msg key="All_Metadata">All Metadata</msg>
+  <msg key="Approval">Approval</msg>
   <msg key="Approval_Pending">Approval Pending.</msg>
+  <msg key="approved">approved</msg>
   <msg key="Created_by">Created by:</msg>
   <msg key="Created_by_1">Created by</msg>
+  <msg key="current">current</msg>
   <msg key="Current_Metadata">Current Metadata</msg>
   <msg key="Current_Reasons">Current Reasons</msg>
   <msg key="current_version">(current version)</msg>
@@ -32,11 +39,16 @@
   <msg key="File_Size">File Size:</msg>
   <msg key="file_sizek">%file_size%k</msg>
   <msg key="Help">Help</msg>
+  <msg key="Help_on_title">Help on $title</msg>
   <msg key="Help_on_titlenoquote">Help on %title;noquote%</msg>
   <msg key="HTML">HTML</msg>
+  <msg key="last_24hrs">last 24hrs</msg>
+  <msg key="last_month">last month</msg>
+  <msg key="last_week">last week</msg>
   <msg key="lt_Add_a_New_Archive_Rev">Add a New Archive Revision to %archive_name%</msg>
   <msg key="lt_Add_a_new_Download_Re">Add a new Download Reason</msg>
   <msg key="lt_Add_a_New_Software_Ar">Add a New Software Archive</msg>
+  <msg key="lt_Add_an_Revision_to_ar">Add an Revision to $archive_name</msg>
   <msg key="lt_Administer_permission">Administer permission is necessary to grant or revoke archive permissions</msg>
   <msg key="lt_After_weeding_out_use">After weeding out users who don't want to be spammed, there was no one
       left on your list. Sorry!</msg>
@@ -60,6 +72,7 @@
   <msg key="lt_If_you_have_selected_">If you have selected &quot;Other&quot;</msg>
   <msg key="lt_Linked_metadatalinked">Linked: %metadata.linked_p%</msg>
   <msg key="lt_Mainpage_metadatamain">Mainpage: %metadata.mainpage_p%</msg>
+  <msg key="lt_Metadata_id_not_found">Metadata id not found</msg>
   <msg key="lt_My_Unapproved_Revisio">My Unapproved Revisions:</msg>
   <msg key="lt_Name_metadatapretty_n">Name: %metadata.pretty_name%</msg>
   <msg key="lt_One_Archive_archive_n">One Archive: %archive_name;noquote%</msg>
@@ -74,11 +87,14 @@
   <msg key="lt_Required_metadatarequ">Required: %metadata.required_p%</msg>
   <msg key="lt_Set_Repository_Permis">Set Repository Permissions</msg>
   <msg key="lt_Sort_key_metadatasort">Sort key: %metadata.sort_key%</msg>
+  <msg key="lt_The_archive_you_are_l">The archive you are looking for (archive ID $archive_id) could not be found</msg>
   <msg key="lt_The_following_users_w">The following users will receive your spam:</msg>
   <msg key="lt_the_metadata_collecte">the metadata collected for the repository archive types.</msg>
   <msg key="lt_the_repository_archiv">the repository archive types.</msg>
   <msg key="lt_the_repository_descri">the repository description and help text.</msg>
   <msg key="lt_the_repository_downlo">the repository download reasons.</msg>
+  <msg key="lt_The_revision_you_are_">The revision you are looking for (revision ID $revision_id) could not be found</msg>
+  <msg key="lt_The_version_you_are_l">The version you are looking for (revision ID $revision_id) could not be found</msg>
   <msg key="lt_titlenoquote_Reposito">%title;noquote% Repository Administration</msg>
   <msg key="lt_Total_downloads_liste">Total downloads listed: %current_count%; Overall Total for %archive_name%: %total_count%</msg>
   <msg key="lt_Upload_a_New_Version_">Upload a New Version of Software:</msg>
@@ -95,6 +111,8 @@
   <msg key="NOT">NOT</msg>
   <msg key="on">on</msg>
   <msg key="on_creation_date">on %creation_date%</msg>
+  <msg key="Other">Other</msg>
+  <msg key="pending">pending</msg>
   <msg key="Permission">Permission</msg>
   <msg key="Plain_Text">Plain Text</msg>
   <msg key="please_tell_us_why">please tell us why:</msg>
@@ -102,12 +120,17 @@
   <msg key="Reason_for_Download">Reason for Download:</msg>
   <msg key="receive_your_email">receive your email.</msg>
   <msg key="register">&quot;&gt;register</msg>
+  <msg key="rejected">rejected</msg>
   <msg key="s">s</msg>
   <msg key="See_All_Versions">&gt;See All Versions</msg>
   <msg key="Software_Name">Software Name:</msg>
+  <msg key="Software_Name_1">Software Name</msg>
+  <msg key="Software_Type">Software Type</msg>
   <msg key="Spam_Downloaders">Spam Downloaders</msg>
   <msg key="Spam_downloaders">&quot;Spam downloaders&quot;</msg>
   <msg key="Summary">Summary:</msg>
+  <msg key="Type">Type</msg>
+  <msg key="Updated">Updated</msg>
   <msg key="Version_History">Version History</msg>
   <msg key="Version_Number">Version Number:</msg>
   <msg key="version_version_name">version %version_name%</msg>

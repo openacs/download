@@ -31,7 +31,7 @@ if ![db_0or1row archive_info_select {
     where da.archive_id = :archive_id
       and u.user_id = da.creation_user
 }] {
-    ad_return_complaint 1 "The archive you are looking for (archive ID $archive_id) could not be found"
+    ad_return_complaint 1 "[_ download.lt_The_archive_you_are_l]"
     return
 }
 
@@ -53,6 +53,6 @@ db_foreach metadata {
     append extra_form_elts [download_metadata_widget $data_type $pretty_name $metadata_id]
 }
 
-set context [list "Add an Revision to $archive_name"]
+set context [list "[_ download.lt_Add_an_Revision_to_ar]"]
 
 ad_return_template

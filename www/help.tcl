@@ -10,6 +10,6 @@ ad_page_contract {
 array set repository [download_repository_info]
 set title $repository(title)
 set help_text $repository(help_text)
-set context [list "Help on $title"]
+set context [list "[_ download.Help_on_title]"]
 
 ad_return_template

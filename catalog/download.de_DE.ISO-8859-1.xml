@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<message_catalog package_key="download" package_version="5.1d1" locale="de_DE" charset="ISO-8859-1">
+
+  <msg key="_Downloads">Anzahl an Downloads</msg>
+  <msg key="Administration">Administration</msg>
+  <msg key="all">alle</msg>
+  <msg key="Approval">Genehmigungsstufe</msg>
+  <msg key="approved">genehmigt</msg>
+  <msg key="current">aktuelle</msg>
+  <msg key="Current_Reasons">Jetzt angegebene Gründe</msg>
+  <msg key="Delete">Löschen</msg>
+  <msg key="Edit">Verändern</msg>
+  <msg key="File_Size">Dateigröße</msg>
+  <msg key="file_sizek"> %file_size%k</msg>
+  <msg key="Help">Hilfe</msg>
+  <msg key="last_24hrs">letzte 24h</msg>
+  <msg key="last_month">letzter Monat</msg>
+  <msg key="last_week">letzte Woche</msg>
+  <msg key="lt_Add_a_new_Download_Re">Fügen Sie einen neuen Downloadgrund hinzu</msg>
+  <msg key="lt_Disapproved_my_revisi">Bisher nicht genehmigt: %my_revisions.approved_comment%</msg>
+  <msg key="lt_Download_archive_name_1">  	 Download %archive_name% %version_name%</msg>
+  <msg key="lt_If_you_have_selected_">Sie haben &quot;Andere Gründe&quot; angegeben</msg>
+  <msg key="lt_My_Unapproved_Revisio">Meine nicht freigegebenen Versionen:</msg>
+  <msg key="lt_Upload_a_New_Version_">Uploaden Sie eine neue Version des Dokuments:</msg>
+  <msg key="Other">Andere Gründe</msg>
+  <msg key="pending">wartend</msg>
+  <msg key="please_tell_us_why">Bitte teilen Sie uns den Grund mit.</msg>
+  <msg key="Reason_for_Download">Grund des Downloads</msg>
+  <msg key="rejected">zurückgewiesen</msg>
+  <msg key="Software_Name_1">Name des Downloads</msg>
+  <msg key="Software_Type">Art des Downloads</msg>
+  <msg key="Type">Typen</msg>
+  <msg key="Updated">Letzter Update</msg>
+  <msg key="Versions">Versionen</msg>
+</message_catalog>

@@ -12,7 +12,7 @@ ad_page_contract {
     sql_query:verify
 } 
 
-set admin_user_id [ad_verify_and_get_user_id]
+set admin_user_id [ad_conn user_id]
 
 # Header for CSV file
 set csv_rows "\"User Name\",\"Version\",\"Download Date\",\"From IP\",\"From Hostname\",\"Download Reason\"\n"

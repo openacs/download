@@ -20,7 +20,7 @@ ad_page_contract {
 array set repository_info [download_repository_info]
 
 set repository_id $repository_info(repository_id)
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 ad_require_permission $repository_id "admin"
 

@@ -124,7 +124,7 @@ ad_proc download_file_downloader {
     
     ns_log Debug "download_file_downloader: downloading $revision_id"
 
-    set user_id [ad_verify_and_get_user_id]
+    set user_id [ad_conn user_id]
     set download_ip [ad_conn peeraddr]
     if [catch {
         set download_hostname [ns_hostbyaddr $download_ip]

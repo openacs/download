@@ -9,9 +9,9 @@ ad_page_contract {
     {return_url "[ad_conn package_url]"}
 }
 
-ad_maybe_redirect_for_registration
+auth::require_login
 set context {"Add an Archive"}
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 array set repository [download_repository_info]
 set repository_id $repository(repository_id)

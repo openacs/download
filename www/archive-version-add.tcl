@@ -13,7 +13,7 @@ if [empty_string_p $return_url] {
     set return_url "[ad_conn package_url]/one-archive?archive_id=$archive_id"
 }
 
-ad_maybe_redirect_for_registration
+auth::require_login
 set repository_id [download_repository_id]
 
 ad_require_permission $archive_id write

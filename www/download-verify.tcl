@@ -8,10 +8,10 @@ ad_page_contract {
     revision_id:integer,notnull
 }
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 set repository_id [download_repository_id]
 
-ad_maybe_redirect_for_registration
+auth::require_login
 ad_require_permission $revision_id "read"
 
 set admin_p [ad_permission_p $repository_id admin]

@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 set repository_id [download_repository_id]
-set user_id         [ad_verify_and_get_user_id]
+set user_id         [ad_conn user_id]
 
 ad_require_permission $repository_id "admin"
 

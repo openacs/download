@@ -1,6 +1,6 @@
 <master>
-<property name="title">Downloads by IP @download_ip@</property>
-<property name="context">@context@</property>
+<property name="title">Downloads by IP @download_ip;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <p>
 <form method="post" action="spam-users">
@@ -9,5 +9,5 @@
 </form>
 </p>
 
-@dimensional_html@
+@dimensional_html;noquote@
 @table@

@@ -1,5 +1,5 @@
 <master>
-<property name="title">@title@</property>
+<property name="title">@title;noquote@</property>
 <property name="context"></property>
 
 <if @master_admin_p@ eq 1>
@@ -17,7 +17,7 @@
 
 <h3>Available Software:</h3> 
 
-@dimensional_html@
+@dimensional_html;noquote@
 <br /><br />
 @table@
 

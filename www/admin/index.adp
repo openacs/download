@@ -1,5 +1,5 @@
 <master>
-<property name="title">@title@ Repository Administration</property>
+<property name="title">@title;noquote@ Repository Administration</property>
 <property name="context"></property>
 
 @description@

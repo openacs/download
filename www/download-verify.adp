@@ -1,6 +1,6 @@
   <master>
-    <property name="title">Download @archive_name@ @version_name@</property>
-    <property name="context">@context@</property>
+    <property name="title">Download @archive_name;noquote@ @version_name;noquote@</property>
+    <property name="context">@context;noquote@</property>
 
     <h3>Download @archive_name@ @version_name@</h3>
     <table>

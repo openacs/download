@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="4.1" url="http://www.arsdigita.com/acs-repository/download/apm/download-4.1.apm">
+    <version name="5.0d1" url="http://www.arsdigita.com/acs-repository/download/apm/download-5.0d1.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
@@ -19,9 +19,9 @@
         <vendor url="http://www.openacs.org/">OpenACS</vendor>
         <description format="text/plain">Create an instance of the download module. Each instance has a repository_id which allows the download module to differentiate between different instances of the package.</description>
 
-        <provides url="download" version="4.1"/>
-        <requires url="acs-kernel" version="4.6.2"/>
-        <requires url="acs-mail" version="4.6"/>
+        <provides url="download" version="5.0d1"/>
+        <requires url="acs-kernel" version="5.0d13"/>
+        <requires url="acs-mail" version="5.0d1"/>
 
         <files>
             <file type="package_spec" path="download.info"/>

@@ -36,14 +36,12 @@ ad_return_top_of_page $page_content
 set count 0
 foreach to_user_id $userid_list {
     db_exec_plsql sendmail {
-        begin
-           :1 := nt.post_request(
-                party_from => :user_id,
-                party_to => :to_user_id,
-                expand_group => 'f',
-                subject => :subject,
-                message => :msgbody);
-        end;
+        select acs_mail_nt__post_request (
+		    :user_id,    -- p_party_from
+		    :to_user_id, -- p_party_to
+		    :subject,    -- p_subject
+		    :msgbody     -- p_message
+		  );
     }
     incr count
 }

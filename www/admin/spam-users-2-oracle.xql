@@ -7,7 +7,7 @@
       <querytext>
       
         begin
-           :1 := nt.post_request(
+           :1 := acs_mail_nt.post_request(
                 party_from => :user_id,
                 party_to => :to_user_id,
                 expand_group => 'f',

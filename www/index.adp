@@ -32,7 +32,7 @@
 
 <if @user_id@ ne 0>
 <if @my_revisions:rowcount@ ne 0>
-<h3>My Unapparoved Revisions:</h3>
+<h3>My Unapproved Revisions:</h3>
 <ul>
 <multiple name=my_revisions>
   <li><a href="one-revision?revision_id=@my_revisions.revision_id@">@my_revisions.archive_name@ @my_revisions.version_name@</a></li>

@@ -31,6 +31,7 @@ if {[form is_valid edit_reason]} {
         where download_reason_id = :download_reason_id
     }
     ad_returnredirect "repository-reasons"
+    ad_script_abort
 }
 
 set title "Edit Reason"

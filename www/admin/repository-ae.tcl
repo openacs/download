@@ -67,6 +67,7 @@ if { [form is_valid ae_repository] } {
         }
     }    
     ad_returnredirect "$return_url"
+    ad_script_abort
 }
         
 ad_return_template

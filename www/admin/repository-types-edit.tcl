@@ -32,6 +32,7 @@ if {[form is_valid edit_type]} {
         where archive_type_id = :archive_type_id
     }
     ad_returnredirect "repository-types"
+    ad_script_abort
 }
 
 set title "Edit $pretty_name"

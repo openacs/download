@@ -94,6 +94,7 @@ if {[form is_valid edit_metadata]} {
         }
     }
     ad_returnredirect "repository-metadata"
+    ad_script_abort
 }
 
 

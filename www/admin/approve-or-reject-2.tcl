@@ -52,6 +52,7 @@ if [catch {
 
 # Everything after here is email related, so let's send the user on their way
 ad_returnredirect $return_url
+# do not abort/return here!
 
 if {[ad_parameter -package_id [ad_conn package_id] "approval_notification" "download" 1] == 1} {
     # We want to send email to use who submitted the version to let

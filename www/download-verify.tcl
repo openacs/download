@@ -39,6 +39,15 @@ where  da.archive_id = dar.archive_id and
     return
 }
 
+# oracle version gets file_size from the blob
+# postgres version can't (content is in fs, not db), 
+#  so it gets content_path
+#  and we can calculate file_size here
+
+if { ![info exists file_size] } {
+	set file_size [cr_file_size $content_path]
+}
+
 set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] "Download $archive_name $version_name"]
 
 ##TODO Get version name

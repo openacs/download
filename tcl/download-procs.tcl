@@ -179,7 +179,7 @@ ad_proc download_file_downloader {
 
     db_write_blob version_write "select content
                                  from   cr_revisions
-                                 where  revision_id = $revision_id"
+                                 where  revision_id = :revision_id"
 
 
 

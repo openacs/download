@@ -5,19 +5,20 @@
 
 <fullquery name="todo_insert">      
       <querytext>
-      FIX ME PLSQL
+         begin;
+          select download_rep__new(
+			:repository_id,
+			:title,
+			:description,
+			:help_text,
+			now(),
+			:user_id,
+			:package_id,
+			:package_id,
+			null
+		  );
 
-         declare
-          the_id integer;
-         begin
-          the_id := download_rep__new(repository_id  => :repository_id,
-                             title => :title,
-                             description => :description,
-                             help_text => :help_text,
-                             creation_user => :user_id,
-                             parent_id => :package_id,
-                             context_id => :package_id);
-                    end;
+         end;
         
       </querytext>
 </fullquery>
@@ -25,14 +26,17 @@
  
 <fullquery name="repository_edit">      
       <querytext>
-      
-             begin
-                download_rep__edit(repository_id  => :repository_id,
-                                         title => :title,
-                                         description => :description,
-                                         help_text => :help_text,
-                                  modifying_user => :user_id
+             begin;
+                select download_rep__edit(
+				  :repository_id,
+                  :title,
+                  :description,
+                  :help_text,
+                  now(),
+				  :user_id,
+				  null
                 );
+			
              end;
         
       </querytext>

@@ -68,6 +68,15 @@ where  da.repository_id = :repository_id and
     return
 }
 
+# oracle version gets file_size from the blob
+# postgres version can't (content is in fs, not db), 
+#  so it gets content_path
+#  and we can calculate file_size here
+
+if { ![info exists file_size] } {
+	set file_size [cr_file_size $content_path]
+}
+
 set description [acs_messaging_format_as_html $description_type $description]
 
 set context_bar [list [list "one-archive?archive_id=$archive_id" $archive_name] "$archive_name $version_name"]

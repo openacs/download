@@ -10,7 +10,7 @@
                dar.version_name,
                dar.revision_id,
                dar.approved_p,
-               coalesce(dar.approved_comment, 'No comment') approved_comment,
+               coalesce(dar.approved_comment, 'No comment') as approved_comment,
                to_char(dar.creation_date,'Mon DD, YYYY') as creation_date
     from download_arch_revisions_obj dar, download_archives_obj da
     where da.repository_id = :repository_id and
@@ -19,6 +19,33 @@
           dar.creation_user = :user_id
     order by creation_date
 
+      </querytext>
+</fullquery>
+
+<fullquery name="download_index_query">      
+      <querytext>
+select da.archive_id,
+       dat.pretty_name as archive_type,
+       da.archive_type_id,
+       da.archive_name,
+       da.summary,
+       dar.revision_id,
+       dar.file_name,
+       dar.version_name,
+       dar.content as file_size,       
+       (select count(*) from download_downloads where revision_id = dar.revision_id) as downloads,
+       dar.approved_p 
+       $metadata_selects
+from   download_archives_obj da,
+       download_archive_types dat,
+       download_arch_revisions_obj dar
+where  da.repository_id = :repository_id and
+       dat.archive_type_id = da.archive_type_id and
+       da.archive_id = dar.archive_id and
+       acs_permission__permission_p(dar.revision_id, :user_id, 'read') = 't'
+       $approval
+       [ad_dimensional_sql $dimensional where]
+       [ad_order_by_from_sort_spec $orderby $table_def]
       </querytext>
 </fullquery>
 

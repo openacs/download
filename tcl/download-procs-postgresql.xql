@@ -33,33 +33,36 @@
  
 <fullquery name="download_file_downloader.version_write">      
       <querytext>
-      FIX ME LOB
-select content
+select '[cr_fs_path]' || content as content, storage_type
                                  from   cr_revisions
-                                 where  revision_id = $revision_id
+                                 where  revision_id = :revision_id
       </querytext>
 </fullquery>
 
  
 <fullquery name="download_insert_revision.revision_new">      
       <querytext>
-      FIX ME PLSQL
 
         declare
           v_revision_id integer;
         begin
           v_revision_id := content_revision__new(
-           item_id => :archive_id,
-           title => :filename,
-           description => :version_name,
-           revision_id => :revision_id,
-           mime_type => :mime_type,
-           creation_user => :user_id,
-           creation_ip => :creation_ip
-          );
+			:filename,
+			:version_name,
+			now(),
+			:mime_type,
+			null,
+			' ',
+			:archive_id,
+			:revision_id,
+			now(),
+			:user_id,
+			:creation_ip
+		  );
 
           insert into download_archive_revisions (revision_id,    approved_p) values
                                                  (v_revision_id, :approved_p);
+		  return v_revision_id;
         end;
     
       </querytext>
@@ -68,12 +71,10 @@ select content
  
 <fullquery name="download_insert_revision.content_add">      
       <querytext>
-      FIX ME LOB
 
         update cr_revisions
-        set    content = empty_blob()
+        set    content = '[cr_create_content_file $item_id $revision_id $tmp_filename]'
         where  revision_id = :revision_id
-        returning content into :1
     
       </querytext>
 </fullquery>
@@ -81,10 +82,11 @@ select content
  
 <fullquery name="download_insert_revision.make_live">      
       <querytext>
-      FIX ME PLSQL
 
         begin
-        content_item__set_live_revision(:revision_id);
+	        content_item__set_live_revision(:revision_id);
+	
+			return 0;
         end;
     
       </querytext>

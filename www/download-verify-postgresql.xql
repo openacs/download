@@ -13,7 +13,7 @@ select da.archive_id,
        dar.revision_id,
        dar.file_name,
        dar.version_name,
-       dbms_lob__getlength(dar.content) as file_size       
+       dar.content as content_path
 from   download_archives_obj da,
        download_arch_revisions_obj dar
 where  da.archive_id = dar.archive_id and

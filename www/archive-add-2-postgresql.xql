@@ -8,38 +8,65 @@
       FIX ME PLSQL
 
         declare
-          v_archive_id integer;
-          v_archive_desc_id integer;
-          v_name       cr_items.name%TYPE;
+          v_archive_id 			  integer;
+          v_archive_desc_id 	  integer;
+		  v_live_archive_desc_id  integer;
+          v_name       			  cr_items.name%TYPE;
         begin
           v_name := 'Download Archive Desc for ' || :archive_id;
 
           v_archive_desc_id := content_item__new (
-           content_type => 'cr_download_archive_desc',
-           item_id => :archive_desc_id,
-           name => v_name,
-           title => :summary,
-           description => :description,
-           mime_type => :description_format,
-           parent_id => :repository_id,
-           context_id => :repository_id,
-           creation_user => :user_id,
-           creation_ip => :creation_ip,
-           is_live => 't'
+			v_name,
+			:repository_id,
+			:archive_desc_id,
+			null,
+			now(),
+			:user_id,
+			:repository_id,
+			:creation_ip,
+			'content_item',
+			'cr_download_archive_desc',
+			:summary,
+			:description,
+			:description_format,
+			null,
+			null,
+			'file'
           );
-          insert into download_archive_descs (archive_desc_id) values (content_item__get_live_revision(v_archive_desc_id));
+
+		  select content_item__get_live_revision(v_archive_desc_id)
+			into v_live_archive_desc_id;
+
+          insert into download_archive_descs 
+			(archive_desc_id) 
+			values 
+			(v_live_archive_desc_id);
 
           v_archive_id := content_item__new(
-           content_type => 'cr_download_archive',
-           item_id => :archive_id,
-           name => :archive_name,
-           parent_id => :repository_id,
-           context_id => :repository_id,
-           creation_user => :user_id,
-           creation_ip => :creation_ip
-          );
+			:archive_name,
+			:repository_id,
+			:archive_id,
+			null,
+			now(),
+			:user_id,
+			:repository_id,
+			:creation_ip,
+			'content_item',
+			'cr_download_archive',
+			null,
+			null,
+			'text/plain',
+			null,
+			null,
+			'file'
+		  );
 
-          insert into download_archives (archive_id, archive_type_id, archive_desc_id) values (v_archive_id, :archive_type_id, content_item__get_live_revision(v_archive_desc_id));
+          insert into download_archives 
+			(archive_id, archive_type_id, archive_desc_id) 
+			values 
+			(v_archive_id, :archive_type_id, v_live_archive_desc_id);
+
+		  return 0;
         end;
     
       </querytext>

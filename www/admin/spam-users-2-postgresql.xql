@@ -5,7 +5,7 @@
 
 <fullquery name="sendmail">      
       <querytext>
-      FIX ME PLSQL
+      FIX ME PLSQL - need acs_notification
 
         begin
            :1 := nt__post_request(

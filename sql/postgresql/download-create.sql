@@ -68,6 +68,8 @@ the repository is keyed to this table';
 -- Each download module will support certain archive types, we need to indicate
 -- what those types are.
 create sequence download_archive_type_seq;
+create view download_archive_type_sequence as 
+	   select nextval('download_archive_type_seq') as nextval;
 create table download_archive_types (
     archive_type_id integer
                     constraint download_archive_types_pk 
@@ -85,6 +87,8 @@ comment on table download_archive_types is '
 ';
 
 create sequence download_reasons_seq;
+create view download_reasons_sequence as 
+	   select nextval('download_reasons_seq') as nextval;
 create table download_reasons (
     download_reason_id integer
                        constraint download_archive_reasons_pk 
@@ -140,7 +144,9 @@ create table download_archive_metadata (
 );
 
 --When a piece of metadata has a fixed set of responses
-create sequence download_md_choice_id_sequence start 1;
+create sequence download_md_choice_id_seq start 1;
+create view download_md_choice_id_sequence as 
+	   select nextval('download_md_choice_id_seq') as nextval;
 
 create table download_metadata_choices (
 	choice_id	integer 
@@ -253,6 +259,8 @@ create table download_revision_data (
 
 -- We want to collect statistics on downloads.
 create sequence download_downloads_seq;
+create view download_downloads_sequence as 
+	   select nextval('download_downloads_seq') as nextval;
 create table download_downloads (
     download_id   integer 
                   constraint download_downloads_id_pk 

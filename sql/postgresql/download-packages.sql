@@ -69,11 +69,10 @@ begin
      (new__repository_id);
 
 	 -- get the latest revision
-	 select content_item__get_latest_revision ( v_repository_id ) 
-			into v_revision_id;
+	 select into v_revision_id content_item__get_latest_revision (v_repository_id);
 
 	 -- make it live
-	 select content_item__set_live_revision ( v_revision_id );
+	 select into v_revision_id content_item__set_live_revision ( v_revision_id );
 
     return v_repository_id;
 

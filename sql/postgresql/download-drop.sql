@@ -8,11 +8,15 @@ create function inline_0 ()
 returns integer as '
 declare
 	archive_rec			cr_items%ROWTYPE;
+	archive_child_rec	acs_object_context_index%ROWTYPE;
 begin
-	for archive_rec in select item_id from cr_items 
+	for archive_rec in select * from cr_items 
                          where content_type in ( ''cr_download_archive_desc'', 
 											     ''cr_download_archive'', 
 												 ''cr_download_rep'' ) loop
+		for archive_child_rec in select * from acs_object_context_index where ancestor_id = archive_rec.item_id loop
+			PERFORM content_item__delete( archive_child_rec.object_id );
+		end loop;
 		PERFORM content_item__delete( archive_rec.item_id );
 	end loop;
 
@@ -49,17 +53,19 @@ drop function inline_0 ();
 
 /* Sequences */
 drop sequence download_archive_type_seq;
+drop view download_archive_type_sequence;
 drop sequence download_reasons_seq;
-drop sequence download_md_choice_id_sequence;
+drop view download_reasons_sequence;
+drop sequence download_md_choice_id_seq;
+drop view download_md_choice_id_sequence;
 drop sequence download_downloads_seq;
+drop view download_downloads_sequence;
 
 /* Views */
 drop view download_repository_obj;
 drop view download_archives_obj;
 drop view download_arch_revisions_obj;
 drop view download_downloads_repository;
---drop view download_archive_descsi;
---drop view download_archive_descsx;
 
 /* Tables */
 drop table download_downloads;
@@ -99,13 +105,13 @@ begin
 	PERFORM content_type__drop_type (
 	  ''cr_download_archive'',
 	  ''t'',
-	  ''f''
+	  ''t''
 	);
 
 	PERFORM content_type__drop_type (
 	  ''cr_download_rep'',
 	  ''t'',
-	  ''f''
+	  ''t''
 	);
 
     return 0;

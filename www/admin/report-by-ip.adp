@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">Downloads by IP</property>
 <property name="context">@context@</property>
 

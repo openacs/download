@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">Add/Edit Repository</property>
 <property name="context">{Add/Edit Repository}</property>
 

@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">@title@ Repository Administration</property>
 <property name="context"></property>
 

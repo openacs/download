@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">One Archive: @archive_name@</property>
 <property name="context">@context@</property>
 

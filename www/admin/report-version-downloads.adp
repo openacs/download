@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">@archive_name@ Download History</property>
 <property name="context">@context@</property>
 

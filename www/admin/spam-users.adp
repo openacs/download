@@ -1,4 +1,4 @@
-  <master src="master">
+  <master>
     <property name="title">Spam Downloaders</property>
     <property name="context">"Spam downloaders"</property>
 

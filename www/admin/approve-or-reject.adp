@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">@pretty_noun@ @archive_name@ @version_name@</property>
 <property name="context">@pretty_noun@</property>
 

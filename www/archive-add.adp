@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">Add a New Software Archive</property>
 <property name="context">@context@</property>
 

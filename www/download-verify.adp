@@ -1,4 +1,4 @@
-  <master src="master">
+  <master>
     <property name="title">Download @archive_name@ @version_name@</property>
     <property name="context">@context@</property>
 

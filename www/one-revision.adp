@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name="title">One Revision: @archive_name@ ver. @version_name@</property>
 <property name="context">@context@</property>
 

@@ -36,7 +36,7 @@
 --   -set_metadata_value
 --   -downloaded_by
 
-create function download_rep__new (integer,varchar,varchar,varchar,timestamp with time zone,integer,integer,integer,varchar)
+create function download_rep__new (integer,varchar,varchar,varchar,timestamptz,integer,integer,integer,varchar)
 returns integer as '
 declare
 	new__repository_id			alias for $1;
@@ -87,7 +87,7 @@ begin
 
 end;' language 'plpgsql';
 
-create function download_rep__edit (integer,varchar,varchar,varchar,timestamp with time zone,integer,varchar)
+create function download_rep__edit (integer,varchar,varchar,varchar,timestamptz,integer,varchar)
 returns integer as '
 declare
     edit__repository_id			alias for $1;

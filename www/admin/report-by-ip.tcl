@@ -7,10 +7,14 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     {downloaded "1m"}
+} -properties {
+    context:onevalue
+    user_id_list_export:onevalue
+    dimensional_html:onevalue
+    table:onevalue
 }
 
 set repository_id [download_repository_id]
-##TODO: Add support for other
 
 set dimensional {
     {downloaded "Download Period" 1m {
@@ -28,35 +32,15 @@ set table_def {
     {num_downloads "# Downloads" {no_sort} {}}
 }
 
-set sql_query "
-    select min(d.user_id) as user_id,
-           min(u.last_name || ', ' || u.first_names) as user_name,
-           min(u.email) as email,
-           d.download_ip,
-           nvl(min(d.download_hostname),'unavailable') as download_hostname,
-           count(*) as num_downloads,
-           min('$downloaded') as downloaded
-     from download_downloads_repository d, cc_users u
-     where d.repository_id = $repository_id and
-           d.user_id = u.user_id
-           [ad_dimensional_sql $dimensional where]
-     group by d.download_ip
-     order by 2 desc
-"
-
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
-        -Ttable_extra_html { width= 90% align=center} \
+        -Ttable_extra_html { width="90%" align="center" } \
         -bind [ad_tcl_vars_to_ns_set repository_id downloaded] \
-        download_table $sql_query $table_def ]
+               download_table { *SQL* } $table_def ]
 
-# vinodk: the download_table query gets the list of users (plus other data)
-#         we reuse the same query to get the list of user_id's to spam.
-#         Since we're using db_list, it's important that the first column 
-#         of the query is the user_id.
-
-set user_id_list [db_list download_table { *SQL* }]
-set user_id_list_export [export_vars -url -sign user_id_list]
+# query users to spam
+set user_id_list [db_list users_to_spam { *SQL* }]
+set user_id_list_export [export_vars -form -sign user_id_list]
 
 set context [list "Downloads by IP"]
 

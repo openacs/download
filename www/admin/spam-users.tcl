@@ -11,16 +11,21 @@ ad_page_contract {
 } -properties {
     users:multirow
     user_id_list_export:onevalue
+    no_spam_count:onevalue
 }
 
 ad_require_permission [ad_conn package_id] "admin"
 set user_id [ad_verify_and_get_user_id]
 
-# ACS version passed sql_query as a query variable
-# I've changed it to send only a list of signed user_ids
-#  -- vinodk
+# get name, email and
+# remove any users who don't want spam
 
-db_multirow users user_select { *SQL* }
+set want_spam_list {}
+db_multirow users user_select { *SQL* } {
+    lappend want_spam_list $user_id
+}
+set no_spam_count [expr [llength user_id_list] - [llength want_spam_list]]
+set user_id_list $want_spam_list
 
 set user_id_list_export [export_vars -form -sign {user_id_list}]
 

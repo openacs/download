@@ -8,6 +8,12 @@ ad_page_contract {
     user_id:integer,notnull
     {orderby "archive_name"}
     {downloaded "1m"}
+} -properties {
+    first_names:onevalue
+    last_name:onevalue
+    context:onevalue
+    dimensional_html:onevalue
+    table:onevalue
 }
 
 set repository_id [download_repository_id]
@@ -23,51 +29,29 @@ set dimensional {
 
 set table_def {
     {archive_name "Archive"
-    {archive_name $order}
-    {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
+        {archive_name $order}
+        {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
     {version_name "Version"
-    {version_name $order}
-    {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
+        {version_name $order}
+        {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
     {download_date "Download Date"
-    {download_date}
-    {}}
+        {download_date}
+        {}}
     {download_ip "From IP"
-    {download_ip}
-    {<td><a href=report-one-ip?[export_url_vars download_ip downloaded]>$download_ip</a> ($download_hostname)</td>}}
+        {download_ip}
+        {<td><a href=report-one-ip?[export_url_vars download_ip downloaded]>$download_ip</a> ($download_hostname)</td>}}
     {reason "Download Reason"
-    {reason}
-    {}}
+        {reason}
+        {}}
 }
 
-set sql_query "
-    select da.repository_id,
-           da.archive_name, 
-           da.archive_id, 
-           dar.revision_id,
-           dar.version_name,
-           d.download_date,
-           d.download_ip,
-           nvl(d.download_hostname,'unavailable') as download_hostname,
-           nvl2(d.reason_id, d.reason, dr.reason) as reason
-      from download_archives_obj da, download_arch_revisions_obj dar, download_downloads d, download_reasons dr
-     where da.repository_id = $repository_id
-       and da.archive_id = dar.archive_id
-       and d.revision_id = dar.revision_id
-       and d.user_id = $user_id
-       and dr.download_reason_id(+) = d.reason_id
-       [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
-"
-
-db_1row name_select "select u.last_name, u.first_names
-                     from cc_users u
-                     where u.user_id = :user_id "
+db_1row name_select { *SQL* }
 
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center"} \
+        -Ttable_extra_html { width="90%" align="center" } \
         -bind [ad_tcl_vars_to_ns_set repository_id user_id] \
-        download_table $sql_query $table_def ]
+               download_table { *SQL* } $table_def ]
 
 set context [list [list "report-by-user" "Downloads by User"] "$first_names $last_name"]
 ad_return_template

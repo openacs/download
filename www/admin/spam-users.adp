@@ -11,6 +11,9 @@
     <p>
         Users who have requested not to be spammed will
         <strong>NOT</strong> receive your email.
+        <br />
+        (@no_spam_count@ user<if @no_spam_count@ ne 1>s</if> removed 
+        from the list for this reason)
     </p>
 
     <form action="spam-users-2" method="post">

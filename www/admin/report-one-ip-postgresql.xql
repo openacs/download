@@ -21,10 +21,10 @@
 		   download_archives_obj da, 
 		   download_arch_revisions_obj dar, 
 		   cc_users u
-     where da.repository_id = $repository_id
+     where da.repository_id = :repository_id
        and da.archive_id = dar.archive_id
        and d.revision_id = dar.revision_id
-       and d.download_ip = '$download_ip'
+       and d.download_ip = :download_ip
        and u.user_id = d.user_id
        [ad_dimensional_sql $dimensional where]
        [ad_order_by_from_sort_spec $orderby $table_def]

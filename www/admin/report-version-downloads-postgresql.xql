@@ -29,7 +29,6 @@ where d.user_id = u.user_id
 </fullquery>
 
 
-
 <partialquery name="version_clause">
 <querytext>
 

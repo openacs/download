@@ -4,8 +4,8 @@
 <fullquery name="name_select">      
       <querytext>
       select u.last_name, u.first_names
-                     from cc_users u
-                     where u.user_id = :user_id 
+        from cc_users u
+        where u.user_id = :user_id 
       </querytext>
 </fullquery>
 

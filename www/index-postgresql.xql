@@ -49,5 +49,20 @@ where  da.repository_id = :repository_id and
       </querytext>
 </fullquery>
 
+<partialquery name="archive_where_clause">      
+      <querytext>
+      
+   dar.revision_id = content_item__get_live_revision(da.archive_id)
+
+      </querytext>
+</partialquery>
+
+<partialquery name="date_clause">      
+      <querytext>
+
+   current_timestamp
+
+      </querytext>
+</partialquery>
  
 </queryset>

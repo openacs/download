@@ -9,13 +9,16 @@ ad_page_contract {
 }
 
 set repository_id [download_repository_id]
-
 ##TODO: Add support for other
+
+# vinodk: put in the full query name so that when I
+#         pass this var to spam-users, it can find
+#         the right query
 set dimensional {
     {downloaded "Download Period" 1m {
-        {1d "last 24hrs" {where "[db_map date_clause_1]"}}
-        {1w "last week"  {where "[db_map date_clause_7]"}}
-        {1m "last month" {where "[db_map date_clause_30]"}}
+        {1d "last 24hrs" {where "[db_map dbqd.download.www.admin.report-by-ip.date_clause_1]"}}
+        {1w "last week"  {where "[db_map dbqd.download.www.admin.report-by-ip.date_clause_7]"}}
+        {1m "last month" {where "[db_map dbqd.download.www.admin.report-by-ip.date_clause_30]"}}
         {all "all" {}}}}
 }
 
@@ -43,7 +46,7 @@ set sql_query "
      order by 2 desc
 "
 
-set export_sql_query [export_vars -url -sign {sql_query}]
+set export_sql_query [export_vars -url -sign {downloaded repository_id dimensional}]
 
 set dimensional_html [ad_dimensional $dimensional]
 set table [ad_table \

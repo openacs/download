@@ -164,7 +164,7 @@ create table download_metadata_choices (
 				constraint download_mc_label_nn
 				not null,
 	-- might be useful for averaging or whatever, generally null
-	numeric_value	number,
+	numeric_value	numeric,
 	-- lower is earlier 
 	sort_order	integer
 );
@@ -231,7 +231,7 @@ create table download_archive_revisions (
     approved_user       integer 
                         constraint download_ar_usr_fk 
 						references users,
-    approved_comment    varchar(1000),
+    approved_comment    text,
 	file_size			integer
 						constraint download_ar_file_size_nn
 						not null
@@ -269,8 +269,8 @@ create table download_revision_data (
 					  references download_metadata_choices (choice_id),
     boolean_answer	  boolean,
     clob_answer		  text,
-    number_answer	  number,
-    varchar_answer	  varchar(4000),
+    number_answer	  numeric,
+    varchar_answer	  text,
     date_answer		  timestamp
 );
 
@@ -305,7 +305,7 @@ create table download_downloads (
 				  constraint download_downloads_reason_fl
 				  references download_reasons(download_reason_id) 
 				  on delete set null,
-    reason        varchar(1000)
+    reason        text
 );
 
 create function inline_1 ()

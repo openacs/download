@@ -1,5 +1,5 @@
 <master>
-<property name="title">Downloads by User</property>
+<property name="title">#download.Downloads_by_User#</property>
 <property name="context">@context;noquote@</property>
 
 <p>

@@ -5,17 +5,17 @@
 @description@
 
 <ul>
-<li> Configure the download repository</li>
+<li> #download.lt_Configure_the_downloa#</li>
    <ul>
-   <li><a href="/permissions/one?object_id=@repository_id@">Set Repository Permissions</a></li>
-   <li><a href="repository-ae?repository_id=@repository_id@">Edit</a> the repository description and help text.</li>
-   <li><a href="repository-types">View/Edit/Add</a> the repository archive types.</li>
-   <li><a href="repository-metadata">View/Edit/Add</a> the metadata collected for the repository archive types.</li>
-   <li><a href="repository-reasons">View/Edit/Add</a> the repository download reasons.</li>
+   <li><a href="/permissions/one?object_id=@repository_id@">#download.lt_Set_Repository_Permis#</a></li>
+   <li><a href="repository-ae?repository_id=@repository_id@">#download.Edit#</a> #download.lt_the_repository_descri#</li>
+   <li><a href="repository-types">#download.ViewEditAdd#</a> #download.lt_the_repository_archiv#</li>
+   <li><a href="repository-metadata">#download.ViewEditAdd#</a> #download.lt_the_metadata_collecte#</li>
+   <li><a href="repository-reasons">#download.ViewEditAdd#</a> #download.lt_the_repository_downlo#</li>
    </ul>
-<li> Download Reports</li>
+<li> #download.Download_Reports#</li>
    <ul>
-   <li><a href="report-by-user">Download by user</a>.</li>
-   <li><a href="report-by-ip">Download by IP address</a>.</li>
+   <li><a href="report-by-user">#download.Download_by_user#</a>.</li>
+   <li><a href="report-by-ip">#download.lt_Download_by_IP_addres#</a>.</li>
    </ul>
 </ul>

@@ -4,12 +4,13 @@
 
 @help_text@
 
-<a name=permissions><h3>Permissions on Archives</h3></a>
+<a name=permissions><h3>#download.lt_Permissions_on_Archiv#</h3></a>
   <blockquote>
     <table>
-    <tr><th>Permission</th><th>Description</th></tr>
-    <tr><td>Read</td><td>Allows a user to view or download the archive.  Revoke this privilege to make an archive private.</td></tr>
-    <tr><td>Write</td><td>Write permission is necessary to add a version to an existing archive.</td></tr>
-    <tr><td>Administer</td><td>Administer permission is necessary to grant or revoke archive permissions</td></tr>
+    <tr><th>#download.Permission#</th><th>#download.Description_1#</th></tr>
+    <tr><td>#download.Read#</td><td>#download.lt_Allows_a_user_to_view#</td></tr>
+    <tr><td>#download.Write#</td><td>#download.lt_Write_permission_is_n#</td></tr>
+    <tr><td>#download.Administer#</td><td>#download.lt_Administer_permission#</td></tr>
     </table>
   </blockquote>
+

@@ -10,6 +10,6 @@
 </p>
 
 @dimensional_html;noquote@
-<center><strong>Total downloads listed: @current_count@; Overall Total for @archive_name@: @total_count@</strong>
+<center><strong>#download.lt_Total_downloads_liste#</strong>
 </center>
 @table;noquote@

@@ -3,7 +3,7 @@ ad_page_contract {
      Main download page.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Mon Dec 11 18:28:29 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     {archive_type_id ""}
     {orderby "archive_name"}

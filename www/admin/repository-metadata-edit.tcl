@@ -3,7 +3,7 @@ ad_page_contract {
      
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Fri Dec 15 14:53:56 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     metadata_id:integer,notnull
 }

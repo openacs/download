@@ -3,7 +3,7 @@ ad_page_contract {
      Spam downloaders.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Mon Jan  8 18:05:51 2001
-     @cvs-id
+     @cvs-id $Id$
 } {
     userid_list:verify
     subject:notnull

@@ -3,7 +3,7 @@ ad_library {
      Procs used by the download module.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 15:13:52 2000
-     @cvs-id
+     @cvs-id $Id$
 }
 
 # @author jbank@arsdigita.com [jbank@arsdigita.com]

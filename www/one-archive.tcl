@@ -4,7 +4,7 @@ ad_page_contract {
 
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Wed Dec 13 14:38:45 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     archive_id:integer,notnull
 }

@@ -3,7 +3,7 @@ ad_page_contract {
      Show all revisions with a given metadata value.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Fri Dec 15 17:33:03 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     metadata_id:naturalnum,notnull
     value

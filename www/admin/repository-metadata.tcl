@@ -3,7 +3,7 @@ ad_page_contract {
      Repository metadata
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 15:58:00 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
 }
 

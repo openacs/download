@@ -3,7 +3,7 @@ ad_page_contract {
      Delete an archive type.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 16:46:37 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     metadata_id:integer,notnull
 }

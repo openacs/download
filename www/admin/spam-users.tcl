@@ -3,7 +3,7 @@ ad_page_contract {
      Spam downloaders based on the queyr passed in
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Mon Jan  8 17:33:15 2001
-     @cvs-id
+     @cvs-id $Id$
 } {
 	downloaded:verify
 	repository_id:verify

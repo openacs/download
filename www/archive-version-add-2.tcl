@@ -3,7 +3,7 @@ ad_page_contract {
      Add a new archive and version.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 23:21:40 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     upload_file:notnull,trim
     upload_file.tmpfile:tmpfile

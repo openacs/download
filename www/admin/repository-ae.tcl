@@ -3,7 +3,7 @@ ad_page_contract {
      Repository add/edit page.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Mon Dec 11 18:49:53 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     repository_id:integer,notnull
     {return_url "[ad_conn package_url]/admin/"}

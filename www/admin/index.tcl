@@ -3,7 +3,7 @@ ad_page_contract {
      Top level admin page.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 15:11:08 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
 }
 

@@ -3,7 +3,7 @@ ad_page_contract {
      Add a new archive.
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 22:38:49 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     archive_type_id:integer,notnull
     {return_url "[ad_conn package_url]"}

@@ -3,7 +3,7 @@ ad_page_contract {
      
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Tue Dec 12 22:17:40 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
 }
 

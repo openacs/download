@@ -3,7 +3,7 @@ ad_page_contract {
      
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Thu Dec 14 16:11:49 2000
-     @cvs-id
+     @cvs-id $Id$
 } {
     user_id:integer,notnull
     {orderby "archive_name"}

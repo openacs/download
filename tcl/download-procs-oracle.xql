@@ -35,7 +35,7 @@
       <querytext>
       select content
                                  from   cr_revisions
-                                 where  revision_id = :revision_id
+                                 where  revision_id = $revision_id
       </querytext>
 </fullquery>
 

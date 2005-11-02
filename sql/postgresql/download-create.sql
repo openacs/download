@@ -331,14 +331,15 @@ create view download_archives_obj as
               da.archive_id, 
 			  da.archive_type_id, 
 			  da.archive_desc_id,
-              desc_item.title as summary, 
-			  desc_item.description as description, 
-			  desc_item.mime_type as description_type,
-              desc_item.creation_user, 
-			  desc_item.creation_date, 
-			  desc_item.creation_ip 
-       from download_archives da, cr_items cri, download_archive_descsi desc_item
-	   where da.archive_desc_id = desc_item.revision_id and 
+              crr.title as summary, 
+			  crr.description as description, 
+			  crr.mime_type as description_type,
+              o.creation_user, 
+			  o.creation_date, 
+			  o.creation_ip 
+       from download_archives da, cr_items cri, cr_revisions crr, acs_objects o
+	   where da.archive_desc_id = crr.revision_id and 
+                         da.archive_desc_id = o.object_id and
 			 da.archive_id = cri.item_id;
 
 create view download_arch_revisions_obj as

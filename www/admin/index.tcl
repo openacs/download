@@ -13,6 +13,6 @@ set title $repository(title)
 set description $repository(description)
 set help_text $repository(help_text)
 
-ad_require_permission $repository_id "admin"
+permission::require_permission -object_id $repository_id -privilege "admin"
 
 ad_return_template

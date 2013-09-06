@@ -24,9 +24,9 @@ set user_id [ad_conn user_id]
 array set repository [download_repository_info]
 set repository_id $repository(repository_id)
 
-set master_admin_p [ad_permission_p [ad_conn package_id] admin]
-set admin_p [ad_permission_p $repository_id admin]
-set write_p [ad_permission_p $repository_id write]
+set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
+set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
+set write_p [permission::permission_p -object_id $repository_id -privilege write]
 
 set title $repository(title)
 set description $repository(description)

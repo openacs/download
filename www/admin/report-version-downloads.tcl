@@ -21,7 +21,7 @@ ad_page_contract {
 
 set repository_id [download_repository_id]
 
-ad_require_permission $archive_id "admin"
+permission::require_permission -object_id $archive_id -privilege "admin"
 
 set dimensional {
    {versions "Versions" current {

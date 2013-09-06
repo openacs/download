@@ -16,7 +16,7 @@ if [empty_string_p $return_url] {
 auth::require_login
 set repository_id [download_repository_id]
 
-ad_require_permission $archive_id write
+permission::require_permission -object_id $archive_id -privilege write
 
 if ![db_0or1row archive_info_select {
    select da.archive_name, 

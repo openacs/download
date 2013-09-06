@@ -11,7 +11,7 @@ ad_page_contract {
 set repository_id [download_repository_id]
 set user_id         [ad_conn user_id]
 
-ad_require_permission $repository_id "admin"
+permission::require_permission -object_id $repository_id -privilege "admin"
 
 form create edit_type
 element create edit_type archive_type_id -label "ArchiveType ID" -datatype integer -widget hidden

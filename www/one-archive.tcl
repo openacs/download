@@ -9,11 +9,11 @@ ad_page_contract {
     archive_id:integer,notnull
 }
 
-ad_require_permission $archive_id read
+permission::require_permission -object_id $archive_id -privilege read
 
-set master_admin_p [ad_permission_p [ad_conn package_id] admin]
-set admin_p [ad_permission_p $archive_id admin]
-set write_p [ad_permission_p $archive_id write]
+set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
+set admin_p [permission::permission_p -object_id $archive_id -privilege admin]
+set write_p [permission::permission_p -object_id $archive_id -privilege write]
 
 if ![db_0or1row archive_info_select {
    select da.archive_name, 

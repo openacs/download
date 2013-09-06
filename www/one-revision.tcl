@@ -13,11 +13,11 @@ ad_page_contract {
 }
 
 set repository_id [download_repository_id]
-set admin_p [ad_permission_p $revision_id "admin"]
-set master_admin_p [ad_permission_p [ad_conn package_id] admin]
+set admin_p [permission::permission_p -object_id $revision_id -privilege "admin"]
+set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
 
 ##FIXME: Need to do the metadata thing here!
-ad_require_permission $revision_id "read"
+permission::require_permission -object_id $revision_id -privilege "read"
 
 set archive_type_id [db_string get_archive_type "select archive_type_id from download_arch_revisions_obj dar, download_archives da where dar.archive_id = da.archive_id and dar.revision_id = :revision_id"]
 

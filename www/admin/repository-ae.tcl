@@ -11,7 +11,7 @@ ad_page_contract {
 
 set package_id      [ad_conn package_id]
 set user_id [ad_conn user_id]
-ad_require_permission $package_id "admin"
+permission::require_permission -object_id $package_id -privilege "admin"
 
 form create ae_repository
 element create ae_repository return_url -label "ReturnUrl" -datatype text -widget hidden

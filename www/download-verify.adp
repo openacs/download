@@ -10,7 +10,7 @@
       </tr>
       <tr>
         <form method="post" action="@action@">
-          <%= [export_form_vars download_id revision_id] %>
+          <%= [export_vars -form {download_id revision_id}] %>
           <td align="right">#download.Reason_for_Download#</td> 
           <td> @reason_widget;noquote@ </td>
       </tr>

@@ -4,7 +4,7 @@
 
   <table>
   <form action=approve-or-reject-2.tcl>
-  <%=  [export_form_vars return_url action revision_id] %>
+  <%=  [export_vars -form {return_url action revision_id}] %>
   <tr><td colspan=2 align=right>
       [<a href=../one-archive?archive_id=@archive_id@>#download.Version_History#</a>]</td>
   </tr>

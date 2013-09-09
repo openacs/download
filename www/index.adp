@@ -10,7 +10,7 @@
 @description@
 
     <if @user_id@ eq 0>
-      <p>#download.You_must# <strong><a href="/register/index?<%= [export_url_vars return_url] %>">register</a></strong>
+      <p>#download.You_must# <strong><a href="/register/index?<%= [export_vars -url {return_url}] %>">register</a></strong>
          #download.lt_before_you_can_downlo#
       </p>
     </if>

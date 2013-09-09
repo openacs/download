@@ -3,7 +3,7 @@
 <property name="context">@context;noquote@</property>
 
 <form enctype=multipart/form-data method=POST action="archive-version-add-2">
-<%= [export_form_vars archive_id return_url]%>
+<%= [export_vars -form {archive_id return_url}]%>
 
 <h3>#download.lt_Add_a_New_Archive_Rev#</h3>
 

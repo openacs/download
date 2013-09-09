@@ -27,7 +27,7 @@ set dimensional {
 set table_def {
     {download_ip "From IP"
                {no_sort}
-               {<td><a href="report-one-ip?[export_url_vars download_ip downloaded]">$download_ip</a></td>}}
+               {<td><a href="report-one-ip?[export_vars -url {download_ip downloaded}]">$download_ip</a></td>}}
     {download_hostname "Hostname" {} {}}
     {num_downloads "# Downloads" {no_sort} {}}
 }

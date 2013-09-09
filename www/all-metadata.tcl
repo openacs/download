@@ -23,7 +23,7 @@ set metadata_select "metadata$metadata_id"
 
 set table_def [list \
     [list $metadata_select $pretty_name {} \
-        "<td><a href=one-metadata?[export_url_vars metadata_id]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"] \
+        "<td><a href=one-metadata?[export_vars -url {metadata_id}]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"] \
     {version_count "[_ download._Versions]" 
         {version_count $order}
         {<td>$version_count</td>}} \

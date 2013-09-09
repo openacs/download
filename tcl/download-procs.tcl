@@ -23,7 +23,7 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             if { $admin_p } {
                 set repository_id [db_nextval acs_object_id_seq]
                 set return_url "[ad_conn package_url]admin/repository-types"
-                ad_return_exception_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-ae?[export_url_vars repository_id return_url]\">configure this instance of the download module</a>."
+                ad_return_exception_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-ae?[export_vars -url {repository_id return_url}]\">configure this instance of the download module</a>."
             } else {
                 ad_return_exception_page 200 "Not setup" "Please have an admin configure this instance of the download module."
             }
@@ -37,7 +37,7 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             }]
                 if { $count == 0 } {
                     set return_url "[ad_conn url]?[ad_conn query]"
-                    ad_return_exceptio_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-types?[export_url_vars repository_id return_url]\">add a download type</a>."
+                    ad_return_exceptio_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-types?[export_vars -url {repository_id return_url}]\">add a download type</a>."
                     ad_script_abort
                 }
             }

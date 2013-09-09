@@ -27,7 +27,7 @@ set dimensional {
 set table_def {
     {user_name "User Name (Last name, first name)"
                {no_sort}
-               {<td><a href="report-one-user?[export_url_vars user_id downloaded]">$user_name</a> (<a href="mailto:$email">$email</a>)</td>}}
+               {<td><a href="report-one-user?[export_vars -url {user_id downloaded}]">$user_name</a> (<a href="mailto:$email">$email</a>)</td>}}
     {num_downloads "# Downloads" {no_sort} {}}
 }
 

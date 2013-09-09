@@ -95,7 +95,7 @@ db_foreach metadata {
     append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = $metadata_id) as $metadata_select
     "
     if { $linked_p == "t" } {
-        set display "<td><a href=one-metadata?[export_url_vars metadata_id]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"
+        set display "<td><a href=one-metadata?[export_vars -url {metadata_id}]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"
     } else {
         set display ""
     }
@@ -111,14 +111,14 @@ if { $admin_p } {
 	[ad_decode $approved_p \
             "t" "<font color=green>approved</font> 
                 \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=reject&[export_url_vars revision_id return_url]>reject</a></font>\]" \
+                 <a href=admin/approve-or-reject?action=reject&[export_vars -url {revision_id return_url}]>reject</a></font>\]" \
             "f" "<font color=red>rejected</font>
                 \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=approve&[export_url_vars revision_id return_url]>approve</a>\]" \
+                 <a href=admin/approve-or-reject?action=approve&[export_vars -url {revision_id return_url}]>approve</a>\]" \
                 "pending 
                 \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=approve&[export_url_vars revision_id return_url]>approve</a> |
-                 <a href=admin/approve-or-reject?action=reject&[export_url_vars revision_id return_url]>reject</a></font>\]
+                 <a href=admin/approve-or-reject?action=approve&[export_vars -url {revision_id return_url}]>approve</a> |
+                 <a href=admin/approve-or-reject?action=reject&[export_vars -url {revision_id return_url}]>reject</a></font>\]
 	"]
 	    </td>}]
     }

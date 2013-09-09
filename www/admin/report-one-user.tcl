@@ -39,7 +39,7 @@ set table_def {
         {}}
     {download_ip "From IP"
         {download_ip}
-        {<td><a href=report-one-ip?[export_url_vars download_ip downloaded]>$download_ip</a> ($download_hostname)</td>}}
+        {<td><a href=report-one-ip?[export_vars -url {download_ip downloaded}]>$download_ip</a> ($download_hostname)</td>}}
     {reason "Download Reason"
         {reason}
         {}}

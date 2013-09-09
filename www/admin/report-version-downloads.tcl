@@ -43,13 +43,13 @@ set table_def {
         {<td><a href="report-one-user?user_id=$user_id">$user_name</a></td>}}
     {version_name "Version"
         {version_name $order}
-        {<td><a href="[ad_conn package_url]one-revision?[export_url_vars revision_id downloaded]">$version_name</a></td>}}
+        {<td><a href="[ad_conn package_url]one-revision?[export_vars -url {revision_id downloaded}]">$version_name</a></td>}}
     {download_date "Download Date"
         {download_date $order}
         {}}
     {download_ip "From IP (hostname)"
         {download_ip $order}
-        {<td><a href="report-one-ip?[export_url_vars download_ip downloaded]">$download_ip</a> ($download_hostname)</td>}}
+        {<td><a href="report-one-ip?[export_vars -url {download_ip downloaded}]">$download_ip</a> ($download_hostname)</td>}}
     {reason "Download Reason"
         {reason $order}
         {<td>$reason</td>}}

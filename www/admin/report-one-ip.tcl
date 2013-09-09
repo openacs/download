@@ -38,7 +38,7 @@ set table_def {
     {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
     {user_name "User Name"
     {user_name}
-    {<td><a href="report-one-user?[export_url_vars user_id downloaded]">$user_name</a></td>}}
+    {<td><a href="report-one-user?[export_vars -url {user_id downloaded}]">$user_name</a></td>}}
     {download_date "Download Date"
     {download_date}
     {}}

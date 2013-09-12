@@ -30,7 +30,7 @@
       </select></td>
  </tr>
 
- @extra_form_elts@
+ @extra_form_elts;noquote@
 
  <tr>
   <th align=right>#download.lt_Version_Number_option#</th>

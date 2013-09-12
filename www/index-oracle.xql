@@ -45,7 +45,7 @@ where  da.repository_id = :repository_id and
        acs_permission.permission_p(dar.revision_id, :user_id, 'read') = 't'
        $approval
        [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
+       [template::list::orderby_clause -orderby -name download_list]
       </querytext>
 </fullquery>
  

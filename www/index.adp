@@ -1,3 +1,4 @@
+
 <master>
 <property name="title">@title;noquote@</property>
 <property name="context"></property>
@@ -8,16 +9,17 @@
 <table align="right"><tr><td><a href="help">#download.Help#</a></td></tr></table>
 
 @description@
-
+<if 0>
     <if @user_id@ eq 0>
       <p>#download.You_must# <strong><a href="/register/index?<%= [export_vars -url {return_url}] %>">register</a></strong>
          #download.lt_before_you_can_downlo#
       </p>
     </if>
-
+</if>
 @dimensional_html;noquote@
 <br /><br />
-@table;noquote@
+
+<listtemplate name="download_list"></listtemplate>
 
 <if @write_p@ eq 1>
 <h3 style="margin-top: 1em">#download.lt_Upload_a_New_Version_#</h3>

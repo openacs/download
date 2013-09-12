@@ -24,19 +24,27 @@ set dimensional {
         {all "all" {}}}}
 }
 
-set table_def {
-    {download_ip "From IP"
-               {no_sort}
-               {<td><a href="report-one-ip?[export_vars -url {download_ip downloaded}]">$download_ip</a></td>}}
-    {download_hostname "Hostname" {} {}}
-    {num_downloads "# Downloads" {no_sort} {}}
-}
+template::list::create -name ips_list \
+    -multirow ips \
+    -html {width "90%" align center} \
+    -elements {
+        download_ip {
+            label "From IP"
+            link_url_col one_ip_url
+        }
+        download_hostname {
+            label "Hostname"
+        }
+        num_downloads {
+            label "# Downloads"
+        }
+    }
 
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center" } \
-        -bind [ad_tcl_vars_to_ns_set repository_id downloaded] \
-               download_table { *SQL* } $table_def ]
+
+db_multirow -extend {one_ip_url} ips download_table { *SQL* } {
+    set one_ip_url [export_vars -base report-one-ip {download_ip downloaded}]
+}
 
 # query users to spam
 set user_id_list [db_list users_to_spam { *SQL* }]

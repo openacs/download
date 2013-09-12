@@ -27,31 +27,46 @@ set dimensional {
 }
 
 
-set table_def {
-    {archive_name "Archive"
-        {archive_name $order}
-        {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
-    {version_name "Version"
-        {version_name $order}
-        {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
-    {download_date "Download Date"
-        {download_date}
-        {}}
-    {download_ip "From IP"
-        {download_ip}
-        {<td><a href=report-one-ip?[export_vars -url {download_ip downloaded}]>$download_ip</a> ($download_hostname)</td>}}
-    {reason "Download Reason"
-        {reason}
-        {}}
-}
+template::list::create -name history_list \
+    -multirow history \
+    -html { width "90%" align "center"} \
+    -elements {
+        archive_name {
+            label "Archive"
+            link_url_col url_archive_id 
+            orderby archive_name
+        }
+        version_name {
+            label "Version"
+            link_url_col url_archive_id
+            orderby version_name
+        }
+        download_date {
+            label "Download Date"
+	    orderby download_date
+        }
+        download_ip {
+            label "From IP"
+            display_template {
+                <a href="@history.url_one_ip@">@history.download_ip@</a> (@history.download_hostname@)
+            }
+	    orderby download_ip
+        }
+        reason {
+            label "Download Reason"
+	    orderby reason
+        }
+    } -filters {user_id {} downloaded {}}
 
 db_1row name_select { *SQL* }
 
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center" } \
-        -bind [ad_tcl_vars_to_ns_set repository_id user_id] \
-               download_table { *SQL* } $table_def ]
+
+db_multirow -extend {url_one_ip url_archive_id} history download_table { *SQL* } {
+    set url_archive_id [export_vars -base "../one-revision" {revision_id}]
+    set url_one_ip [export_vars -base "report-one-ip" {download_ip downloaded}]
+}
+
 
 set context [list [list "report-by-user" "Downloads by User"] "$first_names $last_name"]
 ad_return_template

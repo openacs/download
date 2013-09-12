@@ -24,18 +24,27 @@ set dimensional {
         {all "all" {}}}}
 }
 
-set table_def {
-    {user_name "User Name (Last name, first name)"
-               {no_sort}
-               {<td><a href="report-one-user?[export_vars -url {user_id downloaded}]">$user_name</a> (<a href="mailto:$email">$email</a>)</td>}}
-    {num_downloads "# Downloads" {no_sort} {}}
-}
-
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center" } \
-        -bind [ad_tcl_vars_to_ns_set repository_id downloaded] \
-               download_table { *SQL* } $table_def ]
+
+template::list::create -name users_list \
+    -multirow users \
+    -html { width "90%" align center} \
+    -elements {
+        user_name {
+            label "User Name (Last name, first name)"
+            display_template {
+                <a href="@users.report_one_url@">@users.user_name@</a> 
+                (<a href="mailto:@users.email@">@users.email@</a>)
+            }
+        }
+        num_downloads {
+            label "# Downloads"
+        }
+    }
+
+db_multirow -extend {report_one_url} users download_table { *SQL* } {
+    set report_one_url "[export_vars -base report-one-user {user_id downloaded}]"
+}
 
 # query users to spam
 set user_id_list [db_list users_to_spam { *SQL* }]

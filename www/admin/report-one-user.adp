@@ -3,4 +3,5 @@
 <property name="context">@context;noquote@</property>
 
 @dimensional_html;noquote@
-@table;noquote@
+
+<listtemplate name="history_list"></listtemplate>

@@ -1,1 +1,80 @@
-download_file_downloader
+ad_page_contract {
+
+} {
+	{ revision_id:naturalnum,notnull "" }
+	{ download_id:naturalnum,notnull "" }
+        { reason_id "" }
+	{ reason_other ""}
+}
+
+#ns_log Notice "download_file_downloader: $revision_id"
+
+set user_id [ad_conn user_id]
+set download_ip [ad_conn peeraddr]
+if [catch {
+    set download_hostname [ns_hostbyaddr $download_ip]
+}] {
+    set download_hostname [db_null]
+}
+set user_agent  [ns_set iget [ad_conn headers] user-agent]
+
+regexp "[ad_conn package_url]download/(.*)" [ad_conn url] match path
+
+# let's try to get the user_id from the filename, just grab the
+# latest revision --DaveB
+
+if {$revision_id eq ""} {
+	set file_name [ad_conn path_info]
+	set revision_id [db_string get_revision_id {select revision_id from download_arch_revisions_obj where file_name=:file_name and approved_p = 't'} -default ""]
+}
+
+if {$revision_id eq ""} {
+    ad_returnredirect [ad_conn package_url]
+    ad_script_abort
+}
+
+permission::require_permission -object_id $revision_id -privilege "read"
+
+cr_write_content -revision_id $revision_id
+
+##Record the download for all time!!
+if {$download_id eq ""} {
+	set download_id [db_nextval acs_object_id_seq]
+}
+set double_click_p [db_string download_count "select count(*) from download_downloads where download_id = :download_id"]
+#ns_log notice "DAVEB: double_click_p is $double_click_p"
+if { $double_click_p == 0 } {
+    if {[catch {
+	# JCD: Huge ugly kludge map user 0 to evil@xarg.net
+	#if {! $user_id } { 
+	#    set user_id 56228
+	#} 
+	db_dml download_insert {
+insert into download_downloads (
+  download_id, 
+  user_id, 
+  revision_id, 
+  download_date, 
+  download_ip,
+  download_hostname,
+  user_agent,
+  reason_id,
+  reason)
+values (
+  :download_id, 
+  :user_id, 
+  :revision_id, 
+  current_timestamp, 
+  :download_ip,
+  :download_hostname,
+  :user_agent,
+  :reason_id,
+  :reason_other)
+	}
+    } errmsg]} {
+	ns_log Error "Download: Unable to log download of $path $revision_id due to an error: $errmsg"
+    }
+}
+
+
+

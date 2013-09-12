@@ -23,7 +23,7 @@ where d.user_id = u.user_id
       and dar.archive_id = :archive_id
       and dar.revision_id = d.revision_id
       [ad_dimensional_sql $dimensional where]
-      [ad_order_by_from_sort_spec $orderby $table_def]
+      [template::list::orderby_clause -orderby -name download_list]
 
 </querytext>
 </fullquery>

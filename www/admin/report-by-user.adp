@@ -10,4 +10,4 @@
 </p>
 
 @dimensional_html;noquote@
-@table;noquote@
+<listtemplate name="users_list"></listtemplate>

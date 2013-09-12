@@ -21,17 +21,19 @@ if { ![db_0or1row metadata {
 set answer_column [download_metadata_column $data_type]
 set metadata_select "metadata$metadata_id"
 
-set table_def [list \
-    [list $metadata_select $pretty_name {} \
-        "<td><a href=one-metadata?[export_vars -url {metadata_id}]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"] \
-    {version_count "[_ download._Versions]" 
-        {version_count $order}
-        {<td>$version_count</td>}} \
-    {archive_count "[_ download._Files]" 
-        {archive_count $order}
-        {<td>$archive_count</td>}} \
-]
+if {$orderby eq ""} {
+    set orderby $metadata_select
+}
+set elements [list \
+                  $metadata_select {label $pretty_name display_template {<a href='@metadata.url_one_metadata@&value=@metadata.$metadata_select@'>@metadata.$metadata_select@</a>} orderby "$metadata_select"} \
+                  version_count { label "[_ download._Versions]" orderby version_count } \
+                  archive_count { label "[_ download._Files]" orderby archive_count}]
 
+              
+template::list::create -name metadata_list \
+    -multirow metadata \
+    -html {width "100%"} \
+    -elements $elements -filters {metadata_id {}}
 
 set sql_query "
         select $answer_column as $metadata_select, 
@@ -41,12 +43,10 @@ set sql_query "
         where drd.revision_id = dar.revision_id and
               drd.metadata_id = :metadata_id
         group by $answer_column
-        [ad_order_by_from_sort_spec $orderby $table_def]"
+        [template::list::orderby_clause -orderby -name metadata_list]"
 
-set table [ad_table \
-        -Torderby $orderby \
-        -Ttable_extra_html { width=100% } \
-        -bind [ad_tcl_vars_to_ns_set metadata_id] \
-        all_metadata_list $sql_query $table_def ]
+db_multirow -extend {url_one_metadata} metadata all_metadata_list $sql_query {
+    set url_one_metadata [export_vars -base one-mestada {metadata_id}]
+}
 
 ad_return_template

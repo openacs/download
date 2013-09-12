@@ -12,4 +12,4 @@
 @dimensional_html;noquote@
 <center><strong>#download.lt_Total_downloads_liste#</strong>
 </center>
-@table;noquote@
+<listtemplate name="download_list"></listtemplate>

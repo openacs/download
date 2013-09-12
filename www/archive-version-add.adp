@@ -13,7 +13,7 @@
   <td><input type=text name=version_name size=20 max_length=20></td>
  </tr>
 
- @extra_form_elts@
+ @extra_form_elts;noquote@
 
  <tr>
   <th align=right>#download.File#</th>

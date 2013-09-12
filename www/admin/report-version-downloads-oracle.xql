@@ -21,7 +21,7 @@
        and dar.revision_id = d.revision_id
        and dr.download_reason_id(+) = d.reason_id
        [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
+       [template::list::orderby_clause -orderby -name download_list]
 
       </querytext>
 </fullquery>

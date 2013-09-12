@@ -12,9 +12,9 @@ set user_id [ad_conn user_id]
 set repository_id [download_repository_id]
 
 auth::require_login
-ad_require_permission $revision_id "read"
+permission::require_permission -object_id $revision_id -privilege "read"
 
-set admin_p [ad_permission_p $repository_id admin]
+set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
 set approval ""
 if { $admin_p == 0 } {
     set approval "and dar.approved_p = 't'"

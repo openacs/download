@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 set repository_id [download_repository_id]
-ad_require_permission $repository_id "admin"
+permission::require_permission -object_id $repository_id -privilege "admin"
 
 db_dml type_delete {
     delete from download_archive_types where repository_id = :repository_id and archive_type_id = :archive_type_id

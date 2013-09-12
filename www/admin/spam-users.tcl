@@ -14,7 +14,7 @@ ad_page_contract {
     no_spam_count:onevalue
 }
 
-ad_require_permission [ad_conn package_id] "admin"
+permission::require_permission -object_id [ad_conn package_id] -privilege "admin"
 set user_id [ad_conn user_id]
 
 # get name, email and

@@ -27,7 +27,7 @@
        and d.download_ip = :download_ip
        and u.user_id = d.user_id
        [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
+       [template::list::orderby_clause -orderby -name history_list]
 
       </querytext>
 </fullquery>

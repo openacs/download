@@ -27,10 +27,10 @@ ad_page_contract {
 ##Then insert into the download_revision_data
 set user_id [ad_conn user_id]
 set package_id [ad_conn package_id]
-set admin_p [ad_permission_p $repository_id admin]
+set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
 
 # check for write permission on this repository
-ad_require_permission $repository_id write
+permission::require_permission -object_id $repository_id -privilege write
 
 set approved_p [ad_decode $admin_p 0 [db_null] "t"]
 set approved_date [ad_decode $admin_p 0 [db_null] "sysdate"]

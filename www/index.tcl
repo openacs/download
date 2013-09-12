@@ -24,9 +24,9 @@ set user_id [ad_conn user_id]
 array set repository [download_repository_info]
 set repository_id $repository(repository_id)
 
-set master_admin_p [ad_permission_p [ad_conn package_id] admin]
-set admin_p [ad_permission_p $repository_id admin]
-set write_p [ad_permission_p $repository_id write]
+set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
+set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
+set write_p [permission::permission_p -object_id $repository_id -privilege write]
 
 set title $repository(title)
 set description $repository(description)
@@ -67,15 +67,26 @@ if { $admin_p } {
     set approval "       and dar.approved_p = 't'  "
 }
 
-
-set table_def [list \
-		   [list archive_name "[_ download.Software_Name_1]"\
-			{lower(archive_name) $order} \
-			{<td><a href=download-verify?revision_id=$revision_id><img src=[ad_conn package_url]/graphics/download.gif border=0></a> &nbsp;<a href=one-revision?revision_id=$revision_id>$archive_name $version_name</a> &nbsp;(${file_size}k)<br>$summary</td>}
-		    ] \
-	       [list archive_type "[_ download.Software_Type]" "" ""] \
-	       [list downloads "[_ download._Downloads]" "" ""] \
-	      ]
+set element_list {
+    archive_name {
+        label "Software Name"
+        display_template {
+            <a href='@downloads_multirow.download_url@'>
+            <img src='@downloads_multirow.download_img@' border=0>
+            </a> &nbsp;<a href=@downloads_multirow.revision_url@>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
+            &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@
+        } 
+        orderby "archive_name"
+    }
+    archive_type {
+        label "Software Type"
+        orderby "archive_type"
+    }
+    downloads {
+        label "# Downloads"
+        orderby "downloads"
+    }
+}
 
 #Setup the metadata
 set metadata_selects ""
@@ -95,66 +106,53 @@ db_foreach metadata {
     append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = $metadata_id) as $metadata_select
     "
     if { $linked_p == "t" } {
-        set display "<td><a href=one-metadata?[export_url_vars metadata_id]&value=\[ad_urlencode \$$metadata_select\]>\$$metadata_select</td>"
+        set display "<a href=one-metadata?[export_vars -url {metadata_id}]&value=@downloads_multirow.$metadata_select@>@downloads_multirow.$metadata_select@</a>"
     } else {
         set display ""
     }
-    lappend table_def [list $metadata_select $pretty_name {} $display]
+    lappend element_list $metadata_select [list label $pretty_name display_template $display]
 }
 
 ##Add on the metadata columns
 
 if { $admin_p } {
-    lappend table_def [list dar.approved_p "[_ download.Approval]" \
-        {} \
-        {<td> \
-	[ad_decode $approved_p \
-            "t" "<font color=green>approved</font> 
-                \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=reject&[export_url_vars revision_id return_url]>reject</a></font>\]" \
-            "f" "<font color=red>rejected</font>
-                \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=approve&[export_url_vars revision_id return_url]>approve</a>\]" \
-                "pending 
-                \[<font size=-1>
-                 <a href=admin/approve-or-reject?action=approve&[export_url_vars revision_id return_url]>approve</a> |
-                 <a href=admin/approve-or-reject?action=reject&[export_url_vars revision_id return_url]>reject</a></font>\]
-	"]
-	    </td>}]
+    lappend element_list approved_p {
+        label "[_ download.Approval]"
+        display_template {
+            <font color=@downloads_multirow.approved_color@>@downloads_multirow.approved_text@</font> 
+            \[<font size=-1><a href='@downloads_multirow.approved_url@'>@downloads_multirow.approved_action@</a></font>\]
+        }
+    }
+}
+
+template::list::create -name download_list \
+    -multirow downloads_multirow \
+    -elements $element_list \
+    -filters {archive_type_id {} query_string {} updated {}}
+
+set img_url "[ad_conn package_url]/graphics/download.gif"
+db_multirow -extend {metadata_url download_img revision_url download_url approved_color approved_text approved_url approved_action reject_url} downloads_multirow download_index_query {*} {
+    set download_img $img_url
+    if {$approved_p} {
+        set approved_url [export_vars -base admin/approve-or-reject {{action reject} revision_id return_url}]
+        set approved_text "approved"
+        set approved_color green
+        set approved_action "reject"
+    } else {
+        set approved_url [export_vars -base admin/approve-or-reject {{action approve} revision_id return_url}]
+        set approved_text "rejected"
+        set approved_action approve
+        set approved_color red
     }
 
-set sql_query "
-select da.archive_id,
-       dat.pretty_name as archive_type,
-       da.archive_type_id,
-       da.archive_name,
-       da.summary,
-       dar.revision_id,
-       dar.file_name,
-       dar.version_name,
-       dbms_lob.getlength(dar.content) as file_size,       
-       (select count(*) from download_downloads where revision_id = dar.revision_id) as downloads,
-       dar.approved_p 
-       $metadata_selects
-from   download_archives_obj da,
-       download_archive_types dat,
-       download_arch_revisions_obj dar
-where  da.repository_id = :repository_id and
-       dat.archive_type_id = da.archive_type_id and
-       da.archive_id = dar.archive_id and
-       acs_permission.permission_p(dar.revision_id, :user_id, 'read') = 't'
-       $approval
-       [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]"
+    set download_url "download/$file_name?revision_id=$revision_id"
+    set revision_url "one-revision?revision_id=$revision_id"
+    set metadata_url [export_vars -base one-metadata {metadata_id}]
+
+}
+
 
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Torderby $orderby \
-        -Tband_colors {{} {\"\#cccccc\"}} \
-        -bind [ad_tcl_vars_to_ns_set user_id repository_id] \
-        -Ttable_extra_html { cellpadding=3 } \
-        download_index_query $sql_query $table_def ]
-
 
 db_multirow types types_select {
     select archive_type_id, pretty_name, description from download_archive_types where repository_id = :repository_id

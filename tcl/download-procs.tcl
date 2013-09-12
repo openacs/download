@@ -19,11 +19,11 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
     } -column_array repository ] } {
         #Package not setup
         if { $do_redirect } {
-            set admin_p [ad_permission_p $package_id "admin"]
+            set admin_p [permission::permission_p -object_id $package_id -privilege "admin"]
             if { $admin_p } {
                 set repository_id [db_nextval acs_object_id_seq]
                 set return_url "[ad_conn package_url]admin/repository-types"
-                ad_return_exception_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-ae?[export_url_vars repository_id return_url]\">configure this instance of the download module</a>."
+                ad_return_exception_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-ae?[export_vars -url {repository_id return_url}]\">configure this instance of the download module</a>."
             } else {
                 ad_return_exception_page 200 "Not setup" "Please have an admin configure this instance of the download module."
             }
@@ -37,7 +37,7 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             }]
                 if { $count == 0 } {
                     set return_url "[ad_conn url]?[ad_conn query]"
-                    ad_return_exceptio_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-types?[export_url_vars repository_id return_url]\">add a download type</a>."
+                    ad_return_exceptio_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-types?[export_vars -url {repository_id return_url}]\">add a download type</a>."
                     ad_script_abort
                 }
             }
@@ -139,7 +139,7 @@ ad_proc download_file_downloader {
         ad_script_abort
     }
 
-    ad_require_permission $revision_id "read"
+    permission::require_permission -object_id $revision_id -privilege "read"
 
     ##Record the download for all time!!
     set double_click_p [db_string download_count "select count(*) from download_downloads where download_id = :download_id"]

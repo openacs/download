@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     {archive_id:integer,notnull}
-    {orderby "last_name"}
+    {orderby "user_name"}
     {downloaded 1m}
     {versions "current"}
 } -properties {
@@ -21,7 +21,7 @@ ad_page_contract {
 
 set repository_id [download_repository_id]
 
-ad_require_permission $archive_id "admin"
+permission::require_permission -object_id $archive_id -privilege "admin"
 
 set dimensional {
    {versions "Versions" current {
@@ -37,23 +37,37 @@ set dimensional {
     }}
 }
 
-set table_def {
-    {user_name "User Name"
-        {user_name $order}
-        {<td><a href="report-one-user?user_id=$user_id">$user_name</a></td>}}
-    {version_name "Version"
-        {version_name $order}
-        {<td><a href="[ad_conn package_url]one-revision?[export_url_vars revision_id downloaded]">$version_name</a></td>}}
-    {download_date "Download Date"
-        {download_date $order}
-        {}}
-    {download_ip "From IP (hostname)"
-        {download_ip $order}
-        {<td><a href="report-one-ip?[export_url_vars download_ip downloaded]">$download_ip</a> ($download_hostname)</td>}}
-    {reason "Download Reason"
-        {reason $order}
-        {<td>$reason</td>}}
-}
+template::list::create -name download_list \
+    -multirow downloads \
+    -html {width "90%" align center} \
+    -elements {
+        user_name { 
+            label "User Name"
+            orderby user_name
+            link_url_col url_one_user
+        }
+        version_name {
+            label "Version"
+            orderby version_name
+            link_url_col url_one_revision
+            
+        } 
+        download_date {
+            label "Download Date"
+            orderby download_date
+        }
+        download_ip {
+            label "From IP (hostname)"
+            orderby download_ip
+            display_template {
+                <a href="@downloads.url_one_ip@">@downloads.download_ip@</a> (@downloads.download_hostname@)
+            }
+        }
+        reason {
+            label "Download Reason"
+            orderby reason
+        }
+    } -filters {archive_id {} downloaded {} versions {}}
 
 db_1row name_select { *SQL* }
 
@@ -61,10 +75,13 @@ set current_count [db_string current_count { *SQL* }]
 set total_count [db_string total_count { *SQL* }]
 
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center" } \
-        -bind [ad_tcl_vars_to_ns_set archive_id] \
-               download_table { *SQL* } $table_def ]
+
+set pkg_url [ad_conn package_url]
+db_multirow -extend {url_one_ip url_one_revision url_one_user} downloads download_table { *SQL* } {
+    set url_one_user [export_vars -base report-one-user {user_id}]
+    set url_one_revision [export_vars -base "${pkg_url}one-revision" {revision_id downloaded}]
+    set url_one_ip [export_vars -base report-one-ip {download_ip downloaded}]
+}
 
 # query users to spam
 set user_id_list [db_list users_to_spam { *SQL* }]

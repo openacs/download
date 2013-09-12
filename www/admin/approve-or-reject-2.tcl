@@ -22,7 +22,7 @@ array set repository_info [download_repository_info]
 set repository_id $repository_info(repository_id)
 set user_id [ad_conn user_id]
 
-ad_require_permission $repository_id "admin"
+permission::require_permission -object_id $repository_id -privilege "admin"
 
 if { $action == "approve" } {
     set approved_p "t"
@@ -54,7 +54,7 @@ if [catch {
 ad_returnredirect $return_url
 # do not abort/return here!
 
-if {[ad_parameter -package_id [ad_conn package_id] "approval_notification" "download" 1] == 1} {
+if {[parameter::get -package_id [ad_conn package_id] -parameter approval_notification -default 1] == 1} {
     # We want to send email to use who submitted the version to let
     # them know it's approved (or rejected).
     

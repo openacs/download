@@ -10,4 +10,5 @@
 </p>
 
 @dimensional_html;noquote@
-@table;noquote@
+
+<listtemplate name="history_list"></listtemplate>

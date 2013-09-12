@@ -24,7 +24,7 @@
        and d.revision_id = dar.revision_id
        and d.user_id = :user_id
        [ad_dimensional_sql $dimensional where]
-       [ad_order_by_from_sort_spec $orderby $table_def]
+       [template::list::orderby_clause -orderby -name history_list]
 
       </querytext>
 </fullquery>

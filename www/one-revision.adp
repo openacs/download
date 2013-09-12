@@ -13,7 +13,7 @@
 </if>
  <tr><td colspan=2 align=center>
                    [<a href=download-verify?revision_id=@revision_id@>#download.Download_Now#</a>]
-                   [<a href=one-archive?<%= [export_url_vars archive_id ]%>>#download.See_All_Versions#</a>]<br>&nbsp;</td>
+                   [<a href=one-archive?<%= [export_vars -url {archive_id }]%>#download.See_All_Versions#</a>]<br>&nbsp;</td>
  </tr>
  <tr><td align=right valign=top><p>#download.Summary#</td>
      <td>@summary@</td>

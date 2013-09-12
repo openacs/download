@@ -17,7 +17,7 @@
       dam.mainpage_p,
       dam.computed_p      
     from download_archive_metadata dam left join download_archive_types dat
-      using archive_type_id
+      using (archive_type_id)
     where dam.repository_id = :repository_id and
           dam.metadata_id = :metadata_id 
     order by archive_type_id

@@ -19,7 +19,7 @@ set title $repository(title)
 set description $repository(description)
 set help_text $repository(help_text)
 
-set admin_p [ad_permission_p $repository_id admin]
+set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
 
 set extra_form_elts ""
 db_foreach metadata {

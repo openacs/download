@@ -28,30 +28,41 @@ set dimensional {
 	}
 }
 
-
-set table_def {
-    {archive_name "Archive"
-    {archive_name $order}
-    {<td><a href="../one-archive?archive_id=$archive_id">$archive_name</a></td>}}
-    {version_name "Version"
-    {version_name $order}
-    {<td><a href="../one-revision?revision_id=$revision_id">$version_name</a></td>}}
-    {user_name "User Name"
-    {user_name}
-    {<td><a href="report-one-user?[export_url_vars user_id downloaded]">$user_name</a></td>}}
-    {download_date "Download Date"
-    {download_date}
-    {}}
-    {reason "Download Reason"
-    {reason}
-    {}}
-}
+template::list::create -name history_list \
+    -multirow history \
+    -html {width "90%" align center} \
+    -elements {
+        archive_name {
+            label "Archive"
+            link_url_col url_archive
+            orderby archive_name
+        } 
+        version_name {
+            label "Version"
+            link_url_col url_archive
+            orderby version_name
+        }
+        user_name {
+            label "User Name"
+            link_url_col url_one_user
+            orderby user_name
+        } 
+        download_date {
+            label "Download Date"
+            orderby download_date
+        } 
+        reason {
+            label "Download Reason"
+            orderby reason
+        }
+    } -filters {download_ip {} downloaded {}}
 
 set dimensional_html [ad_dimensional $dimensional]
-set table [ad_table \
-        -Ttable_extra_html { width="90%" align="center" } \
-        -bind [ad_tcl_vars_to_ns_set repository_id download_ip] \
-               download_table { *SQL* } $table_def ]
+
+db_multirow -extend {url_one_user url_archive} history download_table { *SQL* } {
+    set url_archive [export_vars -base "../one-revision" {archive_id}]
+    set url_one_user [export_vars -base "report-one-user" {user_id downloaded}]
+}
 
 # query users to spam
 set user_id_list [db_list users_to_spam { *SQL* }]

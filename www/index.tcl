@@ -67,6 +67,11 @@ if { $admin_p } {
     set approval "       and dar.approved_p = 't'  "
 }
 
+set orderby_fieldname [lindex [split $orderby ","] 0]
+if {$orderby_fieldname ni {archive_name archive_type downloads}} {
+    set orderby "archive_name,desc"
+}
+
 set element_list {
     archive_name {
         label "Software Name"

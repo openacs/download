@@ -1,5 +1,5 @@
   <master>
-    <property name="title">Spam Downloaders</property>
+    <property name="doc(title)">Spam Downloaders</property>
     <property name="context">"Spam downloaders"</property>
 
     <if @users:rowcount@ eq 0>

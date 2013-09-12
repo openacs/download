@@ -1,5 +1,5 @@
 <master>
-<property name="title">One Archive: @archive_name;noquote@</property>
+<property name="doc(title)">One Archive: @archive_name;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 <if @master_admin_p@ eq 1>

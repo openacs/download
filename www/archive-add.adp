@@ -1,5 +1,5 @@
 <master>
-<property name="title">Add a New Software Archive</property>
+<property name="doc(title)">Add a New Software Archive</property>
 <property name="context">@context;noquote@</property>
 
 <form enctype=multipart/form-data method=POST action="archive-add-2">

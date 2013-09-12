@@ -1,5 +1,5 @@
 <master>
-<property name="title">Help on @title;noquote@</property>
+<property name="doc(title)">Help on @title;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 @help_text@

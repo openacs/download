@@ -1,5 +1,5 @@
 <master>
-<property name="title">@title;noquote@</property>
+<property name="doc(title)">@title;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 <h3>#download.lt_Add_a_new_Download_Re#</h3>

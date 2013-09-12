@@ -1,5 +1,5 @@
 <master>
-<property name="title">#download.Downloads_by_User#</property>
+<property name="doc(title)">#download.Downloads_by_User#</property>
 <property name="context">@context;noquote@</property>
 
 <p>

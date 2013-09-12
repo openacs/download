@@ -1,5 +1,5 @@
 <master>
-<property name="title">@archive_name;noquote@ Download History</property>
+<property name="doc(title)">@archive_name;noquote@ Download History</property>
 <property name="context">@context;noquote@</property>
 
 <p>

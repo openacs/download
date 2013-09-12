@@ -1,5 +1,5 @@
 <master>
-<property name="title">Downloads by IP @download_ip;noquote@</property>
+<property name="doc(title)">Downloads by IP @download_ip;noquote@</property>
 <property name="context">@context;noquote@</property>
 
 <p>

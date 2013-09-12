@@ -1,5 +1,5 @@
   <master>
-    <property name="title">Download @archive_name;noquote@ @version_name;noquote@</property>
+    <property name="doc(title)">Download @archive_name;noquote@ @version_name;noquote@</property>
     <property name="context">@context;noquote@</property>
 
     <h3>#download.lt_Download_archive_name_1#</h3>

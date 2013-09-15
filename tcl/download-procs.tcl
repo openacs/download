@@ -61,13 +61,13 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
     set element_name "metadata.$metadata_id"
     switch -- $data_type {
 	"number" {
-	    append html "<input type=text name=$element_name value=\"[philg_quote_double_quotes $user_value]\" size=10>"
+	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
 	}
 	"integer" {
-	    append html "<input type=text name=$element_name value=\"[philg_quote_double_quotes $user_value]\" size=10>"
+	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
 	}
 	"shorttext" {
-	    append html "<input type=text name=$element_name value=\"[philg_quote_double_quotes $user_value]\" size=20>"
+	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=20>"
 	}
 
 	"text" {

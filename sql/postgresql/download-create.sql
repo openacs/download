@@ -264,8 +264,8 @@ create table download_downloads (
                   on delete cascade,
     download_date timestamptz not null,
     download_hostname varchar(400),
-    download_ip   varchar(20),
-    user_agent    varchar(200),
+    download_ip   varchar(40),
+    user_agent    varchar(500),
     reason_id     integer
 				  constraint download_downloads_reason_fl
 				  references download_reasons(download_reason_id) 

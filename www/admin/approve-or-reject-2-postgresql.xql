@@ -16,27 +16,4 @@
       </querytext>
 </fullquery>
 
- 
-<fullquery name="sendmail">      
-      <querytext>
-
-		declare
-			v_id   integer;
-        begin
-          v_id := acs_mail_nt__post_request(
-                :user_id,           -- p_party_from
-                :creation_user,     -- p_party_to
-                'f',                -- p_expand_group
-                :subject,           -- p_subject
-                :message,           -- p_message
-                0                   -- p_max_retries
-          );
-
-		  return v_id;
-        end;
-    
-      </querytext>
-</fullquery>
-
- 
 </queryset>

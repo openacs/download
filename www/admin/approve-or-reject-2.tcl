@@ -59,21 +59,10 @@ if {[parameter::get -package_id [ad_conn package_id] -parameter approval_notific
     # them know it's approved (or rejected).
     
     # This is the email address of the user who submitted the version.
-    db_1row creation_email_select {
-        select da.archive_name,
-               dar.creation_user,
-               dar.version_name
-          from download_arch_revisions_obj dar, download_archives_obj da
-         where da.archive_id = dar.archive_id and dar.revision_id = :revision_id
-    } 
+    db_1row creation_email_select { *SQL* } 
 
     # This is the email address and name of the user who approved (or rejected) the version
-    db_1row approving_user_select {
-        select email as approving_email,
-               first_names || ' ' || last_name as approving_name
-          from cc_users 
-         where user_id = :user_id
-    }
+    db_1row approving_user_select { *SQL* }
 
     set body "
     Your posting to [ad_system_name] $repository_info(title): $archive_name $version_name
@@ -84,14 +73,7 @@ if {[parameter::get -package_id [ad_conn package_id] -parameter approval_notific
 
     set subject "$repository_info(title):  $archive_name $version_name $approval_status: "
 
-    db_exec_plsql sendmail {
-        begin
-           :1 := acs_mail_nt.post_request(
-                party_from => :user_id,
-                party_to => :creation_user,
-                expand_group => 'f',
-                subject => :subject,
-                message => :body);
-        end;
-    }
+    acs_mail_lite::send -to_addr $creation_email -from_addr $approving_email \
+        -subject $subject -body $body
+
 }

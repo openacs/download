@@ -35,14 +35,10 @@ ad_return_top_of_page $page_content
 # send out email
 set count 0
 foreach to_user_id $user_id_list {
-    db_exec_plsql sendmail {
-        select acs_mail_nt__post_request (
-		    :user_id,    -- p_party_from
-		    :to_user_id, -- p_party_to
-		    :subject,    -- p_subject
-		    :msgbody     -- p_message
-		  );
-    }
+    set from_addr [acs_user::get_element -user_id $user_id -element email]
+    set to_addr [acs_user::get_element -user_id $to_user_id -element email]
+    acs_mail_lite::send -to_addr $to_addr -from_addr $from_addr \
+        -subject $subject -body $msgbody
     incr count
 }
 

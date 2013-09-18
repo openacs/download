@@ -6,9 +6,11 @@
       
         select da.archive_name,
                dar.creation_user,
-               dar.version_name
-          from download_arch_revisions_obj dar, download_archives_obj da
+               dar.version_name,
+               u.email as creation_email
+          from download_arch_revisions_obj dar, download_archives_obj da, cc_users u
          where da.archive_id = dar.archive_id and dar.revision_id = :revision_id
+         and u.user_id = dar.creation_user
     
       </querytext>
 </fullquery>

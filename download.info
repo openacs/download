@@ -21,7 +21,7 @@
 
         <provides url="download" version="5.2d2"/>
         <requires url="acs-kernel" version="5.2.0a1"/>
-        <requires url="acs-content-repository" version=" 5.2.0a3"/>
+        <requires url="acs-content-repository" version="5.2.0a3"/>
 
         <files>
             <file type="package_spec" path="download.info"/>

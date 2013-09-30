@@ -81,7 +81,7 @@ if {[form is_valid edit_metadata]} {
             delete from download_metadata_choices where metadata_id = :metadata_id
         }
 
-        if { $data_type == "choice" } {
+        if { $data_type eq "choice" } {
             set choices [split $choices ","]
             set count 0
             foreach choice $choices {

@@ -58,7 +58,7 @@ if {[form is_valid add_metadata]} {
               :computed_p)
         }
 
-        if { $data_type == "choice" } {
+        if { $data_type eq "choice" } {
             set choices [split $choices ","]
             set count 0
             foreach choice $choices {

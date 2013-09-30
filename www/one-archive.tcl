@@ -15,7 +15,7 @@ set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -pr
 set admin_p [permission::permission_p -object_id $archive_id -privilege admin]
 set write_p [permission::permission_p -object_id $archive_id -privilege write]
 
-if ![db_0or1row archive_info_select {
+if {![db_0or1row archive_info_select {
    select da.archive_name, 
           da.summary,
           da.description, 
@@ -26,14 +26,14 @@ if ![db_0or1row archive_info_select {
      from download_archives_obj da, cc_users u
     where da.archive_id = :archive_id
       and u.user_id = da.creation_user
-}] {
+}]} {
     ad_return_complaint 1 "[_ download.lt_The_archive_you_are_l]"
     return
 }
 
 
 
-if {[string eq $description_type {text/plain}]} { 
+if {$description_type eq "text/plain"} { 
     set description [ad_text_to_html -- $description]
 }
 
@@ -67,8 +67,7 @@ if { [catch {
     set gc_link [general_comments_create_link -object_name $archive_name $archive_id [ad_conn url]?[ad_conn query]]
     set gc_comments [general_comments_get_comments $archive_id [ad_conn url]?[ad_conn query]]
 } error] } {
-    global errorInfo errorCode
-    ns_log Notice "gc_link: $errorInfo, $errorCode"
+    ns_log Notice "gc_link: $::errorInfo, $::errorCode"
 }
 
 

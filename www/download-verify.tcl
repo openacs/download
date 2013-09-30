@@ -20,7 +20,7 @@ if { $admin_p == 0 } {
     set approval "and dar.approved_p = 't'"
 }
 
-if ![db_0or1row revision_info_select "
+if {![db_0or1row revision_info_select "
 select da.archive_id,
        da.repository_id as repository_id,
        da.archive_name,
@@ -34,7 +34,7 @@ from   download_archives_obj da,
 where  da.archive_id = dar.archive_id and
        dar.revision_id = :revision_id 
        $approval
-"] {
+"]} {
     ad_return_complaint 1 "[_ download.lt_The_version_you_are_l]"
     return
 }

@@ -11,7 +11,7 @@ ad_page_contract {
     {return_url "[ad_conn package_url]"}
 } -validate {
     valid_action_value {
-        if { $action != "approve" && $action != "reject" } {
+        if { $action ne "approve" && $action ne "reject" } {
             ad_complain "The value for 'action' must be 'approve' or 'reject'"
         }
     }
@@ -24,7 +24,7 @@ set user_id [ad_conn user_id]
 
 permission::require_permission -object_id $repository_id -privilege "admin"
 
-if { $action == "approve" } {
+if { $action eq "approve" } {
     set approved_p "t"
     set approval_action "approving"
     set approval_status "APPROVED"
@@ -35,7 +35,7 @@ if { $action == "approve" } {
 }
 
 # Here's where we update the database to set the version as approved
-if [catch {
+if {[catch {
     db_dml version_approve "
        update download_archive_revisions
          set approved_p = :approved_p,
@@ -44,7 +44,7 @@ if [catch {
              approved_date = sysdate
        where revision_id = :revision_id
     " 
-} errmsg] {
+} errmsg]} {
     ad_return_error "Problem $approval_action version" "There was a problem $approval_action the version
     in the database.  Here's the error message: $errmsg"
     return

@@ -10,7 +10,7 @@ ad_page_contract {
     {return_url "[ad_conn package_url]"}
 } -validate {
     valid_action_value {
-        if { $action != "approve" && $action != "reject" } {
+        if { $action ne "approve" && $action ne "reject" } {
             ad_complain "The value for 'action' must be 'approve' or 'reject'"
         }
     }
@@ -18,7 +18,7 @@ ad_page_contract {
 
 set package_id [ad_conn package_id]
 
-if ![db_0or1row revision_info_select {
+if {![db_0or1row revision_info_select {
 select da.repository_id as repository_id,
        da.archive_id,
        da.archive_name,
@@ -37,12 +37,12 @@ from   download_archives_obj da,
 where  da.archive_id = dar.archive_id and
        dar.revision_id = :revision_id and
        u.user_id = dar.creation_user
-}] {
+}]} {
     ad_return_complaint 1 "The version id $revision_id was not found"
     return
 }
 
-if { $action == "approve" } {
+if { $action eq "approve" } {
     set pretty_action "Approve"
     set pretty_noun "Approval"
 } else {

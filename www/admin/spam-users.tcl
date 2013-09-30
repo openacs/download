@@ -24,7 +24,7 @@ set want_spam_list {}
 db_multirow users user_select { *SQL* } {
     lappend want_spam_list $user_id
 }
-set no_spam_count [expr [llength user_id_list] - [llength want_spam_list]]
+set no_spam_count [expr {[llength user_id_list] - [llength want_spam_list]}]
 set user_id_list $want_spam_list
 
 set user_id_list_export [export_vars -form -sign {user_id_list}]

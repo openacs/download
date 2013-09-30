@@ -40,7 +40,7 @@ db_foreach metadata {
 }
 
 
-if ![db_0or1row revision_info_select "         
+if {![db_0or1row revision_info_select "         
 select da.archive_id,
        dat.pretty_name as archive_type,
        da.archive_type_id,
@@ -68,12 +68,12 @@ where  da.repository_id = :repository_id and
        da.archive_id = dar.archive_id and
        dar.revision_id = :revision_id and
        dar.creation_user = u.user_id
-"] {
+"]} {
     ad_return_complaint 1 "[_ download.lt_The_revision_you_are_]"
     return
 }
 
-if {[string eq $description_type {text/plain}]} { 
+if {$description_type eq "text/plain"} { 
     set description [ad_text_to_html -- $description]
 }
 
@@ -84,8 +84,7 @@ if { [catch {
     set gc_link [general_comments_create_link -object_name "$archive_name $version_name" $revision_id [ad_conn url]?[ad_conn query]]
     set gc_comments [general_comments_get_comments $revision_id [ad_conn url]?[ad_conn query]]
 } error] } {
-    global errorInfo errorCode
-    ns_log Notice "gc_link: $errorInfo, $errorCode"
+    ns_log Notice "gc_link: $::errorInfo, $::errorCode"
 }
 
 ad_return_template

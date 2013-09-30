@@ -9,7 +9,7 @@ ad_page_contract {
     {return_url ""}
 }
 
-if [empty_string_p $return_url] {
+if {$return_url eq ""} {
     set return_url "[ad_conn package_url]/one-archive?archive_id=$archive_id"
 }
 
@@ -18,7 +18,7 @@ set repository_id [download_repository_id]
 
 permission::require_permission -object_id $archive_id -privilege write
 
-if ![db_0or1row archive_info_select {
+if {![db_0or1row archive_info_select {
    select da.archive_name, 
           da.archive_type_id,
           da.summary,
@@ -30,7 +30,7 @@ if ![db_0or1row archive_info_select {
      from download_archives_obj da, cc_users u
     where da.archive_id = :archive_id
       and u.user_id = da.creation_user
-}] {
+}]} {
     ad_return_complaint 1 "[_ download.lt_The_archive_you_are_l]"
     return
 }

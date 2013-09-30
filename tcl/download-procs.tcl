@@ -11,7 +11,7 @@ ad_library {
 ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
     Get information about the repository mounted for package_id.
 } {
-    if [empty_string_p $package_id] {
+    if {$package_id eq ""} {
         set package_id [ad_conn package_id]
     }
     if { ![db_0or1row repository_info {
@@ -135,7 +135,7 @@ ad_proc download_file_downloader {
 
     regexp "[ad_conn package_url]download/(.*)" [ad_conn url] match path
 
-    if [empty_string_p $revision_id] {
+    if {$revision_id eq ""} {
         ad_script_abort
     }
 
@@ -144,7 +144,7 @@ ad_proc download_file_downloader {
     ##Record the download for all time!!
     set double_click_p [db_string download_count "select count(*) from download_downloads where download_id = :download_id"]
     if { $double_click_p == 0 } {
-        if [catch {
+        if {[catch {
             db_dml download_insert {
                 insert into download_downloads (
                 download_id, 
@@ -167,7 +167,7 @@ ad_proc download_file_downloader {
                 :reason_id,
                 :reason_other)
             }
-        } errmsg] {
+        } errmsg]} {
             ns_log Error "Download: Unable to log download due to an error: $errmsg"
         }
     }
@@ -217,32 +217,32 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
         order by sort_key
     } {
 		# date's are complex. convert them first
-		if { $data_type == "date" } {
+		if { $data_type eq "date" } {
 			if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
-				if {$required_p == "t"} {
+				if {$required_p eq "t"} {
 					ad_complain "$errmsg: Please make sure your dates are valid."
 				} else {
 					set metadata($metadata_id) ""
 				}
 			}
 		}
-        if { [exists_and_not_null metadata($metadata_id)] } {
+        if { ([info exists metadata($metadata_id)] && $metadata($metadata_id) ne "") } {
             set response_value [string trim $metadata($metadata_id)]
-        } elseif {$required_p == "t"} {
+        } elseif {$required_p eq "t"} {
             lappend metadata_with_missing_responses $pretty_name
             continue
         } else {
             set response_to_question($metadata_id) ""
             set response_value ""
         }
-        if {![empty_string_p $response_value]} {
-            if { $data_type == "number" } {
+        if {$response_value ne ""} {
+            if { $data_type eq "number" } {
                 if { ![regexp {^(-?[0-9]+\.)?[0-9]+$} $response_value] } {
 
                     ad_complain "The value for \"$metadata\" must be a number. Your value was \"$response_value\"."
                     continue
                 }
-            } elseif { $data_type == "integer" } {
+            } elseif { $data_type eq "integer" } {
                 if { ![regexp {^[0-9]+$} $response_value] } {
                     ad_complain "The value for \"$metadata\" must be an integer. Your value was \"$response_value\"."
                     continue
@@ -296,7 +296,7 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
     Dummy comment.
 } {
     # get the filename part of the upload file
-    if ![regexp {[^//\\]+$} $upload_file filename] {
+    if {![regexp {[^//\\]+$} $upload_file filename]} {
         # no match
         set filename $upload_file
     }

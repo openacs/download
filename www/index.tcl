@@ -110,7 +110,7 @@ db_foreach metadata {
     set metadata_select "metadata$metadata_id"
     append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = $metadata_id) as $metadata_select
     "
-    if { $linked_p == "t" } {
+    if { $linked_p eq "t" } {
         set display "<a href=one-metadata?[export_vars -url {metadata_id}]&value=@downloads_multirow.$metadata_select@>@downloads_multirow.$metadata_select@</a>"
     } else {
         set display ""

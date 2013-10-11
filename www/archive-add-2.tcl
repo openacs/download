@@ -44,7 +44,7 @@ set archive_id [db_nextval acs_object_id_seq]
 set archive_desc_id [db_nextval acs_object_id_seq]
 set revision_id [db_nextval acs_object_id_seq]
 
-if { $html_p eq "f" } {
+if { $html_p == "f" } {
     set description_format "text/plain"
 } else {
     set description_format "text/html"

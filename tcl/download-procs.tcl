@@ -219,7 +219,7 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
 		# date's are complex. convert them first
 		if { $data_type eq "date" } {
 			if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
-				if {$required_p eq "t"} {
+				if {$required_p == "t"} {
 					ad_complain "$errmsg: Please make sure your dates are valid."
 				} else {
 					set metadata($metadata_id) ""
@@ -228,7 +228,7 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
 		}
         if { ([info exists metadata($metadata_id)] && $metadata($metadata_id) ne "") } {
             set response_value [string trim $metadata($metadata_id)]
-        } elseif {$required_p eq "t"} {
+        } elseif {$required_p == "t"} {
             lappend metadata_with_missing_responses $pretty_name
             continue
         } else {

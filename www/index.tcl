@@ -18,6 +18,15 @@ ad_page_contract {
     master_admin_p:onevalue    
 }
 
+#
+# The following two lines severe as a guard against errors for
+# outdated query parameters (spiders try often months later to refresh
+# an entry).
+#
+if {[regexp {,(.*)$} $orderby _ suffix] && $suffix ni {asc desc}} { set orderby "archive_name,desc"}
+if {[lindex [split $orderby ,] 0] ni {archive_name archive_type downloads}} { set orderby "archive_name,desc"}
+
+
 set return_url "[ad_conn url]?[ad_conn query]"
 set user_id [ad_conn user_id]
 
@@ -76,10 +85,10 @@ set element_list {
     archive_name {
         label "Software Name"
         display_template {
-            <a href='@downloads_multirow.download_url@'>
-            <img src='@downloads_multirow.download_img@' height='32' border='0'>
-            </a> &nbsp;<a href=@downloads_multirow.revision_url@>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
-            &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@
+            <div style='float:left; margin-right: 20px;'><a href='@downloads_multirow.download_url@'>
+            <img src='@downloads_multirow.download_img@' height='32' border='0'> </a> </div>
+            <div style='display: inline;'> <a href=@downloads_multirow.revision_url@>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
+            &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@</div>
         } 
         orderby "archive_name"
     }
@@ -90,6 +99,7 @@ set element_list {
     downloads {
         label "# Downloads"
         orderby "downloads"
+        html {align right}
     }
 }
 

@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     {archive_type_id ""}
-    {orderby "archive_name"}
+    {orderby "archive_name,desc"}
     {query_string ""}
 	{updated ""}
 } -properties {
@@ -77,7 +77,7 @@ set element_list {
         label "Software Name"
         display_template {
             <a href='@downloads_multirow.download_url@'>
-            <img src='@downloads_multirow.download_img@' border=0>
+            <img src='@downloads_multirow.download_img@' height='32' border='0'>
             </a> &nbsp;<a href=@downloads_multirow.revision_url@>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
             &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@
         } 
@@ -135,7 +135,7 @@ template::list::create -name download_list \
     -elements $element_list \
     -filters {archive_type_id {} query_string {} updated {}}
 
-set img_url "[ad_conn package_url]/graphics/download.gif"
+set img_url "[ad_conn package_url]/graphics/download-button.png"
 db_multirow -extend {metadata_url download_img revision_url download_url approved_color approved_text approved_url approved_action reject_url} downloads_multirow download_index_query {*} {
     set download_img $img_url
     if {$approved_p} {

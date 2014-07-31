@@ -5,10 +5,10 @@ ad_page_contract {
      @creation-date Mon Dec 11 18:28:29 2000
      @cvs-id $Id$
 } {
-    {archive_type_id ""}
+    {archive_type_id:naturalnum,optional ""}
     {orderby "archive_name,desc"}
     {query_string ""}
-	{updated ""}
+    {updated ""}
 } -properties {
     title:onevalue
     description:onevalue

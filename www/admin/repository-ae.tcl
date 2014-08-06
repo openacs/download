@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Mon Dec 11 18:49:53 2000
      @cvs-id $Id$
 } {
-    repository_id:integer,notnull
+    repository_id:naturalnum,notnull
     {return_url "[ad_conn package_url]/admin/"}
 }
 

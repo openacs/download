@@ -8,7 +8,7 @@ ad_page_contract {
     upload_file:notnull,trim
     upload_file.tmpfile:tmpfile
     {return_url "[ad_conn package_url]"}
-    archive_type_id:integer,notnull
+    archive_type_id:naturalnum,notnull
     archive_name:notnull
     {version_name ""}
     summary:notnull

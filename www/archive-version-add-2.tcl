@@ -9,7 +9,7 @@ ad_page_contract {
     upload_file.tmpfile:tmpfile
     {return_url "[ad_conn package_url]"}
     version_name:notnull
-    archive_id:integer,notnull
+    archive_id:naturalnum,notnull
     metadata:array,optional,multiple,html
 } -validate {
     check_metadata -requires { } {

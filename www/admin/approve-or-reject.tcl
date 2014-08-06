@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     action:notnull
-    revision_id:integer,notnull
+    revision_id:naturalnum,notnull
     {return_url "[ad_conn package_url]"}
 } -validate {
     valid_action_value {

@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Thu Dec 14 17:37:31 2000
      @cvs-id $Id$
 } {
-    {archive_id:integer,notnull}
+    {archive_id:naturalnum,notnull}
     {orderby "user_name"}
     {downloaded 1m}
     {versions "current"}

@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Tue Dec 12 22:38:49 2000
      @cvs-id $Id$
 } {
-    archive_type_id:integer,notnull
+    archive_type_id:naturalnum,notnull
     {return_url "[ad_conn package_url]"}
 }
 

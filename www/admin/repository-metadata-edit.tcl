@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Fri Dec 15 14:53:56 2000
      @cvs-id $Id$
 } {
-    metadata_id:integer,notnull
+    metadata_id:naturalnum,notnull
 }
 
 set context [list "Metadata edit"]

@@ -116,8 +116,8 @@ ad_proc download_file_downloader {
 } {
     ad_page_contract {
     } {
-	{ revision_id:naturalnum,notnull "" }
-	{ download_id:naturalnum,notnull "" }
+	{ revision_id:naturalnum "" }
+	{ download_id:naturalnum "" }
         { reason_id "" }
 	{ reason_other ""}
     }

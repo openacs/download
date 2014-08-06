@@ -6,7 +6,7 @@ ad_page_contract {
      @creation-date Wed Dec 13 14:38:45 2000
      @cvs-id $Id$
 } {
-    archive_id:integer,notnull
+    archive_id:naturalnum,notnull
 }
 
 permission::require_permission -object_id $archive_id -privilege read

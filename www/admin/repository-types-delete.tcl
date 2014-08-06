@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Tue Dec 12 16:46:37 2000
      @cvs-id $Id$
 } {
-    archive_type_id:integer,notnull
+    archive_type_id:naturalnum,notnull
 }
 
 set repository_id [download_repository_id]

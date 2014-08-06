@@ -5,7 +5,7 @@ ad_page_contract {
      @creation-date Wed Dec 13 00:23:21 2000
      @cvs-id $Id$
 } {
-    revision_id:integer,notnull
+    revision_id:naturalnum,notnull
 }
 
 set user_id [ad_conn user_id]

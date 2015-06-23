@@ -6,7 +6,7 @@
 
 <ul>
 <multiple name=archives>
-<li><a href=one-archive?archive_id=@archives.archive_id@>@archives.archive_name@</a> 
+<li><a href="one-archive?archive_id=@archives.archive_id@">@archives.archive_name@</a> 
     (@archives.num_versions@ <%= [ad_decode @archives.num_versions@ 1 version versions] %>)
 </multiple>
 </ul>

@@ -9,21 +9,21 @@
 
 <table>
  <tr>
-  <th align=right>#download.Software_Name#</th>
-  <td><input type=text name=archive_name size=40>
+  <th align="right">#download.Software_Name#</th>
+  <td><input type="text" name="archive_name" size="40">
   </td>
  </tr>
  <tr>
-  <th align=right>#download.Summary#</th>
-  <td colspan=2>
-     <input type=text name=summary size=60 maxlength=100></td>
+  <th align="right">#download.Summary#</th>
+  <td colspan="2">
+     <input type="text" name="summary" size="60" maxlength="100"></td>
  </tr>
  <tr>
-  <th align=right valign=top>#download.Description#</th>
+  <th align="right" valign="top">#download.Description#</th>
   <td><textarea name=description cols=60 rows=6 wrap=soft></textarea></td>
  </tr>
  <tr>
-  <th align=right>#download.Description_is#</th>
+  <th align="right">#download.Description_is#</th>
   <td><select name=html_p>
       <option value=f>#download.Plain_Text#
       <option value=t>#download.HTML#
@@ -33,20 +33,20 @@
  @extra_form_elts;noquote@
 
  <tr>
-  <th align=right>#download.lt_Version_Number_option#</th>
-  <td><input type=text name=version_name size=20 max_length=20></td>
+  <th align="right">#download.lt_Version_Number_option#</th>
+  <td><input type="text" name="version_name" size="20" max_length=20></td>
  </tr>
 
  <tr>
-  <th align=right>#download.File#</th>
-  <td><input type=file name=upload_file size=40></td>
+  <th align="right">#download.File#</th>
+  <td><input type="file" name="upload_file" size="40"></td>
  </tr>
  <tr>
  <td>&nbsp;</td>
  <td><font size=-1>#download.lt_Use_the_Browse_button# </font></td>
  </tr>
 
- <tr><td></td><td colspan=2><input type=submit value="Add Archive">
+ <tr><td></td><td colspan="2"><input type="submit" value="Add Archive">
      </td>
  </tr>
 

@@ -8,7 +8,7 @@
 <table align="right"><tr><td><a href="help">#download.Help#</a></td></tr></table>
 
 <table align="center">
- <tr><th colspan=2><big>@archive_name@</big></th></tr>
+ <tr><th colspan="2"><big>@archive_name@</big></th></tr>
  <tr>
      <td align="right">#download.Created_by#</td>
      <td><a href="/shared/community-member?user_id=@creation_user@">@creation_user_name@</a> #download.on_creation_date#</td>
@@ -24,11 +24,11 @@
 
  <if @admin_p@ eq 1>
  <tr>
-     <td align=right valign=top><a href="admin/report-version-downloads?archive_id=@archive_id@&versions=current">#download.lt_View_Download_History#</a>
+     <td align="right" valign="top"><a href="admin/report-version-downloads?archive_id=@archive_id@&versions=current">#download.lt_View_Download_History#</a>
  </tr>
  <tr>
-     <td align=right valign=top><p><a href="/permissions/one?object_id=@archive_id@"><strong>#download.lt_Edit_Permissions_on_t#</strong></a> 
-     <td> <font size=-1>(<a href=help#permissions>#download.lt_permission_descriptio#</a>)</font>
+     <td align="right" valign="top"><p><a href="/permissions/one?object_id=@archive_id@"><strong>#download.lt_Edit_Permissions_on_t#</strong></a> 
+     <td> <font size=-1>(<a href="help#permissions">#download.lt_permission_descriptio#</a>)</font>
  </tr>
 </if>
 

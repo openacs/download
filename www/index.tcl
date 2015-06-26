@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     {archive_type_id:naturalnum,optional ""}
-    {orderby "archive_name,desc"}
+    {orderby:token "archive_name,desc"}
     {query_string ""}
     {updated ""}
 } -properties {

@@ -13,7 +13,7 @@ ad_page_contract {
     {version_name ""}
     summary:notnull
     description:notnull,html
-    html_p
+    html_p:boolean
     metadata:array,optional,html
 } -validate {
     check_metadata -requires { archive_type_id } {

@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     metadata_id:naturalnum,notnull
-    {orderby ""}
+    {orderby:token ""}
 }
 
 if { ![db_0or1row metadata {

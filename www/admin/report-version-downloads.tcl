@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     {archive_id:naturalnum,notnull}
-    {orderby "user_name"}
+    {orderby:token "user_name"}
     {downloaded 1m}
     {versions "current"}
 } -properties {

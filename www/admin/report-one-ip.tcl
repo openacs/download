@@ -7,7 +7,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     download_ip:notnull
-    {orderby "archive_name"}
+    {orderby:token "archive_name"}
     {downloaded "1m"}
 } -properties {
     download_ip:onevalue

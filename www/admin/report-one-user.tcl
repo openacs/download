@@ -6,7 +6,7 @@ ad_page_contract {
      @cvs-id $Id$
 } {
     user_id:naturalnum,notnull
-    {orderby "archive_name"}
+    {orderby:token "archive_name"}
     {downloaded "1m"}
 } -properties {
     first_names:onevalue

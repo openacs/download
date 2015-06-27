@@ -1,9 +1,9 @@
 # /packages/download/tcl/download-procs.tcl
 ad_library {
-     Procs used by the download module.
-     @author jbank@arsdigita.com [jbank@arsdigita.com]
-     @creation-date Tue Dec 12 15:13:52 2000
-     @cvs-id $Id$
+    Procs used by the download module.
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Tue Dec 12 15:13:52 2000
+    @cvs-id $Id$
 }
 
 # @author jbank@arsdigita.com [jbank@arsdigita.com]
@@ -23,7 +23,9 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             if { $admin_p } {
                 set repository_id [db_nextval acs_object_id_seq]
                 set return_url "[ad_conn package_url]admin/repository-types"
-                ad_return_exception_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-ae?[export_vars -url {repository_id return_url}]\">configure this instance of the download module</a>."
+                set href [export_vars -base [ad_conn package_url]admin/repository-ae {repository_id return_url}]
+                ad_return_exception_page 200 "Not setup" [subst {Please <a href="[ns_quotehtml $href]">configure
+                    this instance of the download module</a>.}]
             } else {
                 ad_return_exception_page 200 "Not setup" "Please have an admin configure this instance of the download module."
             }
@@ -35,12 +37,13 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             set count [db_string type_info {
                 select count(*) from download_archive_types where repository_id = :repository_id
             }]
-                if { $count == 0 } {
-                    set return_url "[ad_conn url]?[ad_conn query]"
-                    ad_return_exceptio_page 200 "Not setup" "Please <a href=\"[ad_conn package_url]admin/repository-types?[export_vars -url {repository_id return_url}]\">add a download type</a>."
-                    ad_script_abort
-                }
+            if { $count == 0 } {
+                set return_url "[ad_conn url]?[ad_conn query]"
+                set href [export_vars -base [ad_conn package_url]admin/repository-types {repository_id return_url}]
+                ad_return_exceptio_page 200 "Not setup" [subst {Please <a href="[ns_quotehtml $href]">add a download type</a>.}]
+                ad_script_abort
             }
+        }
     }
     return [array get repository]
 }
@@ -60,23 +63,23 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
     set html ""
     set element_name "metadata.$metadata_id"
     switch -- $data_type {
-	"number" {
-	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
-	}
-	"integer" {
-	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
-	}
-	"shorttext" {
-	    append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=20>"
-	}
+        "number" {
+            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
+        }
+        "integer" {
+            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
+        }
+        "shorttext" {
+            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=20>"
+        }
 
-	"text" {
-	    append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>" 
-	}
-	"date" {
-	    append html "[ad_dateentrywidget $element_name $user_value]" 
-	}
-	"boolean" {
+        "text" {
+            append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>" 
+        }
+        "date" {
+            append html "[ad_dateentrywidget $element_name $user_value]" 
+        }
+        "boolean" {
             append html "<select name=$element_name>
             <option value=\"\">Select One</option>
             <option value=\"t\" [ad_decode $user_value "t" "selected" ""]>True</option>
@@ -116,10 +119,10 @@ ad_proc download_file_downloader {
 } {
     ad_page_contract {
     } {
-	{ revision_id:naturalnum "" }
-	{ download_id:naturalnum "" }
+        { revision_id:naturalnum "" }
+        { download_id:naturalnum "" }
         { reason_id "" }
-	{ reason_other ""}
+        { reason_other ""}
     }
     
     ns_log Debug "download_file_downloader: downloading $revision_id"
@@ -147,25 +150,25 @@ ad_proc download_file_downloader {
         if {[catch {
             db_dml download_insert {
                 insert into download_downloads (
-                download_id, 
-                user_id, 
-                revision_id, 
-                download_date, 
-                download_ip,
-                download_hostname,
-                user_agent,
-                reason_id,
-                reason)
+                                                download_id, 
+                                                user_id, 
+                                                revision_id, 
+                                                download_date, 
+                                                download_ip,
+                                                download_hostname,
+                                                user_agent,
+                                                reason_id,
+                                                reason)
                 values
                 (:download_id, 
-                :user_id, 
-                :revision_id, 
-                sysdate, 
-                :download_ip,
-                :download_hostname,
-                :user_agent,
-                :reason_id,
-                :reason_other)
+                 :user_id, 
+                 :revision_id, 
+                 sysdate, 
+                 :download_ip,
+                 :download_hostname,
+                 :user_agent,
+                 :reason_id,
+                 :reason_other)
             }
         } errmsg]} {
             ns_log Error "Download: Unable to log download due to an error: $errmsg"
@@ -216,16 +219,16 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
          dam.archive_type_id is null)
         order by sort_key
     } {
-		# date's are complex. convert them first
-		if { $data_type eq "date" } {
-			if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
-				if {$required_p == "t"} {
-					ad_complain "$errmsg: Please make sure your dates are valid."
-				} else {
-					set metadata($metadata_id) ""
-				}
-			}
-		}
+        # date's are complex. convert them first
+        if { $data_type eq "date" } {
+            if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
+                if {$required_p == "t"} {
+                    ad_complain "$errmsg: Please make sure your dates are valid."
+                } else {
+                    set metadata($metadata_id) ""
+                }
+            }
+        }
         if { ([info exists metadata($metadata_id)] && $metadata($metadata_id) ne "") } {
             set response_value [string trim $metadata($metadata_id)]
         } elseif {$required_p == "t"} {
@@ -267,15 +270,15 @@ ad_proc download_insert_metadata { repository_id archive_type_id revision_id met
 } {
     array set metadata $metadata_array
     set metadata_list [db_list_of_lists survsimp_question_info_list {
-            select 
-            dam.metadata_id,
-            dam.data_type
-            from download_archive_metadata dam
-            where dam.repository_id = :repository_id and
-               dam.computed_p = 'f' and
-               (dam.archive_type_id = :archive_type_id or
-                dam.archive_type_id is null)
-            order by sort_key
+        select 
+        dam.metadata_id,
+        dam.data_type
+        from download_archive_metadata dam
+        where dam.repository_id = :repository_id and
+        dam.computed_p = 'f' and
+        (dam.archive_type_id = :archive_type_id or
+         dam.archive_type_id is null)
+        order by sort_key
     }]
 
     foreach metadata_info $metadata_list {
@@ -301,27 +304,27 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
         set filename $upload_file
     }
 
-	# get the file_size for the postgres version
-	set file_size [file size $tmpfile]
+    # get the file_size for the postgres version
+    set file_size [file size $tmpfile]
 
     set mime_type [cr_filename_to_mime_type -create $upload_file]
 
     db_exec_plsql revision_new {
         declare
-          v_revision_id integer;
+        v_revision_id integer;
         begin
-          v_revision_id := content_revision.new(
-           item_id => :archive_id,
-           title => :filename,
-           description => :version_name,
-           revision_id => :revision_id,
-           mime_type => :mime_type,
-           creation_user => :user_id,
-           creation_ip => :creation_ip
-          );
+        v_revision_id := content_revision.new(
+                                              item_id => :archive_id,
+                                              title => :filename,
+                                              description => :version_name,
+                                              revision_id => :revision_id,
+                                              mime_type => :mime_type,
+                                              creation_user => :user_id,
+                                              creation_ip => :creation_ip
+                                              );
 
-          insert into download_archive_revisions (revision_id,    approved_p) values
-                                                 (v_revision_id, :approved_p);
+        insert into download_archive_revisions (revision_id,    approved_p) values
+        (v_revision_id, :approved_p);
         end;
     }
 
@@ -340,3 +343,11 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
 
     download_insert_metadata $repository_id $archive_type_id $revision_id $metadata_array
 }
+
+#
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:
+

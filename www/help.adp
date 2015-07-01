@@ -4,7 +4,7 @@
 
 @help_text@
 
-<a name=permissions><h3>#download.lt_Permissions_on_Archiv#</h3></a>
+<h3>#download.lt_Permissions_on_Archiv#</h3>
   <blockquote>
     <table>
     <tr><th>#download.Permission#</th><th>#download.Description_1#</th></tr>

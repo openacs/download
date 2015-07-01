@@ -4,9 +4,10 @@
 <property name="context"></property>
 
 <if @master_admin_p@ eq 1>
-<table align="right"><tr><td><a href="admin/">#download.Administration#</a></td></tr></table>
+<div style='float:right; padding:5px;'><a href="admin/">#download.Administration#</a></div>
 </if>
-<table align="right"><tr><td><a href="help">#download.Help#</a></td></tr></table>
+<div style='float:right; padding:5px;'><a href="help">#download.Help#</a></div>
+<br>
 
 @description@
 <if 0>

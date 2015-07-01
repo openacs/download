@@ -4,11 +4,10 @@
 
 <p>
 <form method="post" action="spam-users">
-  @user_id_list_export;noquote@
-  <input type="submit" value="Spam Downloaders" />
+  <div>@user_id_list_export;noquote@
+  <input type="submit" value="Spam Downloaders" ></div>
 </form>
-</p>
 
-@dimensional_html;noquote@
+@dimensional_html;literal@
 <listtemplate name="ips_list"></listtemplate>
     

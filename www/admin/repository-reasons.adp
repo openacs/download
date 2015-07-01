@@ -6,6 +6,8 @@
 
 <formtemplate id="add_reason"></formtemplate>
 
+
+<if @reasons:rowcount;literal@ gt 0>
 <h3>#download.Current_Reasons#</h3>
 <ul>
 <multiple name=reasons>
@@ -14,4 +16,5 @@
       <a href="repository-reasons-edit?download_reason_id=@reasons.download_reason_id@">#download.Edit#</a>
 </multiple>
 </ul>
+</if>
 

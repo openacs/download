@@ -4,6 +4,7 @@
 
 <formtemplate id="add_metadata"></formtemplate>
 
+<if @metadata:rowcount;literal@ gt 0>
 <h3>#download.Current_Metadata#</h3>
 <ul>
 <multiple name=metadata>
@@ -20,4 +21,4 @@
       <a href="repository-metadata-edit?metadata_id=@metadata.metadata_id@">#download.Edit#</a>
 </multiple>
 </ul>
-
+</if>

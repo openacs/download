@@ -28,7 +28,7 @@ set dimensional_html [ad_dimensional $dimensional]
 
 template::list::create -name users_list \
     -multirow users \
-    -html { width "90%" align center} \
+    -html { width "90%" style "margin: 0 auto;"} \
     -elements {
         user_name {
             label "User Name (Last name, first name)"

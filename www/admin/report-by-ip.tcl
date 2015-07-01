@@ -26,7 +26,7 @@ set dimensional {
 
 template::list::create -name ips_list \
     -multirow ips \
-    -html {width "90%" align center} \
+    -html {width "90%" style "margin: 0 auto;"} \
     -elements {
         download_ip {
             label "From IP"

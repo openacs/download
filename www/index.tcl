@@ -54,25 +54,25 @@ db_foreach archive_type {
 lappend type_dimlist {"" "#download.all#" {}}
 
 set dimensional [list [list versions "#download.Versions#" current [list \
-									 [list current [_ download.current] {where "[db_map archive_where_clause]"} ] \
-									 [list all [_ download.all] {where "da.archive_id = dar.archive_id"} ]
+									 [list current "[_ download.current]" {where "[db_map archive_where_clause]"} ] \
+									 [list all "[_ download.all]" {where "da.archive_id = dar.archive_id"} ]
 								     ]]\
-		     [list archive_type_id [_ download.Type]    "" $type_dimlist] \
-		     [list updated         [_ download.Updated] all [list \
-								   [list 1d [_ download.last_24hrs] {where "[db_map date_clause_1]"}] \
-								   [list 1w [_ download.last_week]  {where "[db_map date_clause_7]"}] \
-								   [list 1m [_ download.last_month] {where "[db_map date_clause_30]"}] \
-								   [list all [_ download.all] {}]]
+		     [list archive_type_id "[_ download.Type]"    "" $type_dimlist] \
+		     [list updated         "[_ download.Updated]" all [list \
+								   [list 1d "[_ download.last_24hrs]" {where "[db_map date_clause_1]"}] \
+								   [list 1w "[_ download.last_week]"  {where "[db_map date_clause_7]"}] \
+								   [list 1m "[_ download.last_month]" {where "[db_map date_clause_30]"}] \
+								   [list all "[_ download.all]" {}]]
 		     ]]
 
 if { $admin_p } {
     set approval ""
-    lappend dimensional [list approved [_ download.Approval] approved \
+    lappend dimensional [list approved "[_ download.Approval]" approved \
 			     [list \
-				  [list pending [_ download.pending]   {where "dar.approved_p is null"}] \
-				  [list approved [_ download.approved] {where "dar.approved_p = 't'"}] \
-				  [list rejected [_ download.rejected] {where "dar.approved_p = 'f'"}] \
-				  [list all [_ download.all] {}] \
+				  [list pending "[_ download.pending]"   {where "dar.approved_p is null"}] \
+				  [list approved "[_ download.approved]" {where "dar.approved_p = 't'"}] \
+				  [list rejected "[_ download.rejected]" {where "dar.approved_p = 'f'"}] \
+				  [list all "[_ download.all]" {}] \
 				  ]
 			 ]
 } else {
@@ -136,7 +136,7 @@ db_foreach metadata {
 
 if { $admin_p } {
     lappend element_list approved_p {
-        label [_ download.Approval]
+        label "[_ download.Approval]"
         display_template {
             <font color="@downloads_multirow.approved_color@">@downloads_multirow.approved_text@</font> 
             \[<font size="-1"><a href='@downloads_multirow.approved_url@'>@downloads_multirow.approved_action@</a></font>\]

@@ -11,13 +11,13 @@
 @description@
 <if 0>
     <if @user_id@ eq 0>
-      <p>#download.You_must# <strong><a href="/register/index?<%= [export_vars -url {return_url}] %>">register</a></strong>
+      <p>#download.You_must# <strong><a href="@register_url;noi18n@">register</a></strong>
          #download.lt_before_you_can_downlo#
       </p>
     </if>
 </if>
 @dimensional_html;noquote@
-<br /><br />
+<br><br>
 
 <listtemplate name="download_list"></listtemplate>
 
@@ -25,7 +25,7 @@
 <h3 style="margin-top: 1em">#download.lt_Upload_a_New_Version_#</h3>
 <ul>
 <multiple name=types>
-  <li><a href="archive-add?repository_id=@repository_id@&amp;archive_type_id=@types.archive_type_id@">@types.pretty_name@</a></li>
+  <li><a href="@archive_add_url;noi18n@">@types.pretty_name@</a></li>
 </multiple>
 </ul>
 </if>

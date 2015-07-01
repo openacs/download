@@ -8,7 +8,9 @@ ad_page_contract {
     {archive_type_id:naturalnum,optional ""}
     {orderby:token "archive_name,desc"}
     {query_string ""}
-    {updated ""}
+    {updated:word ""}
+    {approved:word ""}
+    {versions:word "current"}
 } -properties {
     title:onevalue
     description:onevalue
@@ -28,6 +30,7 @@ if {[lindex [split $orderby ,] 0] ni {archive_name archive_type downloads}} { se
 
 
 set return_url "[ad_conn url]?[ad_conn query]"
+set register_url [export_vars -base /register/index {return_url}]
 set user_id [ad_conn user_id]
 
 array set repository [download_repository_info]
@@ -51,25 +54,25 @@ db_foreach archive_type {
 lappend type_dimlist {"" "#download.all#" {}}
 
 set dimensional [list [list versions "#download.Versions#" current [list \
-									 [list current "[_ download.current]" {where "[db_map archive_where_clause]"} ] \
-									 [list all "[_ download.all]" {where "da.archive_id = dar.archive_id"} ]
+									 [list current [_ download.current] {where "[db_map archive_where_clause]"} ] \
+									 [list all [_ download.all] {where "da.archive_id = dar.archive_id"} ]
 								     ]]\
-		     [list archive_type_id "[_ download.Type]" "" $type_dimlist] \
-		     [list updated "[_ download.Updated]" all [list \
-								   [list 1d "[_ download.last_24hrs]" {where "[db_map date_clause_1]"}] \
-								   [list 1w "[_ download.last_week]"  {where "[db_map date_clause_7]"}] \
-								   [list 1m "[_ download.last_month]" {where "[db_map date_clause_30]"}] \
-								   [list all "[_ download.all]" {}]]
+		     [list archive_type_id [_ download.Type]    "" $type_dimlist] \
+		     [list updated         [_ download.Updated] all [list \
+								   [list 1d [_ download.last_24hrs] {where "[db_map date_clause_1]"}] \
+								   [list 1w [_ download.last_week]  {where "[db_map date_clause_7]"}] \
+								   [list 1m [_ download.last_month] {where "[db_map date_clause_30]"}] \
+								   [list all [_ download.all] {}]]
 		     ]]
 
 if { $admin_p } {
     set approval ""
-    lappend dimensional [list approved "[_ download.Approval]" approved \
+    lappend dimensional [list approved [_ download.Approval] approved \
 			     [list \
-				  [list pending "[_ download.pending]"   {where "dar.approved_p is null"}] \
-				  [list approved "[_ download.approved]" {where "dar.approved_p = 't'"}] \
-				  [list rejected "[_ download.rejected]" {where "dar.approved_p = 'f'"}] \
-				  [list all "[_ download.all]" {}] \
+				  [list pending [_ download.pending]   {where "dar.approved_p is null"}] \
+				  [list approved [_ download.approved] {where "dar.approved_p = 't'"}] \
+				  [list rejected [_ download.rejected] {where "dar.approved_p = 'f'"}] \
+				  [list all [_ download.all] {}] \
 				  ]
 			 ]
 } else {
@@ -86,8 +89,8 @@ set element_list {
         label "Software Name"
         display_template {
             <div style='float:left; margin-right: 20px;'><a href='@downloads_multirow.download_url@'>
-            <img src='@downloads_multirow.download_img@' height='32' border='0'> </a> </div>
-            <div style='display: inline;'> <a href=@downloads_multirow.revision_url@>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
+            <img src='@downloads_multirow.download_img@' height='32' alt=''download border='0'> </a> </div>
+            <div style='display: inline;'> <a href="@downloads_multirow.revision_url@"x>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
             &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@</div>
         } 
         orderby "archive_name"
@@ -118,7 +121,7 @@ db_foreach metadata {
 } {
     set answer_column [download_metadata_column $data_type]
     set metadata_select "metadata$metadata_id"
-    append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = $metadata_id) as $metadata_select
+    append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = :metadata_id) as $metadata_select
     "
     if { $linked_p == "t" } {
 	set href [export_vars -base one-metadata {metadata_id}]
@@ -133,10 +136,10 @@ db_foreach metadata {
 
 if { $admin_p } {
     lappend element_list approved_p {
-        label "[_ download.Approval]"
+        label [_ download.Approval]
         display_template {
-            <font color=@downloads_multirow.approved_color@>@downloads_multirow.approved_text@</font> 
-            \[<font size=-1><a href='@downloads_multirow.approved_url@'>@downloads_multirow.approved_action@</a></font>\]
+            <font color="@downloads_multirow.approved_color@">@downloads_multirow.approved_text@</font> 
+            \[<font size="-1"><a href='@downloads_multirow.approved_url@'>@downloads_multirow.approved_action@</a></font>\]
         }
     }
 }
@@ -147,7 +150,9 @@ template::list::create -name download_list \
     -filters {archive_type_id {} query_string {} updated {}}
 
 set img_url "[ad_conn package_url]/graphics/download-button.png"
-db_multirow -extend {metadata_url download_img revision_url download_url approved_color approved_text approved_url approved_action reject_url} downloads_multirow download_index_query {*} {
+db_multirow -extend {metadata_url download_img revision_url download_url approved_color \
+			 approved_text approved_url approved_action reject_url
+} downloads_multirow download_index_query {*} {
     set download_img $img_url
     if {$approved_p} {
         set approved_url [export_vars -base admin/approve-or-reject {{action reject} revision_id return_url}]
@@ -161,8 +166,8 @@ db_multirow -extend {metadata_url download_img revision_url download_url approve
         set approved_color red
     }
 
-    set download_url "download/$file_name?revision_id=$revision_id"
-    set revision_url "one-revision?revision_id=$revision_id"
+    set download_url [export_vars -base download/$file_name {revision_id}]
+    set revision_url [export_vars -base one-revision {revision_id}]
     set metadata_url [export_vars -base one-metadata {metadata_id}]
 
 }
@@ -189,6 +194,6 @@ db_multirow my_revisions my_revisions {
     order by creation_date
 }
 
-
+set archive_add_url [export_vars -base archive-add {repository_id archive_type_id}]
 
 ad_return_template

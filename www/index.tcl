@@ -89,8 +89,8 @@ set element_list {
         label "Software Name"
         display_template {
             <div style='float:left; margin-right: 20px;'><a href='@downloads_multirow.download_url@'>
-            <img src='@downloads_multirow.download_img@' height='32' alt=''download border='0'> </a> </div>
-            <div style='display: inline;'> <a href="@downloads_multirow.revision_url@"x>@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
+            <img src='@downloads_multirow.download_img@' height='32' alt='download' border='0'> </a> </div>
+            <div style='display: inline;'> <a href="@downloads_multirow.revision_url@">@downloads_multirow.archive_name@ @downloads_multirow.version_name@</a> 
             &nbsp;(@downloads_multirow.file_size@k)<br>@downloads_multirow.summary@</div>
         } 
         orderby "archive_name"

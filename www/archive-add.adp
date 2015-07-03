@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">Add a New Software Archive</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <form enctype=multipart/form-data method=POST action="archive-add-2">
 <%= [export_vars -form {archive_type_id return_url}]%>

@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">One @pretty_name;noquote@</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <h4>@pretty_name@</h4>
 

@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">One Archive: @archive_name;noquote@</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <if @master_admin_p@ eq 1>
 <table align="right"><tr><td><a href="admin/">#download.Administration#</a></td></tr></table>

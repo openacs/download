@@ -1,6 +1,6 @@
 
 <master>
-<property name="doc(title)">@title;noquote@</property>
+<property name="doc(title)">@title;literal@</property>
 <property name="context"></property>
 
 <if @master_admin_p@ eq 1>

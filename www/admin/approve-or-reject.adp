@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">@pretty_noun;noquote@ @archive_name;noquote@ @version_name;noquote@</property>
-<property name="context">@pretty_noun;noquote@</property>
+<property name="context">@pretty_noun;literal@</property>
 
   <table>
   <form action=approve-or-reject-2.tcl>

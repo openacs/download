@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">@archive_name;noquote@ Download History</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <p>
 <form method="post" action="spam-users">

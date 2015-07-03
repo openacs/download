@@ -1,6 +1,6 @@
 <master>
 <property name="doc(title)">#download.Downloads_by_User#</property>
-<property name="context">@context;noquote@</property>
+<property name="context">@context;literal@</property>
 
 <p>
 <form method="post" action="spam-users">

@@ -1,4 +1,8 @@
-create or replace view download_repository_obj as
+-- "create or replace view download_repository_obj" led to ERROR:  cannot change name of view column "context_id" to "obj_title"
+-- so we drop the view an create it later
+
+drop view download_repository_obj;
+create view download_repository_obj as
 select repository_id, 
                  o.object_id, o.object_type, o.title as obj_title, o.package_id as obj_package_id, o.context_id,
                  o.security_inherit_p, o.creation_user, o.creation_date, o.creation_ip, o.last_modified, o.modifying_user,
@@ -12,7 +16,8 @@ select repository_id,
 	   and i.item_id = o.object_id
 	   and r.revision_id = i.live_revision;
 
-create or replace view download_arch_revisions_obj as
+drop view  download_arch_revisions_obj;
+create view download_arch_revisions_obj as
 select dar.*, 
                           o.object_id, o.object_type, o.title as obj_title, o.package_id as obj_package_id, o.context_id,
                           o.security_inherit_p, o.creation_user, o.creation_date, o.creation_ip, o.last_modified, o.modifying_user,

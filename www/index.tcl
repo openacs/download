@@ -87,6 +87,7 @@ if {$orderby_fieldname ni {archive_name archive_type downloads}} {
 set element_list {
     archive_name {
         label "Software Name"
+        display_template_name download/index-archive_name
         display_template {
             <div style='float:left; margin-right: 20px;'><a href='@downloads_multirow.download_url@'>
             <img src='@downloads_multirow.download_img@' height='32' alt='download' border='0'> </a> </div>

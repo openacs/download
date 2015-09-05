@@ -18,7 +18,7 @@
     </if>
 </if>
 @dimensional_html;noquote@
-<br><br>
+<p>
 
 <listtemplate name="download_list" style="table-2third"></listtemplate>
 

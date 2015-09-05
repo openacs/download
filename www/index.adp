@@ -20,7 +20,7 @@
 @dimensional_html;noquote@
 <br><br>
 
-<listtemplate name="download_list"></listtemplate>
+<listtemplate name="download_list" style="table-2third"></listtemplate>
 
 <if @write_p@ eq 1>
 <h3 style="margin-top: 1em">#download.lt_Upload_a_New_Version_#</h3>

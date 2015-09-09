@@ -103,7 +103,7 @@ set element_list {
     downloads {
         label "# Downloads"
         orderby "downloads"
-        html {align right}
+        html {style "text-align: right;"}
     }
 }
 

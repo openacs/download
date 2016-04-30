@@ -52,9 +52,6 @@ the repository is keyed to this table';
 
 -- Each download module will support certain archive types, we need to indicate
 -- what those types are.
-create sequence download_archive_type_seq;
-create view download_archive_type_sequence as 
-	   select nextval('download_archive_type_seq') as nextval;
 create table download_archive_types (
     archive_type_id integer
                     constraint download_archive_types_pk 
@@ -70,9 +67,7 @@ comment on table download_archive_types is '
  This table stores the types of archives that can be stored in a given download repository.
 ';
 
-create sequence download_reasons_seq;
-create view download_reasons_sequence as 
-	   select nextval('download_reasons_seq') as nextval;
+create sequence download_reasons_sequence;
 create table download_reasons (
     download_reason_id integer
                        constraint download_archive_reasons_pk 

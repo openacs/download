@@ -7,14 +7,14 @@
 by <a href="mailto:jbank\@arsdigita.com">Joseph Bank</a>
  based
 largely on the ACS Repository requirements written by <a href="mailto:tnight\@arsdigita.com">Todd Nightingale</a>
-<i>This is a DRAFT</i>
+<em>This is a DRAFT</em>
 <h3>I. Introduction</h3>
 <p>OpenACS 4.x has a file storage module, so an obvious question
-is: "Why do we need a seperate download module?" The download
-module is targeted at a different usage pattern and interface. The
-intent of the download module is to provide an online repository
-for the public (or pseudo-public) distribution of infrequently
-modified files. The ACS 3.4 download module, used at
+is: "Why do we need a seperate download module?" The
+download module is targeted at a different usage pattern and
+interface. The intent of the download module is to provide an
+online repository for the public (or pseudo-public) distribution of
+infrequently modified files. The ACS 3.4 download module, used at
 http://www.arsdigita.com/download for distribution of software
 provided by ArsDigita, and the acs-repository, used at
 http://www.arsdigita.com/acs-repository for distribution of ACS
@@ -47,7 +47,7 @@ The download package is intended to support two user roles:
 <li>User (downloading and contributing)</li><li>Administrator</li>
 </ol>
 
-Joe Contributer (currently working for <i>Joe.com</i>
+Joe Contributer (currently working for <em>Joe.com</em>
 ) writes a
 piece of software used to do knowledge management (KM) for the ACS.
 He packages his code using the <a href="/doc/packages">APM</a>
@@ -58,22 +58,22 @@ format, in one step a package, version, vendor, owner and
 description data are all uploaded (extracted from the .info file).
 <p>Jane Admin who installed and configured the download package
 chose to not allow users to download versions pending approval.
-That forces her to download Joe's package from the admin pages and
-install it. She notices that it isn't malicious in any way and
-doesn't harm her OpenACS installation so she approves it to go live
-on her package repository. Joe is informed via email that his
-package was approved (because Jane set this configuration
+That forces her to download Joe&#39;s package from the admin pages
+and install it. She notices that it isn&#39;t malicious in any way
+and doesn&#39;t harm her OpenACS installation so she approves it to
+go live on her package repository. Joe is informed via email that
+his package was approved (because Jane set this configuration
 parameter).</p>
 <p>Don Downloader is scanning through the most recently uploaded
-APMs on a package repository and finds Joe's KM package. He notices
-that many other users have downloaded the package and have made
-comments praising the package as well as <i>Joe.com</i>. Since Ben
-is a follower by heart, he decides to download the package as well
-and install it on his system. (Ben's crafty friend Alyssa later
-informs Ben that he could have just had the APM install directly
-from the repository url).</p>
-<p>Benny Beancounter loves to learn about who's downloading files
-from his site and what reasons they give for downloads. On a
+APMs on a package repository and finds Joe&#39;s KM package. He
+notices that many other users have downloaded the package and have
+made comments praising the package as well as <em>Joe.com</em>.
+Since Ben is a follower by heart, he decides to download the
+package as well and install it on his system. (Ben&#39;s crafty
+friend Alyssa later informs Ben that he could have just had the APM
+install directly from the repository url).</p>
+<p>Benny Beancounter loves to learn about who&#39;s downloading
+files from his site and what reasons they give for downloads. On a
 frequent basis, Benny visits the download packages admin pages and
 views a report of how many downloads occured for each file. He then
 drills down on a particular file and views a list of the users who
@@ -175,9 +175,9 @@ package data.</p>
 </p>
 <p>A logged in user must be able to comment on vendors, packages,
 and versions.</p>
-<h3>VI.C Requirements: Administrator's Interface</h3>
+<h3>VI.C Requirements: Administrator&#39;s Interface</h3>
 
-The requirement of the administrator's interface is to enable
+The requirement of the administrator&#39;s interface is to enable
 administrators to approve or reject package versions as they are
 uploaded by users. Naturally any site administrator would have
 rights on all the packages in the repository <strong>200.0 Approval
@@ -212,5 +212,5 @@ Repository</td><td>12/10/2000</td><td>Joseph Bank</td>
 <hr>
 <address><a href="mailto:jbank\@arsdigita.com"></a></address>
 
-Last modified: $Id: requirements.html,v 1.3 2002/09/13 16:46:34
+Last modified: $&zwnj;Id: requirements.html,v 1.3 2002/09/13 16:46:34
 jeffd Exp $

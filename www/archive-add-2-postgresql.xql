@@ -16,23 +16,26 @@
           v_name := 'Download Archive Desc for ' || :archive_id;
 
           v_archive_desc_id := content_item__new (
-			v_name,
-			:repository_id,
-			:archive_desc_id,
-			null,
-			now(),
-			:user_id,
-			:repository_id,
-			:creation_ip,
-			'content_item',
-			'cr_download_archive_desc',
-			:summary,
-			:description,
-			:description_format,
-			null,
-			null,
-			'file',
-			:package_id
+                        v_name,                     -- name
+                        :repository_id,             -- parent_id
+                        :archive_desc_id,           -- item_id
+                        null,                       -- locale
+                        now(),                      -- creation_date
+                        :user_id,                   -- creation_user
+                        :repository_id,             -- context_id
+                        :creation_ip,               -- creation_ip
+                        'content_item',             -- item_subtype
+                        'cr_download_archive_desc', -- content_type
+                        :summary,                   -- title
+                        :description,               -- description
+                        :description_format,        -- mime_type
+                        null,                       -- nls_language
+                        null,                       -- text
+                        null,                       -- data
+			null,                       -- relation_tag
+			'f',                        -- is_live
+                        'file',                     -- storage_type
+                        :package_id                 -- package_id
           );
 
 		  -- get the latest revision
@@ -49,22 +52,26 @@
 			(v_live_archive_desc_id);
 
           v_archive_id := content_item__new(
-			varchar :archive_name,
-			:repository_id,
-			:archive_id,
-			null,
-			now(),
-			:user_id,
-			:repository_id,
-			:creation_ip,
-			'content_item',
-			'cr_download_archive',
-			null,
-			null,
-			'text/plain',
-			null,
-			null,
-			'file'
+                        varchar :archive_name,      -- name
+                        :repository_id,             -- parent_id
+                        :archive_id,                -- item_id
+                        null,                       -- locale
+                        now(),                      -- creation_date
+                        :user_id,                   -- creation_user
+                        :repository_id,             -- context_id
+                        :creation_ip,               -- creation_ip
+                        'content_item',             -- item_subtype
+                        'cr_download_archive',      -- content_type
+                        null,                       -- title
+                        null,                       -- description
+                        'text/plain',               -- mime_type
+                        null,                       -- nls_language
+                        null,                       -- text
+                        null,                       -- data
+			null,                       -- relation_tag
+			'f',                        -- is_live
+                        'file',                     -- storage_type
+                        :package_id                 -- package_id
 		  );
 
 		  -- get the latest revision

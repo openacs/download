@@ -10,7 +10,7 @@ largely on the ACS Repository requirements written by <a href="mailto:tnight\@ar
 <em>This is a DRAFT</em>
 <h3>I. Introduction</h3>
 <p>OpenACS 4.x has a file storage module, so an obvious question
-is: "Why do we need a seperate download module?" The
+is: "Why do we need a separate download module?" The
 download module is targeted at a different usage pattern and
 interface. The intent of the download module is to provide an
 online repository for the public (or pseudo-public) distribution of
@@ -47,7 +47,7 @@ The download package is intended to support two user roles:
 <li>User (downloading and contributing)</li><li>Administrator</li>
 </ol>
 
-Joe Contributer (currently working for <em>Joe.com</em>
+Joe Contributor (currently working for <em>Joe.com</em>
 ) writes a
 piece of software used to do knowledge management (KM) for the ACS.
 He packages his code using the <a href="/doc/packages">APM</a>
@@ -75,7 +75,7 @@ install directly from the repository url).</p>
 <p>Benny Beancounter loves to learn about who&#39;s downloading
 files from his site and what reasons they give for downloads. On a
 frequent basis, Benny visits the download packages admin pages and
-views a report of how many downloads occured for each file. He then
+views a report of how many downloads occurred for each file. He then
 drills down on a particular file and views a list of the users who
 downloaded the file and their specified reason for downloading.</p>
 <h3>V. Related Links</h3>

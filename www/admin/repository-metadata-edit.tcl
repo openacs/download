@@ -45,7 +45,7 @@ element create edit_metadata archive_type_id -label "Archive Type" -datatype int
 element create edit_metadata pretty_name -label "Field Name" -datatype text
 element create edit_metadata sort_key -label "Sort Key" -datatype integer
 element create edit_metadata data_type -label "Data Type" -datatype text -widget select -options { {"short text" "shorttext"} {"long text" "text"} {"boolean" "boolean"} {"number" "number"} {"integer" "integer"} {"date" "date"} {"choice" "choice"}}
-element create edit_metadata choices -label "Choices (, seperated list of choices if data type is choice)" -datatype text -optional
+element create edit_metadata choices -label "Choices (, separated list of choices if data type is choice)" -datatype text -optional
 element create edit_metadata required_p -label "Is the field required" -datatype text -widget select -value "f" -options {{"True" "t"} {"False" "f"}}
 element create edit_metadata linked_p -label "Should there be a link to show all archives with this value" -datatype text -widget select -value "f" -options {{"True" "t"} {"False" "f"}}
 element create edit_metadata mainpage_p -label "Should this value show up in the main page table" -datatype text -widget select -value "f" -options {{"True" "t"} {"False" "f"}}

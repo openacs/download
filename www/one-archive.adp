@@ -2,7 +2,7 @@
 <property name="doc(title)">One Archive: @archive_name;noquote@</property>
 <property name="context">@context;literal@</property>
 
-<if @master_admin_p@ eq 1>
+<if @master_admin_p;literal@ true>
 <table align="right"><tr><td><a href="admin/">#download.Administration#</a></td></tr></table>
 </if>
 <table align="right"><tr><td><a href="help">#download.Help#</a></td></tr></table>
@@ -22,7 +22,7 @@
      <td>@description;noquote@</td>
  </tr>
 
- <if @admin_p@ eq 1>
+ <if @admin_p;literal@ true>
  <tr>
      <td align="right" valign="top"><a href="admin/report-version-downloads?archive_id=@archive_id@&versions=current">#download.lt_View_Download_History#</a>
  </tr>
@@ -44,7 +44,7 @@
 <if @pending_count@ gt 0>
   #download.lt_pending_count_pending#
 </if>
-<if @write_p@ eq 1>
+<if @write_p;literal@ true>
 <p><li><a href="archive-version-add?archive_id=@archive_id@">#download.add_a_version#</a>
 </if>
 </tr>

@@ -2,7 +2,7 @@
 <property name="doc(title)">One Revision: @archive_name;noquote@ ver. @version_name;noquote@</property>
 <property name="context">@context;literal@</property>
 
-<if @master_admin_p@ eq 1>
+<if @master_admin_p;literal@ true>
 <table align="right"><tr><td><a href="admin/">#download.Administration#</a></td></tr></table>
 </if>
 <table align="right"><tr><td><a href="help">#download.Help#</a></td></tr></table>
@@ -21,7 +21,7 @@
  <tr><td align="right" valign="top">#download.Description#</td>
      <td>@description;noquote@</td>
  </tr>
-<if @admin_p@ eq 1>
+<if @admin_p;literal@ true>
  <tr><td align="right" valign="top"><p><a href="/permissions/one?object_id=@revision_id@"><b>#download.lt_Edit_Permissions_on_T#</b></a> 
      <td> <font size=-1>(<a href="help#permissions">#download.lt_permission_descriptio#</a>)</font>
  </tr>
@@ -34,7 +34,7 @@
 <tr>
  <td align="right">#download.Downloads#</td>
  <td>@downloads@
-     <if @admin_p@ eq 1>
+     <if @admin_p;literal@ true>
      (<a href="admin/report-version-downloads?archive_id=@archive_id@&versions=all">#download.download_history#</a>)
      </if>
 

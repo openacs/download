@@ -32,7 +32,7 @@ where  da.repository_id = :repository_id and
        dat.archive_type_id = da.archive_type_id and
        da.archive_id = dar.archive_id and
        dar.revision_id = :revision_id and
-       dar.creation_user = p.user_id
+       dar.creation_user = p.person_id
 
       </querytext>
 </fullquery>

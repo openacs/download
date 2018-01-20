@@ -16,4 +16,4 @@ db_dml reason_delete {
 }
 
 ad_returnredirect "repository-reasons"
-
+ad_script_abort

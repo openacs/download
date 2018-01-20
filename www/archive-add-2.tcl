@@ -88,8 +88,11 @@ db_transaction {
         end;
     }
 
-    download_insert_revision $upload_file ${upload_file.tmpfile} $repository_id $archive_type_id $archive_id $version_name $revision_id $user_id $creation_ip $approved_p [array get metadata]
+    download_insert_revision $upload_file ${upload_file.tmpfile} $repository_id \
+	$archive_type_id $archive_id $version_name $revision_id \
+	$user_id $creation_ip $approved_p [array get metadata]
 
 }
 
 ad_returnredirect $return_url
+ad_script_abort

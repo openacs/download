@@ -16,7 +16,8 @@ if { ![db_0or1row metadata {
     where dam.linked_p = 't' and
           dam.metadata_id = :metadata_id
 }] } {
-    ad_return_complaint 1 "[_ download.lt_Metadata_id_not_found]"
+    ad_return_complaint 1 [_ download.lt_Metadata_id_not_found]
+    ad_script_abort
 }
 set answer_column [download_metadata_column $data_type]
 

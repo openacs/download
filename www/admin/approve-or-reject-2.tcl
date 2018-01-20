@@ -47,7 +47,7 @@ if {[catch {
 } errmsg]} {
     ad_return_error "Problem $approval_action version" "There was a problem $approval_action the version
     in the database.  Here's the error message: $errmsg"
-    return
+    ad_script_abort
 }
 
 # Everything after here is email related, so let's send the user on their way

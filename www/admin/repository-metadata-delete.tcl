@@ -16,4 +16,5 @@ db_dml metadata_delete {
 }
 
 ad_returnredirect "repository-metadata"
+ad_script_abort
 

@@ -16,4 +16,5 @@ db_dml type_delete {
 }
 
 ad_returnredirect "repository-types"
+ad_script_abort
 

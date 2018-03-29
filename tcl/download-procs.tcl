@@ -40,7 +40,7 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
             if { $count == 0 } {
                 set return_url "[ad_conn url]?[ad_conn query]"
                 set href [export_vars -base [ad_conn package_url]admin/repository-types {repository_id return_url}]
-                ad_return_exceptio_page 200 "Not setup" [subst {Please <a href="[ns_quotehtml $href]">add a download type</a>.}]
+                ad_return_exception_page 200 "Not setup" [subst {Please <a href="[ns_quotehtml $href]">add a download type</a>.}]
                 ad_script_abort
             }
         }

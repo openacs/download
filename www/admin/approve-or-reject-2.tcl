@@ -1,6 +1,6 @@
 # /packages/download/www/admin/approve-or-reject-2.tcl
 ad_page_contract {
-     
+
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Wed Dec 13 10:10:30 2000
      @cvs-id $Id$
@@ -43,7 +43,7 @@ if {[catch {
              approved_user = :user_id,
              approved_date = sysdate
        where revision_id = :revision_id
-    " 
+    "
 } errmsg]} {
     ad_return_error "Problem $approval_action version" "There was a problem $approval_action the version
     in the database.  Here's the error message: $errmsg"
@@ -57,18 +57,18 @@ ad_returnredirect $return_url
 if {[parameter::get -package_id [ad_conn package_id] -parameter approval_notification -default 1] == 1} {
     # We want to send email to use who submitted the version to let
     # them know it's approved (or rejected).
-    
+
     # This is the email address of the user who submitted the version.
-    db_1row creation_email_select { *SQL* } 
+    db_1row creation_email_select { *SQL* }
 
     # This is the email address and name of the user who approved (or rejected) the version
     db_1row approving_user_select { *SQL* }
 
     set body "
     Your posting to [ad_system_name] $repository_info(title): $archive_name $version_name
-    
+
     [ad_url][ad_conn package_url]/one-revision?revision_id=$revision_id
-    
+
     was approved by $approving_name:\n\n$approved_comment"
 
     set subject "$repository_info(title):  $archive_name $version_name $approval_status: "
@@ -77,3 +77,9 @@ if {[parameter::get -package_id [ad_conn package_id] -parameter approval_notific
         -subject $subject -body $body
 
 }
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:

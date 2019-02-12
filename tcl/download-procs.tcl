@@ -74,10 +74,10 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
         }
 
         "text" {
-            append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>" 
+            append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>"
         }
         "date" {
-            append html "[ad_dateentrywidget $element_name $user_value]" 
+            append html "[ad_dateentrywidget $element_name $user_value]"
         }
         "boolean" {
             append html "<select name=$element_name>
@@ -111,10 +111,10 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
 
 ad_proc download_file_downloader {
 } {
-    Sends the requested file to the user.  Note that the path has the 
-    original file name, so the browser will have a sensible name if you 
+    Sends the requested file to the user.  Note that the path has the
+    original file name, so the browser will have a sensible name if you
     save the file.  Version downloads are supported by looking for
-    the form variable version_id.  We don't actually check that the 
+    the form variable version_id.  We don't actually check that the
     version_id matches the path, we just serve it up.
 } {
     ad_page_contract {
@@ -124,7 +124,7 @@ ad_proc download_file_downloader {
         { reason_id "" }
         { reason_other ""}
     }
-    
+
     ns_log Debug "download_file_downloader: downloading $revision_id"
 
     set user_id [ad_conn user_id]
@@ -150,20 +150,20 @@ ad_proc download_file_downloader {
         if {[catch {
             db_dml download_insert {
                 insert into download_downloads (
-                                                download_id, 
-                                                user_id, 
-                                                revision_id, 
-                                                download_date, 
+                                                download_id,
+                                                user_id,
+                                                revision_id,
+                                                download_date,
                                                 download_ip,
                                                 download_hostname,
                                                 user_agent,
                                                 reason_id,
                                                 reason)
                 values
-                (:download_id, 
-                 :user_id, 
-                 :revision_id, 
-                 sysdate, 
+                (:download_id,
+                 :user_id,
+                 :revision_id,
+                 sysdate,
                  :download_ip,
                  :download_hostname,
                  :user_agent,
@@ -207,7 +207,7 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
     set metadata_with_missing_responses [list]
     ##Iterate over the metadata information
     db_foreach metadata {
-        select 
+        select
         dam.metadata_id,
         dam.pretty_name,
         dam.data_type,
@@ -250,9 +250,9 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
                     ad_complain "The value for \"$metadata\" must be an integer. Your value was \"$response_value\"."
                     continue
                 }
-            } 
+            }
         }
-        
+
 
         ns_log Debug "LOGGING: Metadata $pretty_name: $metadata($metadata_id)"
     }
@@ -270,7 +270,7 @@ ad_proc download_insert_metadata { repository_id archive_type_id revision_id met
 } {
     array set metadata $metadata_array
     set metadata_list [db_list_of_lists survsimp_question_info_list {
-        select 
+        select
         dam.metadata_id,
         dam.data_type
         from download_archive_metadata dam
@@ -282,8 +282,8 @@ ad_proc download_insert_metadata { repository_id archive_type_id revision_id met
     }]
 
     foreach metadata_info $metadata_list {
-        set metadata_id [lindex $metadata_info 0] 
-        set data_type [lindex $metadata_info 1] 
+        set metadata_id [lindex $metadata_info 0]
+        set data_type [lindex $metadata_info 1]
         set response $metadata($metadata_id)
         set answer_column [download_metadata_column $data_type]
         db_dml metadata_inserts "
@@ -350,4 +350,3 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
 #    tcl-indent-level: 4
 #    indent-tabs-mode: nil
 # End:
-

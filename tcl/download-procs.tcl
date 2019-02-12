@@ -132,7 +132,7 @@ ad_proc download_file_downloader {
     if [catch {
         set download_hostname [ns_hostbyaddr $download_ip]
     }] {
-        set download_hostname [db_null]
+        set download_hostname ""
     }
     set user_agent  [ns_set iget [ad_conn headers] user-agent]
 

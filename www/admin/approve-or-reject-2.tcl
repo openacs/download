@@ -7,7 +7,7 @@ ad_page_contract {
 } {
     action:notnull
     revision_id:naturalnum,notnull
-    { approved_comment [db_null] }
+    { approved_comment "" }
     {return_url "[ad_conn package_url]"}
 } -validate {
     valid_action_value {

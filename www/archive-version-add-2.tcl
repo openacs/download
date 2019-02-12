@@ -29,10 +29,10 @@ set admin_p [permission::permission_p -object_id $repository_id -privilege admin
 # check for write permission on this folder
 permission::require_permission -object_id $archive_id -privilege write
 
-set approved_p [ad_decode $admin_p 0 [db_null] "t"]
-set approved_date [ad_decode $admin_p 0 [db_null] "sysdate"]
-set approved_user [ad_decode $admin_p 0 [db_null] ":user_id"]
-set approved_comment [ad_decode $admin_p 0 [db_null] "Automatic approval, add by admin."]
+set approved_p [ad_decode $admin_p 0 "" "t"]
+set approved_date [ad_decode $admin_p 0 "" "sysdate"]
+set approved_user [ad_decode $admin_p 0 "" ":user_id"]
+set approved_comment [ad_decode $admin_p 0 "" "Automatic approval, add by admin."]
 
 
 # get the ip

@@ -64,13 +64,13 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
     set element_name "metadata.$metadata_id"
     switch -- $data_type {
         "number" {
-            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
+            append html "<input type=text name=$element_name value=\"[ns_quotehtml $user_value]\" size=10>"
         }
         "integer" {
-            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=10>"
+            append html "<input type=text name=$element_name value=\"[ns_quotehtml $user_value]\" size=10>"
         }
         "shorttext" {
-            append html "<input type=text name=$element_name value=\"[ad_quotehtml $user_value]\" size=20>"
+            append html "<input type=text name=$element_name value=\"[ns_quotehtml $user_value]\" size=20>"
         }
 
         "text" {
@@ -139,6 +139,15 @@ ad_proc download_file_downloader {
     regexp "[ad_conn package_url]download/(.*)" [ad_conn url] match path
 
     if {$revision_id eq ""} {
+        set file_name [ad_conn path_info]
+        set revision_id [lindex [db_list get_revision_id {
+            select revision_id from download_arch_revisions_obj
+            where file_name=:file_name
+            and approved_p = 't'
+            order by revision_id desc}] 0]
+    }
+    if {$revision_id eq ""} {
+        ad_returnredirect [ad_conn package_url]
         ad_script_abort
     }
 

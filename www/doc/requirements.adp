@@ -173,7 +173,7 @@ package data.</p>
 <p>
 <strong>150.0 User commenting</strong><br>
 </p>
-<p>A logged in user must be able to comment on vendors, packages,
+<p>A logged-in user must be able to comment on vendors, packages,
 and versions.</p>
 <h3>VI.C Requirements: Administrator&#39;s Interface</h3>
 

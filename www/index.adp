@@ -26,7 +26,7 @@
 <h3 style="margin-top: 1em">#download.lt_Upload_a_New_Version_#</h3>
 <ul>
 <multiple name=types>
-  <li><a href="@archive_add_url;noi18n@">@types.pretty_name@</a></li>
+  <li><a href="@types.archive_add_url;noi18n@">@types.pretty_name@</a></li>
 </multiple>
 </ul>
 </if>

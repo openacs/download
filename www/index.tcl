@@ -176,8 +176,10 @@ db_multirow -extend {metadata_url download_img revision_url download_url approve
 
 set dimensional_html [ad_dimensional $dimensional]
 
-db_multirow types types_select {
+db_multirow -extend archive_add_url types types_select {
     select archive_type_id, pretty_name, description from download_archive_types where repository_id = :repository_id
+} {
+    set archive_add_url [export_vars -base archive-add {repository_id archive_type_id}]
 }
 
 db_multirow my_revisions my_revisions {
@@ -194,7 +196,5 @@ db_multirow my_revisions my_revisions {
           dar.creation_user = :user_id
     order by creation_date
 }
-
-set archive_add_url [export_vars -base archive-add {repository_id archive_type_id}]
 
 ad_return_template

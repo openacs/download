@@ -1,6 +1,6 @@
 # /packages/download/www/download-verify.tcl
 ad_page_contract {
-     
+
      @author jbank@arsdigita.com [jbank@arsdigita.com]
      @creation-date Wed Dec 13 00:23:21 2000
      @cvs-id $Id$
@@ -28,11 +28,11 @@ select da.archive_id,
        dar.revision_id,
        dar.file_name,
        dar.version_name,
-       dbms_lob.getlength(dar.content) as file_size       
+       dbms_lob.getlength(dar.content) as file_size
 from   download_archives_obj da,
        download_arch_revisions_obj dar
 where  da.archive_id = dar.archive_id and
-       dar.revision_id = :revision_id 
+       dar.revision_id = :revision_id
        $approval
 "]} {
     ad_return_complaint 1 "[_ download.lt_The_version_you_are_l]"

@@ -7,7 +7,7 @@ ad_page_contract {
      @creation-date Mon Jan  8 17:33:15 2001
      @cvs-id $Id$
 } {
-    user_id_list:verify
+    {user_id_list:verify -1}
 } -properties {
     users:multirow
     user_id_list_export:onevalue

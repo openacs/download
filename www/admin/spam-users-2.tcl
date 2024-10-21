@@ -14,23 +14,9 @@ permission::require_permission -object_id [ad_conn package_id] -privilege "admin
 
 set user_id [ad_conn user_id]
 
-set page_content "[ad_header "Spam Downloaders"]
-
-<h2>Spam Downloaders</h2> 
-<p>
-[ad_context_bar "Spam Downloader"]
-
-<h3>Spam Downloader </h3>
-
-Spam is being sent out. You may move to a different url if you don't want to 
-wait for this process to complete.
-
-<p>
-...
-"
-
-# Takes too long to send emails
-ad_return_top_of_page $page_content
+ad_progress_bar_begin \
+    -title "Spam Downloaders" \
+    -message_1 "Spam is being sent out. You may move to a different url if you don't want to wait for this process to complete."
 
 # send out email
 set count 0
@@ -42,18 +28,6 @@ foreach to_user_id $user_id_list {
     incr count
 }
 
-set page_content "
-
-<p>
-<b>$count</b> users are spammed successfully!
-
-[ad_footer]
-"
-
-ns_write $page_content
-
-
-
-
-
-
+ad_progress_bar_end \
+    -url . \
+    -message_after_redirect "$count users are spammed successfully!"

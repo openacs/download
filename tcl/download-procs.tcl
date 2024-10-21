@@ -77,7 +77,13 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
             append html "<textarea name=$element_name cols=70 rows=10>$user_value</textarea>"
         }
         "date" {
-            append html "[ad_dateentrywidget $element_name $user_value]"
+            append html [subst {
+                <input
+                  type="date"
+                  name="[ns_quotehtml $element_name]"
+                  value="[ns_quotehtml $user_value]"
+                  pattern="\[0-9\]+-(1\[0-2\]|0\[0-9\])-(3\[0-1\]|\[0-2\]\[0-9\])" >
+            }]
         }
         "boolean" {
             append html "<select name=$element_name>
@@ -230,7 +236,10 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
     } {
         # date's are complex. convert them first
         if { $data_type eq "date" } {
-            if [catch  { set metadata($metadata_id) [validate_ad_dateentrywidget "" metadata.$metadata_id [ns_getform]]} errmsg] {
+            set metadata($metadata_id) [ns_queryget metadata.$metadata_id]
+            if {[catch {
+                clock scan $metadata($metadata_id) -format "%Y-%m-%d"
+            } errmsg]} {
                 if {$required_p == "t"} {
                     ad_complain "$errmsg: Please make sure your dates are valid."
                 } else {

@@ -13,7 +13,7 @@ auth::require_login
 set context {"Add an Archive"}
 set user_id [ad_conn user_id]
 
-array set repository [download_repository_info]
+array set repository [download::repository_info]
 set repository_id $repository(repository_id)
 set title $repository(title)
 set description $repository(description)
@@ -34,7 +34,7 @@ db_foreach metadata {
                 dam.archive_type_id is null)
     order by sort_key
 } {
-    append extra_form_elts [download_metadata_widget $data_type $pretty_name $metadata_id]
+    append extra_form_elts [download::metadata_widget $data_type $pretty_name $metadata_id]
 }
 
 ad_return_template

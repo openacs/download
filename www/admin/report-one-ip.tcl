@@ -18,7 +18,7 @@ ad_page_contract {
 }
 
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 set dimensional {
     {downloaded "Download Period" 1m {
         {1d "last 24hrs" {where "[db_map date_clause_1]"}}

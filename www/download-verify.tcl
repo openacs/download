@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 set user_id [ad_conn user_id]
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 
 auth::require_login
 permission::require_permission -object_id $revision_id -privilege "read"

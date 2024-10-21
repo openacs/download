@@ -14,15 +14,15 @@ ad_page_contract {
 } -validate {
     check_metadata -requires { } {
         set archive_type_id [db_string get_archive_type "select archive_type_id from download_archives where archive_id = :archive_id"]
-        set repository_id [download_repository_id]
-        array set metadata [download_validate_metadata $repository_id [array get metadata] $archive_type_id]
+        set repository_id [download::repository_id]
+        array set metadata [download::validate_metadata $repository_id [array get metadata] $archive_type_id]
     }
 }
 
 ##First, do a download_archive.new
 ##Then do a download_archive_revision.new
 ##Then insert into the download_revision_data
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 set user_id [ad_conn user_id]
 set admin_p [permission::permission_p -object_id $repository_id -privilege admin]
 
@@ -40,7 +40,7 @@ set creation_ip [ad_conn peeraddr]
 set revision_id [db_nextval acs_object_id_seq]
 
 db_transaction {
-    download_insert_revision $upload_file ${upload_file.tmpfile} $repository_id $archive_type_id $archive_id $version_name $revision_id $user_id $creation_ip $approved_p [array get metadata]
+    download::insert_revision $upload_file ${upload_file.tmpfile} $repository_id $archive_type_id $archive_id $version_name $revision_id $user_id $creation_ip $approved_p [array get metadata]
 }
 
 ad_returnredirect $return_url

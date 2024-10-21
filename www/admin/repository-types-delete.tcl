@@ -8,7 +8,7 @@ ad_page_contract {
     archive_type_id:naturalnum,notnull
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 permission::require_permission -object_id $repository_id -privilege "admin"
 
 db_dml type_delete {

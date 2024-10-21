@@ -2,7 +2,7 @@
 <queryset>
 
 
-<fullquery name="download_repository_info.repository_info">
+<fullquery name="download::repository_info.repository_info">
 <querytext>
 
 select repository_id, title, description, help_text 
@@ -14,7 +14,7 @@ where parent_id = :package_id
 
  
 
-<fullquery name="download_repository_info.type_info">
+<fullquery name="download::repository_info.type_info">
 <querytext>
 
 select count(*) from download_archive_types 
@@ -25,7 +25,7 @@ where repository_id = :repository_id
 
  
 
-<fullquery name="download_metadata_widget.download_metadata_choices">
+<fullquery name="download::metadata_widget.download_metadata_choices">
 <querytext>
 
 select choice_id, label
@@ -36,7 +36,7 @@ order by sort_order
 </querytext>
 </fullquery>
 
-<fullquery name="download_file_downloader.download_count">
+<fullquery name="download::file_downloader.download_count">
 <querytext>
 
 select count(*) from download_downloads 
@@ -45,7 +45,7 @@ where download_id = :download_id
 </querytext>
 </fullquery>
 
-<fullquery name="download_validate_metadata.metadata">      
+<fullquery name="download::validate_metadata.metadata">      
 <querytext>
       
 select 
@@ -65,7 +65,7 @@ order by sort_key
 
 
  
-<fullquery name="download_insert_metadata.survsimp_question_info_list">      
+<fullquery name="download::insert_metadata.survsimp_question_info_list">      
 <querytext>
       
 select 
@@ -83,7 +83,7 @@ order by sort_key
 
  
 
-<fullquery name="download_insert_metadata.metadata_inserts">      
+<fullquery name="download::insert_metadata.metadata_inserts">      
 <querytext>
       
 insert into download_revision_data

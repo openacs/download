@@ -7,7 +7,7 @@ ad_page_contract {
 } {
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 permission::require_permission -object_id $repository_id -privilege "admin"
 
 set title "Download Repository Download Reasons"

@@ -33,7 +33,7 @@ set return_url "[ad_conn url]?[ad_conn query]"
 set register_url [export_vars -base /register/index {return_url}]
 set user_id [ad_conn user_id]
 
-array set repository [download_repository_info]
+array set repository [download::repository_info]
 set repository_id $repository(repository_id)
 
 set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
@@ -120,7 +120,7 @@ db_foreach metadata {
           (dam.archive_type_id = :archive_type_id or dam.archive_type_id is null)
     order by sort_key
 } {
-    set answer_column [download_metadata_column $data_type]
+    set answer_column [download::metadata_column $data_type]
     set metadata_select "metadata$metadata_id"
     append metadata_selects ", (select $answer_column from download_revision_data where revision_id = dar.revision_id and metadata_id = :metadata_id) as $metadata_select
     "

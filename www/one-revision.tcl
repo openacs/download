@@ -12,7 +12,7 @@ ad_page_contract {
     master_admin_p:onevalue    
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 set admin_p [permission::permission_p -object_id $revision_id -privilege "admin"]
 set master_admin_p [permission::permission_p -object_id [ad_conn package_id] -privilege admin]
 
@@ -32,7 +32,7 @@ db_foreach metadata {
           (dam.archive_type_id = :archive_type_id or dam.archive_type_id is null)
     order by sort_key
 } {
-    set answer_column [download_metadata_column $data_type]
+    set answer_column [download::metadata_column $data_type]
     set metadata_select "metadata$metadata_id"
     template::multirow append metadata $pretty_name $metadata_select
     append metadata_selects ", (select $answer_column from download_revision_data where revision_id = :revision_id and metadata_id = $metadata_id) as $metadata_select

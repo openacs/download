@@ -19,7 +19,7 @@ if { ![db_0or1row metadata {
     ad_return_complaint 1 [_ download.lt_Metadata_id_not_found]
     ad_script_abort
 }
-set answer_column [download_metadata_column $data_type]
+set answer_column [download::metadata_column $data_type]
 
 ##TODO: Add archive types
 db_multirow archives archives "

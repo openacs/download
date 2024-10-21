@@ -3,7 +3,7 @@
 <queryset>
    <rdbms><type>oracle</type><version>8.1.6</version></rdbms>
 
-<fullquery name="download_file_downloader.download_insert">      
+<fullquery name="download::file_downloader.download_insert">      
       <querytext>
       
                 insert into download_downloads (
@@ -30,7 +30,7 @@
       </querytext>
 </fullquery>
  
-<fullquery name="download_insert_revision.revision_new">      
+<fullquery name="download::insert_revision.revision_new">      
       <querytext>
       
         declare
@@ -54,7 +54,7 @@
 </fullquery>
 
  
-<fullquery name="download_insert_revision.content_add">      
+<fullquery name="download::insert_revision.content_add">      
       <querytext>
       
         update cr_revisions
@@ -66,7 +66,7 @@
 </fullquery>
 
  
-<fullquery name="download_insert_revision.make_live">      
+<fullquery name="download::insert_revision.make_live">      
       <querytext>
       
         begin

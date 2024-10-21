@@ -7,7 +7,7 @@ ad_page_contract {
 } {
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 set title "Download Repository Metadata"
 set context [list "Metadata"]
 

@@ -27,9 +27,9 @@
 --
 create table download_repository (
        repository_id integer
-                     constraint download_repository_id_fk
+                     constraint download::repository_id_fk
                      references cr_items (item_id) on delete cascade
-                     constraint download_repository_id_pk primary key
+                     constraint download::repository_id_pk primary key
 );
 
 select content_type__create_type (

@@ -19,7 +19,7 @@ if { ![db_0or1row metadata {
     ad_return_complaint 1 "Metadata id not found"
     ad_script_abort
 }
-set answer_column [download_metadata_column $data_type]
+set answer_column [download::metadata_column $data_type]
 set metadata_select "metadata$metadata_id"
 
 if {$orderby eq ""} {

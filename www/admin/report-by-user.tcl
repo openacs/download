@@ -14,7 +14,7 @@ ad_page_contract {
     table:onevalue
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 
 set dimensional {
     {downloaded "Download Period" 1m {

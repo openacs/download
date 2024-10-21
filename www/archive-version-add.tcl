@@ -14,7 +14,7 @@ if {$return_url eq ""} {
 }
 
 auth::require_login
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 
 permission::require_permission -object_id $archive_id -privilege write
 
@@ -50,7 +50,7 @@ db_foreach metadata {
                 dam.archive_type_id is null)
     order by sort_key
 } {
-    append extra_form_elts [download_metadata_widget $data_type $pretty_name $metadata_id]
+    append extra_form_elts [download::metadata_widget $data_type $pretty_name $metadata_id]
 }
 
 set context [list "[_ download.lt_Add_an_Revision_to_ar]"]

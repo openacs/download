@@ -19,7 +19,7 @@ ad_page_contract {
     table:onevalue
 }
 
-set repository_id [download_repository_id]
+set repository_id [download::repository_id]
 
 permission::require_permission -object_id $archive_id -privilege "admin"
 

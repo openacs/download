@@ -17,8 +17,8 @@ ad_page_contract {
     metadata:array,optional,html
 } -validate {
     check_metadata -requires { archive_type_id } {
-        set repository_id [download_repository_id]
-        array set metadata [download_validate_metadata $repository_id [array get metadata] $archive_type_id]
+        set repository_id [download::repository_id]
+        array set metadata [download::validate_metadata $repository_id [array get metadata] $archive_type_id]
     }
 }
 
@@ -88,7 +88,7 @@ db_transaction {
         end;
     }
 
-    download_insert_revision $upload_file ${upload_file.tmpfile} $repository_id \
+    download::insert_revision $upload_file ${upload_file.tmpfile} $repository_id \
         $archive_type_id $archive_id $version_name $revision_id \
         $user_id $creation_ip $approved_p [array get metadata]
 

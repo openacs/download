@@ -7,7 +7,7 @@ ad_page_contract {
 } {
 }
 
-array set repository [download_repository_info]
+array set repository [download::repository_info]
 set title $repository(title)
 set help_text $repository(help_text)
 set context [list "[_ download.Help_on_title]"]

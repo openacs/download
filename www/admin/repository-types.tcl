@@ -7,7 +7,7 @@ ad_page_contract {
 } {
 }
 
-set repository_id [download_repository_id [ad_conn package_id] 0]
+set repository_id [download::repository_id [ad_conn package_id] 0]
 permission::require_permission -object_id $repository_id -privilege "admin"
 
 set title "Download Repository Archive Types"

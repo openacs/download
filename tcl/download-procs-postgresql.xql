@@ -3,7 +3,7 @@
 <queryset>
    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
-<fullquery name="download_file_downloader.download_insert">      
+<fullquery name="download::file_downloader.download_insert">      
 <querytext>
 
 insert into download_downloads (
@@ -30,7 +30,7 @@ values (
 </querytext>
 </fullquery>
 
-<fullquery name="download_insert_revision.revision_new">      
+<fullquery name="download::insert_revision.revision_new">      
 <querytext>
 
 declare
@@ -63,7 +63,7 @@ end;
 
 
  
-<fullquery name="download_insert_revision.content_add">      
+<fullquery name="download::insert_revision.content_add">      
 <querytext>
 
 update cr_revisions
@@ -75,7 +75,7 @@ where  revision_id = :revision_id
 
 
  
-<fullquery name="download_insert_revision.make_live">      
+<fullquery name="download::insert_revision.make_live">      
 <querytext>
 
 select content_item__set_live_revision( :revision_id );

@@ -7,7 +7,7 @@ ad_page_contract {
 } {
 }
 
-array set repository [download_repository_info]
+array set repository [download::repository_info]
 set repository_id $repository(repository_id)
 set title $repository(title)
 set description $repository(description)

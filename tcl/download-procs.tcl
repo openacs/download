@@ -6,10 +6,16 @@ ad_library {
     @cvs-id $Id$
 }
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Tue Dec 12 15:14:13 2000
-ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
+namespace eval download {}
+
+ad_proc download::repository_info {
+    {package_id ""}
+    {do_redirect 1}
+} {
     Get information about the repository mounted for package_id.
+
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Tue Dec 12 15:14:13 2000
 } {
     if {$package_id eq ""} {
         set package_id [ad_conn package_id]
@@ -48,17 +54,26 @@ ad_proc download_repository_info { {package_id ""} {do_redirect 1}} {
     return [array get repository]
 }
 
-ad_proc download_repository_id { {package_id ""} {do_redirect 1}} {
+ad_proc download::repository_id {
+    {package_id ""}
+    {do_redirect 1}
+} {
     Get repository_id mounted for package_id.
 } {
-    array set repository [download_repository_info $package_id $do_redirect]
+    array set repository [download::repository_info $package_id $do_redirect]
     return $repository(repository_id)
 }
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Tue Dec 12 17:52:07 2000
-ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
-    Return a widget to take input of the given data_type
+ad_proc download::metadata_widget {
+    data_type
+    name
+    metadata_id
+    {user_value ""}
+} {
+    Return a widget to take input of the given data_type.
+
+    @author jbank@arsdigita.com
+    @creation-date Tue Dec 12 17:52:07 2000
 } {
     set html ""
     set element_name "metadata.$metadata_id"
@@ -115,7 +130,7 @@ ad_proc download_metadata_widget { data_type name metadata_id {user_value ""}} {
             </tr>"
 }
 
-ad_proc download_file_downloader {
+ad_proc download::file_downloader {
 } {
     Sends the requested file to the user.  Note that the path has the
     original file name, so the browser will have a sensible name if you
@@ -131,7 +146,7 @@ ad_proc download_file_downloader {
         { reason_other ""}
     }
 
-    ns_log Debug "download_file_downloader: downloading $revision_id"
+    ns_log Debug "download::file_downloader: downloading $revision_id"
 
     set user_id [ad_conn user_id]
     set download_ip [ad_conn peeraddr]
@@ -195,9 +210,10 @@ ad_proc download_file_downloader {
     return filter_return
 }
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Fri Dec 15 14:07:02 2000
-ad_proc download_metadata_column { data_type } { Dummy comment.} {
+ad_proc download::metadata_column { data_type } {
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Fri Dec 15 14:07:02 2000
+} {
     switch -- $data_type {
         date { set answer_column "date_answer" }
         boolean { set answer_column "boolean_answer" }
@@ -213,10 +229,15 @@ ad_proc download_metadata_column { data_type } { Dummy comment.} {
 }
 
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Fri Dec 15 16:14:40 2000
-ad_proc download_validate_metadata { repository_id metadata_info archive_type_id } {
+ad_proc download::validate_metadata {
+    repository_id
+    metadata_info
+    archive_type_id
+} {
     Validate metadata arguments for a given archive_type
+
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Fri Dec 15 16:14:40 2000
 } {
     array set metadata $metadata_info
     set metadata_with_missing_responses [list]
@@ -281,10 +302,16 @@ ad_proc download_validate_metadata { repository_id metadata_info archive_type_id
     return [array get metadata]
 }
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Fri Dec 15 16:16:41 2000
-ad_proc download_insert_metadata { repository_id archive_type_id revision_id metadata_array} {
+ad_proc download::insert_metadata {
+    repository_id
+    archive_type_id
+    revision_id
+    metadata_array
+} {
     Do metadata insertion.  Assume within transaction.
+
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Fri Dec 15 16:16:41 2000
 } {
     array set metadata $metadata_array
     set metadata_list [db_list_of_lists survsimp_question_info_list {
@@ -303,7 +330,7 @@ ad_proc download_insert_metadata { repository_id archive_type_id revision_id met
         set metadata_id [lindex $metadata_info 0]
         set data_type [lindex $metadata_info 1]
         set response $metadata($metadata_id)
-        set answer_column [download_metadata_column $data_type]
+        set answer_column [download::metadata_column $data_type]
         db_dml metadata_inserts "
          insert into download_revision_data(revision_id, metadata_id, $answer_column)
          values ( :revision_id, :metadata_id, :response )
@@ -311,10 +338,21 @@ ad_proc download_insert_metadata { repository_id archive_type_id revision_id met
     }
 }
 
-# @author jbank@arsdigita.com [jbank@arsdigita.com]
-# @creation-date Fri Dec 15 16:20:38 2000
-ad_proc download_insert_revision { upload_file tmpfile repository_id archive_type_id archive_id version_name revision_id user_id creation_ip approved_p metadata_array } {
-    Dummy comment.
+ad_proc download::insert_revision {
+    upload_file
+    tmpfile
+    repository_id
+    archive_type_id
+    archive_id
+    version_name
+    revision_id
+    user_id
+    creation_ip
+    approved_p
+    metadata_array
+} {
+    @author jbank@arsdigita.com [jbank@arsdigita.com]
+    @creation-date Fri Dec 15 16:20:38 2000
 } {
     # get the filename part of the upload file
     if {![regexp {[^//\\]+$} $upload_file filename]} {
@@ -359,7 +397,7 @@ ad_proc download_insert_revision { upload_file tmpfile repository_id archive_typ
         end;
     }
 
-    download_insert_metadata $repository_id $archive_type_id $revision_id $metadata_array
+    download::insert_metadata $repository_id $archive_type_id $revision_id $metadata_array
 }
 
 #

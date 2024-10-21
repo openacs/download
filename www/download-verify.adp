@@ -12,7 +12,14 @@
         <form method="post" action="@action@">
           <%= [export_vars -form {download_id revision_id}] %>
           <td align="right">#download.Reason_for_Download#</td> 
-          <td> @reason_widget;noquote@ </td>
+          <td>
+            <select name="reasons">
+              <option value="">#download.Other#</option>
+              <multiple name="reasons">
+                <option value="@reasons.download_reason_id@">@reasons.reason@</option>
+              </multiple>
+            </select>
+          </td>
       </tr>
       <tr>
         <td align="right">#download.lt_If_you_have_selected_#<br /> #download.please_tell_us_why#</td>

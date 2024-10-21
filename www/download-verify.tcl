@@ -44,10 +44,11 @@ set context [list [list "one-archive?archive_id=$archive_id" $archive_name] "Dow
 ##TODO Get version name
 set action "[ad_conn package_url]download/$file_name"
 
-set option_list "\{\"\" \"[_ download.Other]\"\}"
-
-set reason_widget [ad_db_select_widget -option_list $option_list reasons "
-    select reason, download_reason_id from download_reasons where repository_id = $repository_id" reason_id]
+db_multirow reasons get_reasons {
+    select reason, download_reason_id
+    from download_reasons
+    where repository_id = :repository_id
+}
 
 set download_id [db_nextval download_reasons_sequence]
 ad_return_template
